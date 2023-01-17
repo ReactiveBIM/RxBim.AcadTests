@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutocadTestFrameworkCmd", "AutocadTestFrameworkCmd\AutocadTestFrameworkCmd.csproj", "{716AB9E7-2841-4714-9097-06DFD984D65C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxBim.AutocadTestFramework.Console", "RxBim.AutocadTestFramework.Console\RxBim.AutocadTestFramework.Console.csproj", "{AFF2B2DF-CC4F-44E0-BD98-7C17342F8961}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rxbim.Di.Testing.Autocad", "Rxbim.Di.Testing.Autocad\Rxbim.Di.Testing.Autocad.csproj", "{3479DCB0-30E9-4C43-BE9F-9F627EC46055}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxBim.ScriptUtils.Autocad", "RxBim.ScriptUtils.Autocad\RxBim.ScriptUtils.Autocad.csproj", "{9EA635F8-0B59-47E5-85CC-6C7D0DE119C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionFolder", "{B2B7E452-95B3-41EE-86DC-6D26C0A66C94}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.Props = Directory.Build.Props
+		stylecop.ruleset = stylecop.ruleset
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FE3062B5-3E3B-47F9-95E9-38FC380F35FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxBim.Example.Autocad.IntegrationTests", "RxBim.Example.Autocad.IntegrationTests\RxBim.Example.Autocad.IntegrationTests.csproj", "{9266344E-57D4-4D40-92B7-02A34A70CC88}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{005A1D66-EF42-4E92-8470-4B736151EB90}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{4E2DF1E9-EBDE-498B-BC4C-EFE9E5DD3D68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTestFramework.SDK", "AcadTestFramework.SDK\AcadTestFramework.SDK.csproj", "{91361B2A-889E-44BC-A4A6-CDAF4FBCAD1C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E2DF1E9-EBDE-498B-BC4C-EFE9E5DD3D68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E2DF1E9-EBDE-498B-BC4C-EFE9E5DD3D68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{716AB9E7-2841-4714-9097-06DFD984D65C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{716AB9E7-2841-4714-9097-06DFD984D65C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{716AB9E7-2841-4714-9097-06DFD984D65C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{716AB9E7-2841-4714-9097-06DFD984D65C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFF2B2DF-CC4F-44E0-BD98-7C17342F8961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFF2B2DF-CC4F-44E0-BD98-7C17342F8961}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFF2B2DF-CC4F-44E0-BD98-7C17342F8961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFF2B2DF-CC4F-44E0-BD98-7C17342F8961}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3479DCB0-30E9-4C43-BE9F-9F627EC46055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3479DCB0-30E9-4C43-BE9F-9F627EC46055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3479DCB0-30E9-4C43-BE9F-9F627EC46055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3479DCB0-30E9-4C43-BE9F-9F627EC46055}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EA635F8-0B59-47E5-85CC-6C7D0DE119C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA635F8-0B59-47E5-85CC-6C7D0DE119C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EA635F8-0B59-47E5-85CC-6C7D0DE119C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA635F8-0B59-47E5-85CC-6C7D0DE119C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9266344E-57D4-4D40-92B7-02A34A70CC88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9266344E-57D4-4D40-92B7-02A34A70CC88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9266344E-57D4-4D40-92B7-02A34A70CC88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9266344E-57D4-4D40-92B7-02A34A70CC88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91361B2A-889E-44BC-A4A6-CDAF4FBCAD1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91361B2A-889E-44BC-A4A6-CDAF4FBCAD1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91361B2A-889E-44BC-A4A6-CDAF4FBCAD1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91361B2A-889E-44BC-A4A6-CDAF4FBCAD1C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{716AB9E7-2841-4714-9097-06DFD984D65C} = {FE3062B5-3E3B-47F9-95E9-38FC380F35FE}
+		{AFF2B2DF-CC4F-44E0-BD98-7C17342F8961} = {FE3062B5-3E3B-47F9-95E9-38FC380F35FE}
+		{3479DCB0-30E9-4C43-BE9F-9F627EC46055} = {FE3062B5-3E3B-47F9-95E9-38FC380F35FE}
+		{9EA635F8-0B59-47E5-85CC-6C7D0DE119C6} = {FE3062B5-3E3B-47F9-95E9-38FC380F35FE}
+		{9266344E-57D4-4D40-92B7-02A34A70CC88} = {005A1D66-EF42-4E92-8470-4B736151EB90}
+		{91361B2A-889E-44BC-A4A6-CDAF4FBCAD1C} = {FE3062B5-3E3B-47F9-95E9-38FC380F35FE}
+	EndGlobalSection
+EndGlobal
