@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <UseDi>true</UseDi>
+        <UseAcad>true</UseAcad>
+    </PropertyGroup>
+</Project>
