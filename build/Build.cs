@@ -48,7 +48,7 @@ public class Build : AutocadRxBimBuild
 
 
                     var startInfo = new ProcessStartInfo(
-                        @"C:\Users\ivachevev\RiderProjects\AutocadTestFramework\RxBim.AutocadTestFramework.Console\bin\Debug\net472\RxBim.AutocadTestFramework.Console.exe",
+                        @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\RxBim.AutocadTestFramework.Console\bin\Debug\net472\RxBim.AutocadTestFramework.Console.exe",
                         $@"-a {assemblyPath} -r {results} -v 2019 -d true");
                     var process = new Process();
                     process.StartInfo = startInfo;
