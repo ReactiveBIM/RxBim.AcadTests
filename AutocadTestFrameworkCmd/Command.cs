@@ -72,6 +72,7 @@
 
         private ITestResult RunTests(string assemblyPath)
         {
+            // TODO параметры добавить
             _testAssemblyRunner.Load(assemblyPath, new Dictionary<string, object>());
             var result = _testAssemblyRunner.Run(_testListener, _testFilter);
             return result;

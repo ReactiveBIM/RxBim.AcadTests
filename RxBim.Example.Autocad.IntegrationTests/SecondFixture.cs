@@ -1,20 +1,24 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Threading;
 using AutocadTestFrameworkCmd.Helpers;
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
+using Autodesk.AutoCAD.Runtime;
 using FluentAssertions;
 using NUnit.Framework;
 using RxBim.Di;
 using RxBim.Di.Testing.Autocad.Di;
 using Application = Autodesk.AutoCAD.ApplicationServices.Core.Application;
+using Exception = System.Exception;
 
 namespace RxBim.Example.Autocad.IntegrationTests;
 
 [TestFixture]
+[NonParallelizable]
 [TestDrawing("./drawing2.dwg")]
 public class SecondFixture
 {
@@ -48,7 +52,7 @@ public class SecondFixture
         var ms = (BlockTableRecord)tr.GetObject(SymbolUtilityServices.GetBlockModelSpaceId(db), OpenMode.ForRead);
 
         // "пробегаем" по всем объектам в пространстве модели
-        foreach (ObjectId id in ms)
+        foreach (var id in ms)
         {
             // приводим каждый из них к типу Entity
             var entity = (Entity)tr.GetObject(id, OpenMode.ForRead);
@@ -78,12 +82,25 @@ public class SecondFixture
         acTrans.Commit();
         acCircle.Area.Should()
             .BeApproximately(Math.PI * radius * radius, 1e-3, "wrong calculation of the area of the circle");
-
+        acCurDb.SaveAs(Path.GetTempFileName(), DwgVersion.Current);
+        
+        
+        var docName = "drawing1.dwg";
+        var doc2 = _container.GetService<DocumentCollection>().Open(GetDrawingPath(docName));
+        doc2.Should().Be(docName);
+        throw new Exception();
     }
 
     [Test]
+    [NonParallelizable]
     public void SecondFixtureThirdTest()
     {
+        var currentContext = Thread.CurrentContext;
+        var docName = "drawing1.dwg";
+        var docManager = _container.GetService<DocumentCollection>();
+        var doc2 = docManager.Open(GetDrawingPath(docName));
+        doc2.Should().Be(docName);
+        throw new Exception();
     }
 
     private void OpenDoc(string drawing2Dwg)
