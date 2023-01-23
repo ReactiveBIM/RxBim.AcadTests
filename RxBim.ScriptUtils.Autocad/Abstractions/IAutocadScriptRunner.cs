@@ -1,6 +1,7 @@
 ﻿namespace RxBim.ScriptUtils.Autocad.Abstractions
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -12,7 +13,8 @@
         /// Запускает скрипт
         /// </summary>
         /// <param name="scriptBuilder"><see cref="IAutocadScriptBuilder"/></param>
-        Task Run(Action<IAutocadScriptBuilder> scriptBuilder);
+        /// <param name="cancellationToken">Cansellation token</param>
+        Task Run(Action<IAutocadScriptBuilder> scriptBuilder, CancellationToken cancellationToken);
 
         /// <summary>
         /// Устанавливает файл шаблона для запуска

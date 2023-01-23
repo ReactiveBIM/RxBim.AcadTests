@@ -10,13 +10,20 @@ using Di.Testing.Autocad.Di;
 using FluentAssertions;
 using NUnit.Framework;
 
+/// <summary>
+/// Примеры тестов.
+/// </summary>
 [TestFixture]
+// TODO обсудить
 [TestDrawing("./drawing1.dwg")]
-public class Tests
+public class SimpleTests
 {
     private IContainer _container = null!;
 
-    [SetUp]
+    /// <summary>
+    /// Настройка тестов.
+    /// </summary>
+    [OneTimeSetUp]
     public void Setup()
     {
         var testingDiConfigurator = new TestingDiConfigurator();
@@ -24,17 +31,26 @@ public class Tests
         _container = testingDiConfigurator.Container;
     }
 
+    /// <summary>
+    /// Пустой тест.
+    /// </summary>
     [Test]
     public void FirstTest()
     {
     }
 
+    /// <summary>
+    /// Тест с ошибкой. Для проверки отчета.
+    /// </summary>
     [Test]
     public void FailureTest()
     {
         throw new Exception(nameof(FailureTest));
     }
 
+    /// <summary>
+    /// Тест вывода сообщений из консоли в отчет.
+    /// </summary>
     [Test]
     public void ConsoleTest()
     {
@@ -42,6 +58,9 @@ public class Tests
         Console.WriteLine("Any text");
     }
 
+    /// <summary>
+    /// Тест работы с автокадом.
+    /// </summary>
     [Test]
     public void DrawNewCircleTest()
     {

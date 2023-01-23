@@ -4,20 +4,18 @@ using System;
 using System.IO;
 using System.IO.Pipes;
 using System.Runtime.Serialization;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Abstractions;
 using Helpers;
 
 /// <summary>
-///     Comment
+/// Сервер для обработки сообщений.
 /// </summary>
 public class AcadTestServer
 {
-    private readonly CancellationTokenSource _cancelSource;
-    private readonly CancellationToken _cancel;
     private readonly string _pipeName;
+    private CancellationTokenSource _cancelSource;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="AcadTestServer" /> class.
@@ -27,19 +25,23 @@ public class AcadTestServer
     {
         _pipeName = pipeName;
         _cancelSource = new CancellationTokenSource();
-        _cancel = _cancelSource.Token;
     }
+
+    private CancellationToken Cancel => _cancelSource.Token;
 
     /// <summary>
     ///     comment
     /// </summary>
     /// <param name="testRunningOptions">comment sad</param>
-    public async Task<string> Start(ITestRunningOptions testRunningOptions)
+    /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
+    public async Task<string> Start(ITestRunningOptions testRunningOptions, CancellationToken cancellationToken)
     {
+        _cancelSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+
         using var pipeServer =
             new NamedPipeServerStream(_pipeName, PipeDirection.Out);
         Console.WriteLine("\r\n[thread: {0}] -> Waiting for client.", Thread.CurrentThread.ManagedThreadId);
-        await pipeServer.WaitForConnectionAsync(_cancel);
+        await pipeServer.WaitForConnectionAsync(Cancel);
         Console.WriteLine("[thread: {0}] -> Client connected.", Thread.CurrentThread.ManagedThreadId);
         try
         {
@@ -56,7 +58,7 @@ public class AcadTestServer
             Console.WriteLine("ERROR: {0}", e.Message);
         }
 
-        var listenTask = Task.Run(async () =>
+        var unused = Task.Run(async () =>
             {
                 while (true)
                 {
@@ -67,7 +69,7 @@ public class AcadTestServer
                         message);
                 }
             },
-            _cancel);
+            Cancel);
 
         var result = await Listener("resultPipe");
         Stop();
@@ -82,7 +84,7 @@ public class AcadTestServer
             1,
             PipeTransmissionMode.Byte,
             PipeOptions.Asynchronous);
-        await server.WaitForConnectionAsync(_cancel);
+        await server.WaitForConnectionAsync(Cancel);
         var result = await ReadData(server);
         if (server.IsConnected)
         {

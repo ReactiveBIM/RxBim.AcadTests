@@ -1,9 +1,12 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using _build;
 using Nuke.Common;
 using Nuke.Common.Tools.DotNet;
+using RxBim.AutocadTestFramework.Console.Models;
+using RxBim.AutocadTestFramework.Console.Services;
 using RxBim.Nuke.AutoCAD;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
@@ -36,20 +39,23 @@ public class Build : AutocadRxBimBuild
                     var assemblyName = project.Name + ".dll";
                     var assemblyPath = outputDirectory / assemblyName;
                     var results = outputDirectory / "result.xml";
-                    /*var runner = new AcadTestTasks();
+
+                    // TODO
+                    /*var ts = new CancellationTokenSource(20000);
+                    var runner = new AcadTestTasks();
                     await runner.Run(new TestRunningOptions()
                     {
-                        Debug = true,
+                        Debug = false,
                         AcadVersion = 2019,
                         AssemblyPath = assemblyPath,
                         ResultsFilePath = results,
                         UseAcCoreConsole = false
-                    });*/
+                    }, ts.Token);*/
 
 
                     var startInfo = new ProcessStartInfo(
                         @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\RxBim.AutocadTestFramework.Console\bin\Debug\net472\RxBim.AutocadTestFramework.Console.exe",
-                        $@"-a {assemblyPath} -r {results} -v 2019 -d true");
+                        $@"-a {assemblyPath} -r {results} -v 2019 -d");
                     var process = new Process();
                     process.StartInfo = startInfo;
                     process.Start();

@@ -1,6 +1,5 @@
 ﻿namespace AutocadTestFrameworkCmd
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
@@ -8,6 +7,7 @@
     using Autodesk.AutoCAD.EditorInput;
     using JetBrains.Annotations;
     using Newtonsoft.Json;
+    using NUnit;
     using NUnit.Framework.Api;
     using NUnit.Framework.Interfaces;
     using RxBim.Command.Autocad;
@@ -47,14 +47,14 @@
                 var assembly = options.AssemblyPath;
                 if (!File.Exists(assembly))
                 {
-                    throw new Exception("Несуществующий путь");
+                    throw new System.Exception("Несуществующий путь");
                 }
 
                 var result = RunTests(assembly);
                 SendResults(acadTestClient, result);
                 return PluginResult.Succeeded;
             }
-            catch (Exception e)
+            catch (System.Exception)
             {
                 return PluginResult.Failed;
             }
@@ -65,15 +65,18 @@
             var output = JsonConvert.SerializeObject(result, settings: new JsonSerializerSettings()
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                Error = (sender, args) => { args.ErrorContext.Handled = true; }
+                Error = (_, args) => { args.ErrorContext.Handled = true; }
             });
             File.WriteAllText(resultsPath, output);
         }
 
         private ITestResult RunTests(string assemblyPath)
         {
-            // TODO параметры добавить
-            _testAssemblyRunner.Load(assemblyPath, new Dictionary<string, object>());
+            _testAssemblyRunner.Load(assemblyPath,
+                new Dictionary<string, object>
+                {
+                    { FrameworkPackageSettings.RunOnMainThread, true }
+                });
             var result = _testAssemblyRunner.Run(_testListener, _testFilter);
             return result;
         }
