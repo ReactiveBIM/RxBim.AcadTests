@@ -12,6 +12,7 @@ internal class TestRunningOptions : ITestRunningOptions
     /// </summary>
     public TestRunningOptions()
     {
+        AssemblyPath = string.Empty;
     }
 
     /// <summary>

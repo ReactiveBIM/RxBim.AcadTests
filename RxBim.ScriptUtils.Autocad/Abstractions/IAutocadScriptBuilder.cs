@@ -6,9 +6,9 @@
     public interface IAutocadScriptBuilder
     {
         /// <summary>
-        /// Добавляет команду
+        /// Adds the command to execute.
         /// </summary>
-        /// <param name="command"></param>
+        /// <param name="command">The command.</param>
         /// <returns></returns>
         IAutocadScriptBuilder AddCommand(string command);
     }

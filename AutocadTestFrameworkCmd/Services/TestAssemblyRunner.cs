@@ -1,4 +1,4 @@
-﻿namespace AutocadTestFrameworkCmd.Services
+﻿/*namespace AutocadTestFrameworkCmd.Services
 {
     using System;
     using System.Collections.Generic;
@@ -89,7 +89,7 @@
     }
 }
 
-/*/// <summary>
+/#1#// <summary>
         /// asdasd
         /// </summary>
         public void DoSomething()
@@ -147,4 +147,4 @@
             }
 
             AppDomain.Unload(tempDomain);
-        }*/
+        }#1#*/

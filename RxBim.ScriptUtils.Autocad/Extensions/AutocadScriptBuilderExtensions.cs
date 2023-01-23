@@ -39,6 +39,17 @@
             builder.AddCommand($"NETLOAD \"{dllPath}\"");
             return builder;
         }
+        
+        /// <summary>
+        /// Sets FILEDIA
+        /// </summary>
+        /// <param name="builder"><see cref="IAutocadScriptBuilder"/></param>
+        /// <param name="value">Value</param>
+        public static IAutocadScriptBuilder SetFiledia(this IAutocadScriptBuilder builder, bool value)
+        {
+            builder.AddCommand($"FILEDIA {(value ? "1" : "0")}");
+            return builder;
+        }
 
         /// <summary>
         /// The QUIT command

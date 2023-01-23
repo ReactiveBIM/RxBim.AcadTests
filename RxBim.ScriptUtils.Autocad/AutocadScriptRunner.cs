@@ -7,7 +7,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Abstractions;
-    using RxBim.ScriptUtils.Autocad.Extensions;
+    using Extensions;
 
     /// <inheritdoc />
     public class AutocadScriptRunner : IAutocadScriptRunner
@@ -30,7 +30,7 @@
             : $"C:\\Program Files\\Autodesk\\AutoCAD {AcadVersion}\\acad.exe";
 
         /// <inheritdoc />
-        public async Task Run(Action<IAutocadScriptBuilder> action)
+        public async Task Run(Action<IAutocadScriptBuilder> action, CancellationToken cancellationToken)
         {
             var scriptBuilder = new AutocadScriptBuilder();
             action(scriptBuilder);
@@ -53,21 +53,27 @@
             {
                 var outSb = new StringBuilder();
                 startInfo.RedirectStandardOutput = true;
-                process.OutputDataReceived += (sender, e) => { outSb.AppendLine(e.Data); };
+                process.OutputDataReceived += (_, e) => { outSb.AppendLine(e.Data); };
                 startInfo.RedirectStandardError = true;
-                process.ErrorDataReceived += (sender, e) => { outSb.AppendLine(e.Data); };
+                process.ErrorDataReceived += (_, e) => { outSb.AppendLine(e.Data); };
                 var encoding = Encoding.Unicode;
                 process.StartInfo.StandardOutputEncoding = encoding;
                 process.StartInfo.StandardErrorEncoding = encoding;
-
                 process.Start();
                 if (!UseConsole)
                     process.WaitForInputIdle();
                 process.BeginOutputReadLine();
                 process.BeginErrorReadLine();
-                await process.WaitForExitAsync();
+                await process.WaitForExitAsync(cancellationToken);
                 process.Close();
                 Console.WriteLine(outSb.ToString());
+            }
+            catch (OperationCanceledException)
+            {
+                process.Kill();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Time out");
+                Console.ResetColor();
             }
             catch (Exception ex)
             {
