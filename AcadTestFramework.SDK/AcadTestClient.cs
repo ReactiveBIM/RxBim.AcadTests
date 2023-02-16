@@ -19,7 +19,7 @@ public class AcadTestClient
     /// Initializes a new instance of the <see cref="AcadTestClient"/> class.
     /// </summary>
     /// <param name="pipeName">Pipe name</param>
-    internal AcadTestClient(string pipeName)
+    public AcadTestClient(string pipeName)
     {
         _pipeName = pipeName;
     }
