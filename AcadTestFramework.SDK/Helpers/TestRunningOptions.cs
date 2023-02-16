@@ -5,7 +5,7 @@ using Abstractions;
 
 /// <inheritdoc />
 [DataContract]
-internal class TestRunningOptions : ITestRunningOptions
+public class TestRunningOptions : ITestRunningOptions
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="TestRunningOptions"/> class.

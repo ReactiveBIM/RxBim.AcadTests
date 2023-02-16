@@ -54,8 +54,9 @@
                 SendResults(acadTestClient, result);
                 return PluginResult.Succeeded;
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
+                acadTestClient.SendResult(e.ToString());
                 return PluginResult.Failed;
             }
         }
