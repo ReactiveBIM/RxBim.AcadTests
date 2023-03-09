@@ -1,18 +1,33 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using _build;
+using Bimlab.Nuke.Components;
 using Nuke.Common;
+using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.Tools.DotNet;
-using RxBim.AutocadTestFramework.Console.Models;
-using RxBim.AutocadTestFramework.Console.Services;
 using RxBim.Nuke.AutoCAD;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
-/// <inheritdoc />
-public class Build : AutocadRxBimBuild
+/// <inheritdoc cref="RxBim.Nuke.AutoCAD.AutocadRxBimBuild" />
+[GitHubActions("CI",
+    GitHubActionsImage.WindowsLatest,
+    FetchDepth = 0,
+    OnPushBranches = new[] { DevelopBranch, FeatureBranches },
+    InvokedTargets = new[] { nameof(Test), nameof(IPublish.Publish) },
+    ImportSecrets = new[] { "NUGET_API_KEY", "ALL_PACKAGES" })]
+[GitHubActions("Publish",
+    GitHubActionsImage.WindowsLatest,
+    FetchDepth = 0,
+    OnPushBranches = new[] { MasterBranch, "release/**" },
+    InvokedTargets = new[] { nameof(Test), nameof(IPublish.Publish) },
+    ImportSecrets = new[] { "NUGET_API_KEY", "ALL_PACKAGES" })]
+public class Build : AutocadRxBimBuild, IPublish
 {
+    const string MasterBranch = "master";
+    const string DevelopBranch = "develop";
+    const string FeatureBranches = "feature/**";
+
     /// <summary>
     /// blah
     /// </summary>
@@ -51,8 +66,6 @@ public class Build : AutocadRxBimBuild
                         ResultsFilePath = results,
                         UseAcCoreConsole = false
                     }, ts.Token);*/
-
-
                     var startInfo = new ProcessStartInfo(
                         @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\RxBim.AutocadTestFramework.Console\bin\Debug\net472\RxBim.AutocadTestFramework.Console.exe",
                         $@"-a {assemblyPath} -r {results} -v 2019 -d");
@@ -60,7 +73,6 @@ public class Build : AutocadRxBimBuild
                     process.StartInfo = startInfo;
                     process.Start();
                     await process.WaitForExitAsync();
-
                     var resultPath = outputDirectory / "result.html";
                     await new ResultConverter()
                         .Convert(results, resultPath);
