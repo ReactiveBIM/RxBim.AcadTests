@@ -2,26 +2,21 @@
 
 using System;
 using System.Reflection;
-using AutocadTestFrameworkCmd.Helpers;
+using AcadTests.TestingUtils.Di;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
 using Di;
-using Di.Testing.Autocad.Di;
 using FluentAssertions;
 using NUnit.Framework;
 
 /// <summary>
-/// Примеры тестов.
+///     Примеры тестов.
 /// </summary>
 [TestFixture]
-// TODO обсудить
-[TestDrawing("./drawing1.dwg")]
 public class SimpleTests
 {
-    private IContainer _container = null!;
-
     /// <summary>
-    /// Настройка тестов.
+    ///     Настройка тестов.
     /// </summary>
     [OneTimeSetUp]
     public void Setup()
@@ -31,8 +26,10 @@ public class SimpleTests
         _container = testingDiConfigurator.Container;
     }
 
+    private IContainer _container = null!;
+
     /// <summary>
-    /// Пустой тест.
+    ///     Пустой тест.
     /// </summary>
     [Test]
     public void FirstTest()
@@ -40,7 +37,7 @@ public class SimpleTests
     }
 
     /// <summary>
-    /// Тест с ошибкой. Для проверки отчета.
+    ///     Тест с ошибкой. Для проверки отчета.
     /// </summary>
     [Test]
     public void FailureTest()
@@ -49,7 +46,7 @@ public class SimpleTests
     }
 
     /// <summary>
-    /// Тест вывода сообщений из консоли в отчет.
+    ///     Тест вывода сообщений из консоли в отчет.
     /// </summary>
     [Test]
     public void ConsoleTest()
@@ -59,7 +56,7 @@ public class SimpleTests
     }
 
     /// <summary>
-    /// Тест работы с автокадом.
+    ///     Тест работы с автокадом.
     /// </summary>
     [Test]
     public void DrawNewCircleTest()

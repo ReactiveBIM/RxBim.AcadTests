@@ -1,26 +1,22 @@
-using System.IO;
-using System.Reflection;
-using AutocadTestFrameworkCmd.Helpers;
-using Autodesk.AutoCAD.ApplicationServices;
-using Autodesk.AutoCAD.DatabaseServices;
-using FluentAssertions;
-using NUnit.Framework;
-using RxBim.Di;
-using RxBim.Di.Testing.Autocad.Di;
-
 namespace RxBim.Example.Autocad.IntegrationTests;
 
+using System.IO;
+using System.Reflection;
+using AcadTests.TestingUtils.Di;
+using Autodesk.AutoCAD.ApplicationServices;
+using Autodesk.AutoCAD.DatabaseServices;
+using Di;
+using FluentAssertions;
+using NUnit.Framework;
+
 /// <summary>
-/// Тесты
+///     Тесты
 /// </summary>
 [TestFixture]
-[TestDrawing("./drawing2.dwg")]
 public class OtherTests
 {
-    private IContainer _container = null!;
-
     /// <summary>
-    /// Настройка тестов
+    ///     Настройка тестов
     /// </summary>
     [OneTimeSetUp]
     public void Init()
@@ -32,7 +28,7 @@ public class OtherTests
 
 
     /// <summary>
-    /// <see cref="OneTimeTearDownAttribute"/>
+    ///     <see cref="OneTimeTearDownAttribute" />
     /// </summary>
     [OneTimeTearDown]
     public void Cleanup()
@@ -40,8 +36,10 @@ public class OtherTests
         /* ... */
     }
 
+    private IContainer _container = null!;
+
     /// <summary>
-    /// Тест на получение объектов из чертежа.
+    ///     Тест на получение объектов из чертежа.
     /// </summary>
     [Test]
     public void GetObjectFromAcadTest()
@@ -61,16 +59,14 @@ public class OtherTests
             var entity = (Entity)tr.GetObject(id, OpenMode.ForRead);
 
             if (entity is Circle circle)
-            {
                 circle.Radius.Should().BeApproximately(10, 1e-6, "radius of the circle should be 10 mm");
-            }
         }
 
         tr.Commit();
     }
 
     /// <summary>
-    /// Тест на открытие другого документа 
+    ///     Тест на открытие другого документа
     /// </summary>
     [Test]
     [NonParallelizable]
@@ -88,15 +84,11 @@ public class OtherTests
         string absolutePath;
 
         if (Path.IsPathRooted(path))
-        {
             absolutePath = path;
-        }
         else
-        {
             absolutePath = Path.GetFullPath(
                 Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!,
                     path));
-        }
 
         return absolutePath;
     }

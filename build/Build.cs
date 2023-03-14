@@ -1,13 +1,16 @@
+using static Nuke.Common.Tools.DotNet.DotNetTasks;
+
+namespace _build;
+
 using System;
 using System.Diagnostics;
 using System.Linq;
-using _build;
+using AcadTests.Nuke;
 using Bimlab.Nuke.Components;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.Tools.DotNet;
 using RxBim.Nuke.AutoCAD;
-using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 /// <inheritdoc cref="RxBim.Nuke.AutoCAD.AutocadRxBimBuild" />
 [GitHubActions("CI",
@@ -27,12 +30,6 @@ public class Build : AutocadRxBimBuild, IPublish
     const string MasterBranch = "master";
     const string DevelopBranch = "develop";
     const string FeatureBranches = "feature/**";
-
-    /// <summary>
-    /// blah
-    /// </summary>
-    /// <returns></returns>
-    public static int Main() => Execute<Build>(x => x.Compile);
 
     Target IntegrationTests =>
         _ => _
@@ -57,17 +54,17 @@ public class Build : AutocadRxBimBuild, IPublish
 
                     // TODO
                     /*var ts = new CancellationTokenSource(20000);
-                    var runner = new AcadTestTasks();
-                    await runner.Run(new TestRunningOptions()
-                    {
-                        Debug = false,
-                        AcadVersion = 2019,
-                        AssemblyPath = assemblyPath,
-                        ResultsFilePath = results,
-                        UseAcCoreConsole = false
-                    }, ts.Token);*/
+                var runner = new AcadTestTasks();
+                await runner.Run(new TestRunningOptions()
+                {
+                    Debug = false,
+                    AcadVersion = 2019,
+                    AssemblyPath = assemblyPath,
+                    ResultsFilePath = results,
+                    UseAcCoreConsole = false
+                }, ts.Token);*/
                     var startInfo = new ProcessStartInfo(
-                        @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\RxBim.AutocadTestFramework.Console\bin\Debug\net472\RxBim.AutocadTestFramework.Console.exe",
+                        @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\AcadTests.Console\bin\Debug\net472\AcadTests.Console.exe",
                         $@"-a {assemblyPath} -r {results} -v 2019 -d");
                     var process = new Process();
                     process.StartInfo = startInfo;
@@ -78,4 +75,10 @@ public class Build : AutocadRxBimBuild, IPublish
                         .Convert(results, resultPath);
                 }
             });
+
+    /// <summary>
+    ///     blah
+    /// </summary>
+    /// <returns></returns>
+    public static int Main() => Execute<Build>(x => x.Compile);
 }

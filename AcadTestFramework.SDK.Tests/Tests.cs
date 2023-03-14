@@ -1,14 +1,15 @@
+namespace AcadTestFramework.SDK.Tests;
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AcadTestFramework.SDK.Helpers;
+using AcadTests.SDK;
+using AcadTests.SDK.Helpers;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace AcadTestFramework.SDK.Tests;
-
 /// <summary>
-/// Тесты
+///     Тесты
 /// </summary>
 [TestFixture]
 public class Tests
@@ -26,7 +27,7 @@ public class Tests
     }
 
     /// <summary>
-    /// Тестовый запуск
+    ///     Тестовый запуск
     /// </summary>
     [Test]
     public async Task UseAtfSdkTest()

@@ -11,21 +11,13 @@
   <ItemGroup>
     <PackageReference Include="Nuke.Common" Version="6.3.0" />
     <PackageReference Include="RazorLight" Version="2.3.0" />
-    <PackageReference Include="RxBim.Nuke.AutoCAD" Version="2.1.0-dev003" />
+    <PackageReference Include="RxBim.Nuke.AutoCAD" Version="2.2.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Models\Result.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <PackageDownload Include="NuGet.CommandLine" Version="[6.3.1]" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\RxBim.AutocadTestFramework.Console\RxBim.AutocadTestFramework.Console.csproj" />
+    <ProjectReference Include="..\AcadTests.Console\AcadTests.Console.csproj" />
+    <ProjectReference Include="..\AcadTests.Nuke\AcadTests.Nuke.csproj" />
   </ItemGroup>
 
 </Project>

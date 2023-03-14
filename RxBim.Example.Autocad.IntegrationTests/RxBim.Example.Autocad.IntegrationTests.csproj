@@ -8,22 +8,23 @@
         <PreserveCompilationContext>true</PreserveCompilationContext>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="FluentAssertions" Version="6.9.0" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+        <PackageReference Include="FluentAssertions" Version="6.10.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
         <PackageReference Include="NUnit" Version="3.13.3" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\AutocadTestFrameworkCmd\AutocadTestFrameworkCmd.csproj" />
-      <ProjectReference Include="..\RxBim.Di.Testing.Autocad\RxBim.Di.Testing.Autocad.csproj" />
+        <ProjectReference Include="..\AcadTests.TestingUtils\AcadTests.TestingUtils.csproj" />
     </ItemGroup>
     <ItemGroup>
-      <None Remove="drawing.dwg" />
-      <Content Include="drawing1.dwg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
+        <Content Include="drawing1.dwg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <None Update="drawing2.dwg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
     <ItemGroup>
-      <Reference Include="WindowsBase" />
+        <Reference Include="WindowsBase" />
     </ItemGroup>
 
     <Import Project=".\RxBim.Build.Props" Condition="Exists('.\RxBim.Build.Props')" />
