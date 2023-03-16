@@ -5,6 +5,7 @@ namespace _build;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using AcadTests.Nuke;
 using Bimlab.Nuke.Components;
 using Nuke.Common;
@@ -30,6 +31,16 @@ public class Build : AutocadRxBimBuild, IPublish
     const string MasterBranch = "master";
     const string DevelopBranch = "develop";
     const string FeatureBranches = "feature/**";
+
+    public Build()
+    {
+        Console.OutputEncoding = Encoding.UTF8;
+    }
+
+    /// <summary>
+    /// Main 
+    /// </summary>
+    public static int Main() => Execute<Build>(x => x.From<IPublish>().List);
 
     Target IntegrationTests =>
         _ => _
@@ -76,9 +87,7 @@ public class Build : AutocadRxBimBuild, IPublish
                 }
             });
 
-    /// <summary>
-    ///     blah
-    /// </summary>
-    /// <returns></returns>
-    public static int Main() => Execute<Build>(x => x.Compile);
+    T From<T>()
+        where T : INukeBuild =>
+        (T)(object)this;
 }
