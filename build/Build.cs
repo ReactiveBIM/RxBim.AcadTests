@@ -87,6 +87,15 @@ public class Build : AutocadRxBimBuild, IPublish
                 }
             });
 
+    public Target Test => _ => _
+        .Before<IRestore>()
+        .Executes(() =>
+        {
+            DotNetTest(settings => settings
+                .SetProjectFile(From<IHazSolution>().Solution.Path)
+                .SetConfiguration(From<IHazConfiguration>().Configuration));
+        });
+    
     T From<T>()
         where T : INukeBuild =>
         (T)(object)this;
