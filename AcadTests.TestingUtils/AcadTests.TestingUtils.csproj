@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net472</TargetFramework>
+        <UseDi>true</UseDi>
+        <UseAcad>true</UseAcad>
+        <AssemblyName>$(MSBuildProjectName).$(Version)</AssemblyName>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Description>Autocad tests DI utils</Description>
+        <PackageId>RxBim.AcadTests.DI</PackageId>
+    </PropertyGroup>
+</Project>
