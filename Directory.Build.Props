@@ -21,13 +21,13 @@
     </ItemGroup>
 
     <ItemGroup Condition=" '$(UseDi)' == 'true' ">
-        <PackageReference Include="RxBim.Di" Version="1.2.0"/>
+        <PackageReference Include="RxBim.Di" Version="1.2.1"/>
     </ItemGroup>
     <ItemGroup Condition=" '$(UseAcad)' == 'true' ">
         <PackageReference Include="AutoCAD2019.Base" Version="1.0.3" ExcludeAssets="build; runtime"/>
     </ItemGroup>
     <ItemGroup Condition=" '$(UseSimpleInjector)' == 'true' ">
-        <PackageReference Include="RxBim.Di.SimpleInjector" Version="1.1.1"/>
+        <PackageReference Include="RxBim.Di.SimpleInjector" Version="1.1.2"/>
     </ItemGroup>
 
 
