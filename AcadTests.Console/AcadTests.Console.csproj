@@ -8,7 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\RxBim.Example.Autocad.IntegrationTests\RxBim.Example.Autocad.IntegrationTests.csproj"/>
         <ProjectReference Include="..\AcadTests.Cmd\AcadTests.Cmd.csproj"/>
         <ProjectReference Include="..\AcadTests.ScriptUtils\AcadTests.ScriptUtils.csproj"/>
     </ItemGroup>
@@ -20,5 +19,6 @@
     <PropertyGroup>
         <Description>Autocad tests framework console</Description>
         <PackageId>RxBim.AcadTests.Console</PackageId>
+        <IsPackable>true</IsPackable>
     </PropertyGroup>
 </Project>

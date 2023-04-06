@@ -20,6 +20,7 @@
     <PropertyGroup>
         <Description>Autocad tests nuke utils</Description>
         <PackageId>RxBim.AcadTests.Nuke</PackageId>
+        <IsPackable>true</IsPackable>
     </PropertyGroup>
 
 </Project>
