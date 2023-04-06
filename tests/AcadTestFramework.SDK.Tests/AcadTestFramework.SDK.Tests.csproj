@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj" />
+        <ProjectReference Include="..\..\src\AcadTests.SDK\AcadTests.SDK.csproj" />
     </ItemGroup>
 
 </Project>

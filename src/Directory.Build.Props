@@ -8,26 +8,26 @@
         <Version>1.0.0-dev003</Version>
     </PropertyGroup>
 
-    <PropertyGroup Condition="!$(ProjectName.Contains('Tests'))">
-        <CodeAnalysisRuleSet>..\stylecop.ruleset</CodeAnalysisRuleSet>
+    <PropertyGroup>
+        <CodeAnalysisRuleSet>..\..\stylecop.ruleset</CodeAnalysisRuleSet>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
-    <ItemGroup Condition=" '$(ProjectName)' != '_build' And !'$(ProjectName.EndsWith(`Tests`))' And !'$(ProjectName.EndsWith(`IntegrationTests`))'">
-        <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.406">
+    <ItemGroup>
+        <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.435">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
 
     <ItemGroup Condition=" '$(UseDi)' == 'true' ">
-        <PackageReference Include="RxBim.Di" Version="1.2.1"/>
+        <PackageReference Include="RxBim.Di" Version="1.2.1" />
     </ItemGroup>
     <ItemGroup Condition=" '$(UseAcad)' == 'true' ">
-        <PackageReference Include="AutoCAD2019.Base" Version="1.0.3" ExcludeAssets="build; runtime"/>
+        <PackageReference Include="AutoCAD2019.Base" Version="1.0.3" ExcludeAssets="build; runtime" />
     </ItemGroup>
     <ItemGroup Condition=" '$(UseSimpleInjector)' == 'true' ">
-        <PackageReference Include="RxBim.Di.SimpleInjector" Version="1.1.2"/>
+        <PackageReference Include="RxBim.Di.SimpleInjector" Version="1.1.2" />
     </ItemGroup>
 
 

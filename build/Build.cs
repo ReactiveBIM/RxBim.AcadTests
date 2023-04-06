@@ -95,7 +95,7 @@ public class Build : AutocadRxBimBuild, IPublish
                 .SetProjectFile(From<IHazSolution>().Solution.Path)
                 .SetConfiguration(From<IHazConfiguration>().Configuration));
         });
-    
+
     T From<T>()
         where T : INukeBuild =>
         (T)(object)this;

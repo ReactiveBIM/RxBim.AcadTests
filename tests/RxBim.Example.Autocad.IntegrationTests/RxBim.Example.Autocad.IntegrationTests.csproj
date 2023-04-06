@@ -6,6 +6,7 @@
         <UseDi>true</UseDi>
         <UseSimpleInjector>true</UseSimpleInjector>
         <PreserveCompilationContext>true</PreserveCompilationContext>
+        <LangVersion>10</LangVersion>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="FluentAssertions" Version="6.10.0" />
@@ -13,7 +14,7 @@
         <PackageReference Include="NUnit" Version="3.13.3" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\AcadTests.TestingUtils\AcadTests.TestingUtils.csproj" />
+        <ProjectReference Include="..\..\src\AcadTests.TestingUtils\AcadTests.TestingUtils.csproj" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="drawing1.dwg">

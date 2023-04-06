@@ -1,27 +1,27 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <NoWarn>CS0649;CS0169</NoWarn>
-    <NukeTelemetryVersion>1</NukeTelemetryVersion>
-    <PreserveCompilationContext>true</PreserveCompilationContext>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <NoWarn>CS0649;CS0169</NoWarn>
+        <NukeTelemetryVersion>1</NukeTelemetryVersion>
+        <PreserveCompilationContext>true</PreserveCompilationContext>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Nuke.Common" Version="6.1.2" />
-    <PackageReference Include="RazorLight" Version="2.3.0" />
-    <PackageReference Include="RxBim.Nuke.AutoCAD" Version="2.2.1" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Nuke.Common" Version="6.1.2" />
+        <PackageReference Include="RazorLight" Version="2.3.0" />
+        <PackageReference Include="RxBim.Nuke.AutoCAD" Version="2.2.1" />
+        <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AcadTests.Console\AcadTests.Console.csproj" />
-    <ProjectReference Include="..\AcadTests.Nuke\AcadTests.Nuke.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\AcadTests.Console\AcadTests.Console.csproj" />
+        <ProjectReference Include="..\AcadTests.Nuke\AcadTests.Nuke.csproj" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageDownload Include="NuGet.CommandLine" Version="[6.4.0]" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageDownload Include="NuGet.CommandLine" Version="[6.4.0]" />
+    </ItemGroup>
 
 </Project>

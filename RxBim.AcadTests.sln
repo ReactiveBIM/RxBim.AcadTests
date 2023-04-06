@@ -1,32 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTests.Cmd", "AcadTests.Cmd\AcadTests.Cmd.csproj", "{716AB9E7-2841-4714-9097-06DFD984D65C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTests.Cmd", "src\AcadTests.Cmd\AcadTests.Cmd.csproj", "{716AB9E7-2841-4714-9097-06DFD984D65C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTests.Console", "AcadTests.Console\AcadTests.Console.csproj", "{AFF2B2DF-CC4F-44E0-BD98-7C17342F8961}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTests.Console", "src\AcadTests.Console\AcadTests.Console.csproj", "{AFF2B2DF-CC4F-44E0-BD98-7C17342F8961}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTests.TestingUtils", "AcadTests.TestingUtils\AcadTests.TestingUtils.csproj", "{3479DCB0-30E9-4C43-BE9F-9F627EC46055}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTests.TestingUtils", "src\AcadTests.TestingUtils\AcadTests.TestingUtils.csproj", "{3479DCB0-30E9-4C43-BE9F-9F627EC46055}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTests.ScriptUtils", "AcadTests.ScriptUtils\AcadTests.ScriptUtils.csproj", "{9EA635F8-0B59-47E5-85CC-6C7D0DE119C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTests.ScriptUtils", "src\AcadTests.ScriptUtils\AcadTests.ScriptUtils.csproj", "{9EA635F8-0B59-47E5-85CC-6C7D0DE119C6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionFolder", "{B2B7E452-95B3-41EE-86DC-6D26C0A66C94}"
 	ProjectSection(SolutionItems) = preProject
-		Directory.Build.Props = Directory.Build.Props
 		stylecop.ruleset = stylecop.ruleset
 		.gitignore = .gitignore
 		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FE3062B5-3E3B-47F9-95E9-38FC380F35FE}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.Props = src\Directory.Build.Props
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxBim.Example.Autocad.IntegrationTests", "RxBim.Example.Autocad.IntegrationTests\RxBim.Example.Autocad.IntegrationTests.csproj", "{9266344E-57D4-4D40-92B7-02A34A70CC88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxBim.Example.Autocad.IntegrationTests", "tests\RxBim.Example.Autocad.IntegrationTests\RxBim.Example.Autocad.IntegrationTests.csproj", "{9266344E-57D4-4D40-92B7-02A34A70CC88}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{005A1D66-EF42-4E92-8470-4B736151EB90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTests.SDK", "AcadTests.SDK\AcadTests.SDK.csproj", "{91361B2A-889E-44BC-A4A6-CDAF4FBCAD1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTests.SDK", "src\AcadTests.SDK\AcadTests.SDK.csproj", "{91361B2A-889E-44BC-A4A6-CDAF4FBCAD1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTestFramework.SDK.Tests", "AcadTestFramework.SDK.Tests\AcadTestFramework.SDK.Tests.csproj", "{BA6D7AB6-28E1-4ACD-963A-E4A3EBB3D716}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTestFramework.SDK.Tests", "tests\AcadTestFramework.SDK.Tests\AcadTestFramework.SDK.Tests.csproj", "{BA6D7AB6-28E1-4ACD-963A-E4A3EBB3D716}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTests.Nuke", "AcadTests.Nuke\AcadTests.Nuke.csproj", "{A848C7DF-444C-4AD1-AF69-EB9F2D01E929}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTests.Nuke", "src\AcadTests.Nuke\AcadTests.Nuke.csproj", "{A848C7DF-444C-4AD1-AF69-EB9F2D01E929}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_build", "build\_build.csproj", "{EDD298B6-D7A4-4FC8-978F-EE4BCEB88785}"
 EndProject
@@ -70,6 +72,10 @@ Global
 		{A848C7DF-444C-4AD1-AF69-EB9F2D01E929}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EDD298B6-D7A4-4FC8-978F-EE4BCEB88785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EDD298B6-D7A4-4FC8-978F-EE4BCEB88785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BFA44F9-7D7D-475F-9E31-5123FF3154E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BFA44F9-7D7D-475F-9E31-5123FF3154E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BFA44F9-7D7D-475F-9E31-5123FF3154E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BFA44F9-7D7D-475F-9E31-5123FF3154E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{716AB9E7-2841-4714-9097-06DFD984D65C} = {FE3062B5-3E3B-47F9-95E9-38FC380F35FE}
@@ -80,5 +86,6 @@ Global
 		{91361B2A-889E-44BC-A4A6-CDAF4FBCAD1C} = {FE3062B5-3E3B-47F9-95E9-38FC380F35FE}
 		{BA6D7AB6-28E1-4ACD-963A-E4A3EBB3D716} = {005A1D66-EF42-4E92-8470-4B736151EB90}
 		{A848C7DF-444C-4AD1-AF69-EB9F2D01E929} = {FE3062B5-3E3B-47F9-95E9-38FC380F35FE}
+		{2BFA44F9-7D7D-475F-9E31-5123FF3154E8} = {FE3062B5-3E3B-47F9-95E9-38FC380F35FE}
 	EndGlobalSection
 EndGlobal
