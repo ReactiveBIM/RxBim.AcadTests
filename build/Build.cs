@@ -1,7 +1,3 @@
-using static Nuke.Common.Tools.DotNet.DotNetTasks;
-
-namespace _build;
-
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -37,11 +33,6 @@ public class Build : AutocadRxBimBuild, IPublish
         Console.OutputEncoding = Encoding.UTF8;
     }
 
-    /// <summary>
-    /// Main 
-    /// </summary>
-    public static int Main() => Execute<Build>(x => x.From<IPublish>().List);
-
     Target IntegrationTests =>
         _ => _
             .Executes(async () =>
@@ -55,8 +46,7 @@ public class Build : AutocadRxBimBuild, IPublish
                 foreach (var project in projects)
                 {
                     var outputDirectory = solution.Directory / "testoutput" / project.Name;
-                    DotNetBuild(settings => settings
-                        .SetProjectFile(project)
+                    DotNetTasks.DotNetBuild(settings => DotNetBuildSettingsExtensions.SetProjectFile<DotNetBuildSettings>(settings, project)
                         .SetConfiguration("Debug")
                         .SetOutputDirectory(outputDirectory));
                     var assemblyName = project.Name + ".dll";
@@ -91,10 +81,14 @@ public class Build : AutocadRxBimBuild, IPublish
         .Before<IRestore>()
         .Executes(() =>
         {
-            DotNetTest(settings => settings
-                .SetProjectFile(From<IHazSolution>().Solution.Path)
+            DotNetTasks.DotNetTest(settings => DotNetTestSettingsExtensions.SetProjectFile<DotNetTestSettings>(settings, From<IHazSolution>().Solution.Path)
                 .SetConfiguration(From<IHazConfiguration>().Configuration));
         });
+
+    /// <summary>
+    ///     Main
+    /// </summary>
+    public static int Main() => Execute<Build>(x => x.From<IPublish>().List);
 
     T From<T>()
         where T : INukeBuild =>
