@@ -20,4 +20,8 @@
     <ProjectReference Include="..\AcadTests.Nuke\AcadTests.Nuke.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageDownload Include="NuGet.CommandLine" Version="[6.4.0]" />
+  </ItemGroup>
+
 </Project>
