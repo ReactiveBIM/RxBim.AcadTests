@@ -39,7 +39,7 @@ public class Build : AutocadRxBimBuild, IPublish
             {
                 var solution = Solution;
                 var projects = solution.AllProjects
-                    .Where(x => x.Name.EndsWith(".IntegrationTests"))
+                    .Where(x => x.Name.EndsWith("Autocad.IntegrationTests"))
                     .ToList();
                 if (!projects.Any())
                     throw new ArgumentException("project not found");
@@ -66,6 +66,39 @@ public class Build : AutocadRxBimBuild, IPublish
                 }, ts.Token);*/
                     var startInfo = new ProcessStartInfo(
                         @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\AcadTests.Console\bin\Debug\net472\AcadTests.Console.exe",
+                        $@"-a {assemblyPath} -r {results} -v 2019 -d");
+                    var process = new Process();
+                    process.StartInfo = startInfo;
+                    process.Start();
+                    await process.WaitForExitAsync();
+                    var resultPath = outputDirectory / "result.html";
+                    await new ResultConverter()
+                        .Convert(results, resultPath);
+                }
+            });
+    
+    Target RevitIntegrationTests =>
+        _ => _
+            .Executes(async () =>
+            {
+                var solution = Solution;
+                var projects = solution.AllProjects
+                    .Where(x => x.Name.EndsWith("Revit.IntegrationTests"))
+                    .ToList();
+                if (!projects.Any())
+                    throw new ArgumentException("project not found");
+                foreach (var project in projects)
+                {
+                    var outputDirectory = solution.Directory / "testoutput" / project.Name;
+                    DotNetTasks.DotNetBuild(settings => DotNetBuildSettingsExtensions.SetProjectFile<DotNetBuildSettings>(settings, project)
+                        .SetConfiguration("Debug")
+                        .SetOutputDirectory(outputDirectory));
+                    var assemblyName = project.Name + ".dll";
+                    var assemblyPath = outputDirectory / assemblyName;
+                    var results = outputDirectory / "result.xml";
+
+                    var startInfo = new ProcessStartInfo(
+                        @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\src\RevitTests.Console\bin\Debug\net6.0\RevitTests.Console.exe",
                         $@"-a {assemblyPath} -r {results} -v 2019 -d");
                     var process = new Process();
                     process.StartInfo = startInfo;

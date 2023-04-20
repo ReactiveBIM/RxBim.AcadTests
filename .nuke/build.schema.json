@@ -144,6 +144,7 @@
               "Publish",
               "Release",
               "Restore",
+              "RevitIntegrationTests",
               "SignAssemblies",
               "TagProject",
               "Test"
@@ -180,6 +181,7 @@
               "Publish",
               "Release",
               "Restore",
+              "RevitIntegrationTests",
               "SignAssemblies",
               "TagProject",
               "Test"

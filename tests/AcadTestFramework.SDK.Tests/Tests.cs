@@ -17,10 +17,10 @@ public class Tests
     private static readonly string PipeName = Guid.NewGuid().ToString();
     private static readonly string ResultMessage = "It' results";
 
-    private static void AcadThread(object? data)
+    private async void AcadThread(object? data)
     {
         var client = new AcadTestClient(PipeName);
-        var options = client.GetTestRunningOptions();
+        var options = await client.GetTestRunningOptions();
         client.SendMessage("Hi!");
         client.SendMessage("Some message");
         client.SendResult(ResultMessage);
@@ -35,8 +35,8 @@ public class Tests
         var testRunningOptions = new TestRunningOptions();
         var acadServer = new AcadTestServer(PipeName);
         var resultsTask = acadServer.Start(testRunningOptions, CancellationToken.None);
-        var acad = new Thread(AcadThread);
-        acad.Start();
+        var acadClient = new Thread(AcadThread);
+        acadClient.Start();
         var results = await resultsTask;
         results.Should().Be(ResultMessage);
     }
