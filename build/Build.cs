@@ -52,6 +52,7 @@ public class Build : AutocadRxBimBuild, IPublish
                     .ToList();
                 if (!projects.Any())
                     throw new ArgumentException("project not found");
+                // TODO удалять testoutput перед запуском тестов
                 foreach (var project in projects)
                 {
                     var outputDirectory = solution.Directory / "testoutput" / project.Name;
@@ -63,24 +64,27 @@ public class Build : AutocadRxBimBuild, IPublish
                     var assemblyPath = outputDirectory / assemblyName;
                     var results = outputDirectory / "result.xml";
 
+
                     // TODO
-                    /*var ts = new CancellationTokenSource(20000);
-                var runner = new AcadTestTasks();
-                await runner.Run(new TestRunningOptions()
-                {
-                    Debug = false,
-                    AcadVersion = 2019,
-                    AssemblyPath = assemblyPath,
-                    ResultsFilePath = results,
-                    UseAcCoreConsole = false
-                }, ts.Token);*/
+                    /*var ts = new CancellationTokenSource();
+                    var runner = new AcadTestTasks();
+                    await runner.Run(new TestRunningOptions()
+                    {
+                        Debug = false,
+                        AcadVersion = 2019,
+                        AssemblyPath = assemblyPath,
+                        ResultsFilePath = results,
+                        UseAcCoreConsole = false
+                    }, ts.Token);*/
+
                     var startInfo = new ProcessStartInfo(
-                        @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\AcadTests.Console\bin\Debug\net472\AcadTests.Console.exe",
-                        $@"-a {assemblyPath} -r {results} -v 2019 -d");
+                        @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\AcadTests.Console\bin\Debug\net472\AcadTests.Console.1.0.0-dev003.exe",
+                        $@"-a {assemblyPath} -r {results} -v 2019");
                     var process = new Process();
                     process.StartInfo = startInfo;
                     process.Start();
                     await process.WaitForExitAsync();
+
                     var resultPath = outputDirectory / "result.html";
                     await new ResultConverter()
                         .Convert(results, resultPath);
@@ -95,7 +99,7 @@ public class Build : AutocadRxBimBuild, IPublish
                 .SetProjectFile(From<IHazSolution>().Solution.Path)
                 .SetConfiguration(From<IHazConfiguration>().Configuration));
         });
-    
+
     T From<T>()
         where T : INukeBuild =>
         (T)(object)this;
