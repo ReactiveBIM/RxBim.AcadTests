@@ -18,8 +18,14 @@
         <Reference Include="WindowsBase" />
     </ItemGroup>
 
+    <!--чтобы сборки были в выходной папке-->
     <ItemGroup>
-      <ProjectReference Include="..\..\src\RevitTests.Cmd\RevitTests.Cmd.csproj" />
+        <ProjectReference Include="..\..\src\RevitTests.Cmd\RevitTests.Cmd.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Update="rac_basic_sample_project.rvt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <Import Project=".\RxBim.Build.Props" Condition="Exists('.\RxBim.Build.Props')" />

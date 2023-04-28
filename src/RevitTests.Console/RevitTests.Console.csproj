@@ -9,7 +9,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj" />
-      <ProjectReference Include="..\RevitTests.Cmd\RevitTests.Cmd.csproj" />
     </ItemGroup>
 
     <ItemGroup>

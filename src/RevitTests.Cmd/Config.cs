@@ -1,12 +1,14 @@
 namespace RevitTests.Cmd;
 
 using AcadTests.SDK;
+using JetBrains.Annotations;
 using NUnit.Framework.Api;
 using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
 using RxBim.Di;
 
 /// <inheritdoc />
+[UsedImplicitly]
 public class Config : ICommandConfiguration
 {
     /// <inheritdoc />

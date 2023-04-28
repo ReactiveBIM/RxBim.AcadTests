@@ -12,6 +12,8 @@ using Console = System.Console;
 /// </summary>
 public class RevitTestTasks
 {
+    private const string CommandName = "RevitTests.Cmd.Cmd";
+
     /// <summary>
     ///     Запускает тестирование.
     /// </summary>
@@ -46,7 +48,7 @@ public class RevitTestTasks
         addin.Add(new XElement("Text", "Revit tests sample"));
         addin.Add(new XElement("Description", "Revit tests sample"));
         addin.Add(new XElement("Assembly", assemblyPath));
-        addin.Add(new XElement("FullClassName", "RevitTests.Cmd.Cmd"));
+        addin.Add(new XElement("FullClassName", CommandName));
         addin.Add(new XElement("AddInId", "3cdcad5f-8afe-4871-8ad0-a3f699946319"));
         addin.Add(new XElement("VendorId", "Rxbim"));
         addins.Add(addin);
@@ -62,9 +64,9 @@ public class RevitTestTasks
         sb.AppendLine("'Dim Jrn");
         sb.AppendLine("Set Jrn = CrsJournalScript ");
         sb.AppendLine(
-            "Jrn.RibbonEvent \"Execute external command:3cdcad5f-8afe-4871-8ad0-a3f699946319:RevitTests.Cmd.Cmd\"");
-        sb.AppendLine("Jrn.Command \"Internal\" , \"Close the active project , ID_REVIT_FILE_CLOSE\"");
-        sb.AppendLine("Jrn.Command \"SystemMenu\" , \"Quit the application; prompts to save projects , ID_APP_EXIT\"");
+            $"Jrn.RibbonEvent \"Execute external command:3cdcad5f-8afe-4871-8ad0-a3f699946319:{CommandName}\"");
+        /*sb.AppendLine("Jrn.Command \"Internal\" , \"Close the active project , ID_REVIT_FILE_CLOSE\"");*/
+        sb.AppendLine("Jrn.Command \"Internal\" , \"Quit the application; prompts to save projects , ID_APP_EXIT\"");
         var path = Path.Combine(workDir, "journal.txt");
         File.WriteAllText(path, sb.ToString());
         return path;
