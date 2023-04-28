@@ -9,6 +9,7 @@ using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.Tools.DotNet;
 using RxBim.Nuke.AutoCAD;
+using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 /// <inheritdoc cref="RxBim.Nuke.AutoCAD.AutocadRxBimBuild" />
 [GitHubActions("CI",
@@ -47,7 +48,8 @@ public class Build : AutocadRxBimBuild, IPublish
                 foreach (var project in projects)
                 {
                     var outputDirectory = solution.Directory / "testoutput" / project.Name;
-                    DotNetTasks.DotNetBuild(settings => DotNetBuildSettingsExtensions.SetProjectFile<DotNetBuildSettings>(settings, project)
+                    DotNetTasks.DotNetBuild(settings => DotNetBuildSettingsExtensions
+                        .SetProjectFile<DotNetBuildSettings>(settings, project)
                         .SetConfiguration("Debug")
                         .SetOutputDirectory(outputDirectory));
                     var assemblyName = project.Name + ".dll";
@@ -77,7 +79,7 @@ public class Build : AutocadRxBimBuild, IPublish
                         .Convert(results, resultPath);
                 }
             });
-    
+
     Target RevitIntegrationTests =>
         _ => _
             .Executes(async () =>
@@ -92,7 +94,8 @@ public class Build : AutocadRxBimBuild, IPublish
                 {
                     var outputDirectory = solution.Directory / "testoutput" / project.Name;
                     Directory.Delete(outputDirectory, true);
-                    DotNetTasks.DotNetBuild(settings => DotNetBuildSettingsExtensions.SetProjectFile<DotNetBuildSettings>(settings, project)
+                    DotNetTasks.DotNetBuild(settings => DotNetBuildSettingsExtensions
+                        .SetProjectFile<DotNetBuildSettings>(settings, project)
                         .SetConfiguration("Debug")
                         .SetOutputDirectory(outputDirectory));
                     var assemblyName = project.Name + ".dll";
@@ -112,13 +115,17 @@ public class Build : AutocadRxBimBuild, IPublish
                 }
             });
 
-    public Target Test => _ => _
-        .Before<IRestore>()
-        .Executes(() =>
-        {
-            DotNetTasks.DotNetTest(settings => DotNetTestSettingsExtensions.SetProjectFile<DotNetTestSettings>(settings, From<IHazSolution>().Solution.Path)
-                .SetConfiguration(From<IHazConfiguration>().Configuration));
-        });
+    new Target Test =>
+        targetDefinition => targetDefinition
+            .Before(Clean)
+            .Before<IRestore>()
+            .Executes(() =>
+            {
+                DotNetTest(settings => settings
+                    .SetProjectFile(From<IHazSolution>().Solution.Path)
+                    .SetConfiguration(From<IHazConfiguration>().Configuration)
+                    .SetFilter("FullyQualifiedName!~IntegrationTests"));
+            });
 
     /// <summary>
     ///     Main
