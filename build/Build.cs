@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using AcadTests.Nuke;
@@ -66,7 +67,7 @@ public class Build : AutocadRxBimBuild, IPublish
                 }, ts.Token);*/
                     var startInfo = new ProcessStartInfo(
                         @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\AcadTests.Console\bin\Debug\net472\AcadTests.Console.exe",
-                        $@"-a {assemblyPath} -r {results} -v 2019 -d");
+                        $@"-a {assemblyPath} -r {results} -v 2019");
                     var process = new Process();
                     process.StartInfo = startInfo;
                     process.Start();
@@ -90,6 +91,7 @@ public class Build : AutocadRxBimBuild, IPublish
                 foreach (var project in projects)
                 {
                     var outputDirectory = solution.Directory / "testoutput" / project.Name;
+                    Directory.Delete(outputDirectory, true);
                     DotNetTasks.DotNetBuild(settings => DotNetBuildSettingsExtensions.SetProjectFile<DotNetBuildSettings>(settings, project)
                         .SetConfiguration("Debug")
                         .SetOutputDirectory(outputDirectory));

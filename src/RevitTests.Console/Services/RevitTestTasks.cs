@@ -24,6 +24,7 @@ public class RevitTestTasks
             var server = new AcadTestSdk().AcadTestServer;
             var serverTask = server.Start(options, cancellationToken);
             var workDir = Path.GetDirectoryName(options.AssemblyPath);
+            CreateAddIn(workDir);
             var journal = CreateJournal(workDir!);
             await Run(journal, cancellationToken);
             var testResults = await serverTask;
@@ -44,8 +45,8 @@ public class RevitTestTasks
 		<Description>Revit tests sample</Description>
 		<Assembly>{assemblyPath}</Assembly>
 		<FullClassName>RevitTests.Cmd.Cmd</FullClassName>
-		<AddInId>efeffffd-fb08-41df-b62b-50429e1383d9</AddInId>
-		<VendorId>efeffffd-fb08-41df-b62b-50429e1383d9</VendorId>
+		<AddInId>3cdcad5f-8afe-4871-8ad0-a3f699946319</AddInId>
+		<VendorId>89858172-922c-4a9f-b592-baf95da67b58</VendorId>
 	</AddIn>
 </RevitAddIns>";
         var path = Path.Combine(workDir, "testAddIn.addin");
@@ -57,9 +58,8 @@ public class RevitTestTasks
     {
         var addin = @"'Dim Jrn 
 Set Jrn = CrsJournalScript 
-Jrn.RibbonEvent ""Execute external command:efeffffd-fb08-41df-b62b-50429e1383d9:RevitTests.Cmd.Cmd""
-Jrn.Command ""Internal"" , ""Close the active project , ID_REVIT_FILE_CLOSE"" 
-Jrn.RibbonEvent ""Execute external command:7CF281FA-D8C0-499E-AA60-7A1CF582129F:RTF.Applications.RTFClientEndCmd"" 
+Jrn.RibbonEvent ""Execute external command:3cdcad5f-8afe-4871-8ad0-a3f699946319:RevitTests.Cmd.Cmd""
+Jrn.Command ""Internal"" , ""Close the active project , ID_REVIT_FILE_CLOSE""
 Jrn.Command ""SystemMenu"" , ""Quit the application; prompts to save projects , ID_APP_EXIT""";
         var path = Path.Combine(workDir, "journal.txt");
         File.WriteAllText(path, addin);

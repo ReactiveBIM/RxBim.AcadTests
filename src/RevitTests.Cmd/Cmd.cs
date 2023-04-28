@@ -5,7 +5,7 @@ using AcadTests.SDK;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using Newtonsoft.Json;
+using JetBrains.Annotations;
 using NUnit;
 using NUnit.Framework.Api;
 using NUnit.Framework.Interfaces;
@@ -18,6 +18,7 @@ using RxBim.Shared;
 public class Cmd : RxBimCommand
 {
     /// <inheritdoc />
+    [UsedImplicitly]
     public PluginResult ExecuteCommand(
         AcadTestClient acadTestClient,
         ITestAssemblyRunner testAssemblyRunner,
@@ -48,16 +49,6 @@ public class Cmd : RxBimCommand
     public override bool IsCommandAvailable(UIApplication applicationData, CategorySet selectedCategories)
     {
         return true;
-    }
-
-    private static void SaveResults(ITestResult result, string resultsPath)
-    {
-        var output = JsonConvert.SerializeObject(result, new JsonSerializerSettings
-        {
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            Error = (_, args) => { args.ErrorContext.Handled = true; }
-        });
-        File.WriteAllText(resultsPath, output);
     }
 
     private ITestResult RunTests(

@@ -1,4 +1,4 @@
-namespace AcadTests.Console.Services;
+namespace RevitTests.Console.Services;
 
 using System;
 using CommandLine;
