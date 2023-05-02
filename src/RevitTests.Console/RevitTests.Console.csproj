@@ -9,10 +9,17 @@
 
     <ItemGroup>
       <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj" />
+      <ProjectReference Include="..\RevitTests.Cmd\RevitTests.Cmd.csproj" />
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="CommandLineParser" Version="2.9.1" />
     </ItemGroup>
+
+    <PropertyGroup>
+        <Description>Revit tests framework console.</Description>
+        <PackageId>RxBim.RevitTests.Console</PackageId>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
 
 </Project>

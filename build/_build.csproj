@@ -18,6 +18,11 @@
   <ItemGroup>
     <ProjectReference Include="..\src\AcadTests.Console\AcadTests.Console.csproj" />
     <ProjectReference Include="..\src\AcadTests.Nuke\AcadTests.Nuke.csproj" />
+    <ProjectReference Include="..\src\RevitTests.Console\RevitTests.Console.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageDownload Include="NuGet.CommandLine" Version="[6.5.0]" />
   </ItemGroup>
 
 </Project>

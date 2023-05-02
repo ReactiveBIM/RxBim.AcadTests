@@ -4,7 +4,6 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>net472</TargetFramework>
         <Nullable>enable</Nullable>
-        <AssemblyName>$(MSBuildProjectName).$(Version)</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,7 +16,7 @@
     </ItemGroup>
 
     <PropertyGroup>
-        <Description>Autocad tests framework console</Description>
+        <Description>Autocad tests framework console.</Description>
         <PackageId>RxBim.AcadTests.Console</PackageId>
         <IsPackable>true</IsPackable>
     </PropertyGroup>

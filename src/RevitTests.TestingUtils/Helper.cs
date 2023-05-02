@@ -1,4 +1,4 @@
-namespace RevitTests.Cmd;
+namespace RevitTests.TestingUtils;
 
 using Autodesk.Revit.UI;
 

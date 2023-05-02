@@ -12,6 +12,7 @@ using NUnit.Framework.Api;
 using NUnit.Framework.Interfaces;
 using RxBim.Command.Revit;
 using RxBim.Shared;
+using TestingUtils;
 
 /// <inheritdoc />
 [Transaction(TransactionMode.Manual)]

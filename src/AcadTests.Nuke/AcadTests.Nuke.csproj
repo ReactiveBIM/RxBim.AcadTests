@@ -4,7 +4,6 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <AssemblyName>$(MSBuildProjectName).$(Version)</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
@@ -18,7 +17,7 @@
         </EmbeddedResource>
     </ItemGroup>
     <PropertyGroup>
-        <Description>Autocad tests nuke utils</Description>
+        <Description>Autocad tests nuke utils.</Description>
         <PackageId>RxBim.AcadTests.Nuke</PackageId>
         <IsPackable>true</IsPackable>
     </PropertyGroup>

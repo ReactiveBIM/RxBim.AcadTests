@@ -17,4 +17,10 @@
     <ItemGroup>
         <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj" />
     </ItemGroup>
+
+    <PropertyGroup>
+        <Description>The command to run the autocad tests.</Description>
+        <PackageId>RxBim.AcadTests.Cmd</PackageId>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
 </Project>

@@ -7,7 +7,7 @@ using Autodesk.Revit.DB.Structure;
 using Autodesk.Revit.UI;
 using FluentAssertions;
 using NUnit.Framework;
-using RevitTests.Cmd;
+using RevitTests.TestingUtils;
 
 /// <summary>
 /// Revit tests.
