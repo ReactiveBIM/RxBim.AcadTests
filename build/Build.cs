@@ -90,6 +90,7 @@ public class Build : AutocadRxBimBuild, IPublish
                     .ToList();
                 if (!projects.Any())
                     throw new ArgumentException("project not found");
+                var consoleDllPath = typeof(RevitTests.Console.Services.RevitTestTasks).Assembly.Location;
                 foreach (var project in projects)
                 {
                     var outputDirectory = solution.Directory / "testoutput" / project.Name;
@@ -102,13 +103,17 @@ public class Build : AutocadRxBimBuild, IPublish
                     var assemblyPath = outputDirectory / assemblyName;
                     var results = outputDirectory / "result.xml";
 
-                    var startInfo = new ProcessStartInfo(
-                        @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\src\RevitTests.Console\bin\Debug\net6.0\RevitTests.Console.exe",
-                        $@"-a {assemblyPath} -r {results} -v 2019 -d");
-                    var process = new Process();
-                    process.StartInfo = startInfo;
+                    var process = new Process
+                    {
+                        StartInfo = new ProcessStartInfo
+                        {
+                            FileName = "dotnet",
+                            Arguments = consoleDllPath + " " + $@"-a {assemblyPath} -r {results} -v 2019 -d",
+                        }
+                    };
+
                     process.Start();
-                    await process.WaitForExitAsync();
+                    process.WaitForExit();
                     var resultPath = outputDirectory / "result.html";
                     await new ResultConverter()
                         .Convert(results, resultPath);
