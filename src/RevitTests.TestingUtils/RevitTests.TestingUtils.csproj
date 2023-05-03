@@ -15,6 +15,12 @@
         </AssemblyAttribute>
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="System.Runtime.CompilerServices.Unsafe">
+        <HintPath>..\..\testoutput\RxBim.Example.Revit.IntegrationTests\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
     <PropertyGroup>
         <Description>Revit tests DI utils.</Description>
         <PackageId>RxBim.RevitTests.DI</PackageId>

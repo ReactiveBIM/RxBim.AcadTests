@@ -1,6 +1,8 @@
 namespace RevitTests.Console.Services;
 
 using System.Diagnostics;
+using System.IO.Compression;
+using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
 using AcadTests.SDK;
@@ -28,6 +30,7 @@ public class RevitTestTasks
             var server = new AcadTestSdk().AcadTestServer;
             var serverTask = server.Start(options, cancellationToken);
             var workDir = Path.GetDirectoryName(options.AssemblyPath)!;
+            CopyRevitCmd(workDir);
             CreateAddIn(workDir);
             var journal = CreateJournal(workDir);
             await Run(journal, cancellationToken);
@@ -70,6 +73,13 @@ public class RevitTestTasks
         var path = Path.Combine(workDir, "journal.txt");
         File.WriteAllText(path, sb.ToString());
         return path;
+    }
+
+    private string CopyRevitCmd(string workDir)
+    {
+        var zipPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, "revitCmd.zip");
+        ZipFile.ExtractToDirectory(zipPath, workDir, true);
+        return zipPath;
     }
 
     private async Task Run(string journal, CancellationToken cancellationToken)
