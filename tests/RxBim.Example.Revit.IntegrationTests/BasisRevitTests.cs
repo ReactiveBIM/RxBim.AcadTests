@@ -5,6 +5,7 @@ using System.IO;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Structure;
 using Autodesk.Revit.UI;
+using Di;
 using FluentAssertions;
 using NUnit.Framework;
 using RevitTests.TestingUtils;
@@ -24,10 +25,14 @@ public class BasisRevitTests
     [OneTimeSetUp]
     public void Setup()
     {
-        _uiApplication = Helper.UiApplication!;
+        var configurator = new TestingDiConfigurator();
+        configurator.Configure(GetType().Assembly);
+        var container = configurator.Container;
+
+        _uiApplication = container.GetService<UIApplication>();
         var modelPath = Path.Combine(Environment.CurrentDirectory, "rac_basic_sample_project.rvt");
-        var uiDocument = _uiApplication.OpenAndActivateDocument(modelPath);
-        _document = uiDocument.Document;
+        _uiApplication.OpenAndActivateDocument(modelPath);
+        _document = container.GetService<Document>();
     }
 
     /// <summary>

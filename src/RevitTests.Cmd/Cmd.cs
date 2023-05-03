@@ -1,6 +1,10 @@
 ﻿namespace RevitTests.Cmd;
 
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using AcadTests.SDK;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
@@ -38,6 +42,7 @@ public class Cmd : RxBimCommand
             if (!File.Exists(assembly))
                 throw new FileNotFoundException(assembly);
 
+            Assembly.Load(typeof(Helper).Assembly.Location);
             Helper.UiApplication = uiApplication;
             var result = RunTests(assembly, testAssemblyRunner, testFilter, testListener);
             SendResults(acadTestClient, result);
