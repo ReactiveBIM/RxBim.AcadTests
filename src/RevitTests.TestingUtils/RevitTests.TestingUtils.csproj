@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net472</TargetFramework>
         <Nullable>enable</Nullable>
+        <UseDi>true</UseDi>
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,6 +20,12 @@
       <Reference Include="System.Runtime.CompilerServices.Unsafe">
         <HintPath>..\..\testoutput\RxBim.Example.Revit.IntegrationTests\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="..\AcadTests.TestingUtils\Di\ITestConfiguration.cs">
+        <Link>ITestConfiguration.cs</Link>
+      </Compile>
     </ItemGroup>
 
     <PropertyGroup>
