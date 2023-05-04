@@ -23,6 +23,9 @@
       <None Update="rac_basic_sample_project.rvt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="rac_basic_sample_family.rfa">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <ItemGroup>

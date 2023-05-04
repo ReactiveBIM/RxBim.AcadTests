@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Threading;
 using AcadTests.SDK;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
@@ -78,8 +80,18 @@ public class Cmd : RxBimCommand
 
     private void UiApplicationOnDialogBoxShowing(object sender, DialogBoxShowingEventArgs e)
     {
+        while ((sender as UIApplication)?.ActiveUIDocument.Document?.IsBackgroundCalculationInProgress() == true)
+            Thread.Sleep(1000);
+
         // Do not show the Revit dialog
         e.OverrideResult(1);
+
+        // todo возможно стоить добавить обработку по e.DialogId
+        /*
+TaskDialog_Save_File
+Dialog_Revit_JournalAbort
+TaskDialog_Calculation_In_Progress
+*/
     }
 
     private void SendResults(AcadTestClient acadTestClient, ITestResult result)
