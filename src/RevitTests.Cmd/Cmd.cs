@@ -50,8 +50,12 @@ public class Cmd : RxBimCommand
             var result = RunTests(assembly, testAssemblyRunner, testFilter, testListener);
             SendResults(acadTestClient, result);
 
-            var closeCmd = RevitCommandId.LookupPostableCommandId(PostableCommand.ExitRevit);
-            uiApplication.PostCommand(closeCmd);
+            while (uiApplication.Application.Documents
+                   .Cast<Document>()
+                   .Any(doc => doc.IsBackgroundCalculationInProgress()))
+                Thread.Sleep(1000);
+            /*var closeCmd = RevitCommandId.LookupPostableCommandId(PostableCommand.ExitRevit);
+            uiApplication.PostCommand(closeCmd);*/
             return PluginResult.Succeeded;
         }
         catch (Exception e)
@@ -85,8 +89,8 @@ public class Cmd : RxBimCommand
     private void UiApplicationOnDialogBoxShowing(object sender, DialogBoxShowingEventArgs e)
     {
         // todo можно попробовать так проверять все документы и пробовать закрыть ревит через журнал
-        while ((sender as UIApplication)?.ActiveUIDocument.Document?.IsBackgroundCalculationInProgress() == true)
-            Thread.Sleep(1000);
+        /*while ((sender as UIApplication)?.ActiveUIDocument.Document?.IsBackgroundCalculationInProgress() == true)
+            Thread.Sleep(1000);*/
 
         // Do not show the Revit dialog
         e.OverrideResult(1);
