@@ -23,6 +23,7 @@ using TestingUtils;
 /// <inheritdoc />
 [Transaction(TransactionMode.Manual)]
 [Regeneration(RegenerationOption.Manual)]
+[Journaling(JournalingMode.NoCommandData)]
 public class Cmd : RxBimCommand
 {
     /// <inheritdoc />
@@ -48,6 +49,9 @@ public class Cmd : RxBimCommand
             Helper.UiApplication = uiApplication;
             var result = RunTests(assembly, testAssemblyRunner, testFilter, testListener);
             SendResults(acadTestClient, result);
+
+            var closeCmd = RevitCommandId.LookupPostableCommandId(PostableCommand.ExitRevit);
+            uiApplication.PostCommand(closeCmd);
             return PluginResult.Succeeded;
         }
         catch (Exception e)
@@ -80,6 +84,7 @@ public class Cmd : RxBimCommand
 
     private void UiApplicationOnDialogBoxShowing(object sender, DialogBoxShowingEventArgs e)
     {
+        // todo можно попробовать так проверять все документы и пробовать закрыть ревит через журнал
         while ((sender as UIApplication)?.ActiveUIDocument.Document?.IsBackgroundCalculationInProgress() == true)
             Thread.Sleep(1000);
 

@@ -97,31 +97,4 @@ public class BasisRevitTests
         tr.Commit().Should().Be(TransactionStatus.Committed);
         _document.GetElement(newChain.Id).Should().NotBeNull();
     }
-
-    [Test]
-    public void OpenDocTest()
-    {
-        var files = new DirectoryInfo(@"C:\Program Files\Autodesk\Revit 2019\Samples")
-            .EnumerateFiles()
-            .Take(5);
-        foreach (var file in files)
-        {
-            var uiDocument = _uiApplication.OpenAndActivateDocument(file.FullName);
-            var doc = uiDocument.Document;
-            using var tr = new Transaction(doc, "EmptyTransaction");
-            tr.Start();
-            var status = tr.Commit();
-            status.Should().Be(TransactionStatus.Committed);
-            /*var someElement = new FilteredElementCollector(doc)
-                .WhereElementIsNotElementType()
-                .OfClass(typeof(FamilyInstance))
-                .FirstOrDefault();
-            if (someElement is null) continue;
-            using var tr = new Transaction(doc, "PinSomeElement");
-            tr.Start();
-            someElement.Pinned = true;
-            var status = tr.Commit();
-            status.Should().Be(TransactionStatus.Committed);*/
-        }
-    }
 }

@@ -94,7 +94,8 @@ public class Build : AutocadRxBimBuild, IPublish
                 foreach (var project in projects)
                 {
                     var outputDirectory = solution.Directory / "testoutput" / project.Name;
-                    Directory.Delete(outputDirectory, true);
+                    if (Directory.Exists(outputDirectory))
+                        Directory.Delete(outputDirectory, true);
                     DotNetTasks.DotNetBuild(settings => DotNetBuildSettingsExtensions
                         .SetProjectFile<DotNetBuildSettings>(settings, project)
                         .SetConfiguration("Debug")
