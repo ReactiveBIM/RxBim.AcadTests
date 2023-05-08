@@ -23,7 +23,6 @@ using TestingUtils;
 /// <inheritdoc />
 [Transaction(TransactionMode.Manual)]
 [Regeneration(RegenerationOption.Manual)]
-[Journaling(JournalingMode.NoCommandData)]
 public class Cmd : RxBimCommand
 {
     /// <inheritdoc />
