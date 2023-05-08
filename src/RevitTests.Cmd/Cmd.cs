@@ -58,8 +58,6 @@ public class Cmd : RxBimCommand
             }
 
             uiApplication.Application.WriteJournalComment("Cmd finished", true);
-            Thread.Sleep(10000);
-
             /*var closeCmd = RevitCommandId.LookupPostableCommandId(PostableCommand.ExitRevit);
             uiApplication.PostCommand(closeCmd);*/
             return PluginResult.Succeeded;
