@@ -52,7 +52,14 @@ public class Cmd : RxBimCommand
             while (uiApplication.Application.Documents
                    .Cast<Document>()
                    .Any(doc => doc.IsBackgroundCalculationInProgress()))
+            {
                 Thread.Sleep(1000);
+                uiApplication.Application.WriteJournalComment("Thread.Sleep", true);
+            }
+
+            uiApplication.Application.WriteJournalComment("Cmd finished", true);
+            Thread.Sleep(10000);
+
             /*var closeCmd = RevitCommandId.LookupPostableCommandId(PostableCommand.ExitRevit);
             uiApplication.PostCommand(closeCmd);*/
             return PluginResult.Succeeded;
