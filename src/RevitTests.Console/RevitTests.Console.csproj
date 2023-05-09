@@ -25,7 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Update="revitCmd.zip">
+        <Content Include="revitCmd.zip">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
             <PackageCopyToOutput>true</PackageCopyToOutput>
         </Content>
