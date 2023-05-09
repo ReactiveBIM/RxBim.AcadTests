@@ -61,6 +61,9 @@ public class Cmd : RxBimCommand
             /*var closeCmd = RevitCommandId.LookupPostableCommandId(PostableCommand.ExitRevit);
             uiApplication.PostCommand(closeCmd);*/
 
+            while (uiApplication.ActiveUIDocument.Document?.IsBackgroundCalculationInProgress() == true)
+                Thread.Sleep(1000);
+
             foreach (var revitWorker in Process.GetProcessesByName("RevitWorker"))
             {
                 revitWorker.Kill();
@@ -99,18 +102,17 @@ public class Cmd : RxBimCommand
     private void UiApplicationOnDialogBoxShowing(object sender, DialogBoxShowingEventArgs e)
     {
         // todo можно попробовать так проверять все документы и пробовать закрыть ревит через журнал
-        /*while ((sender as UIApplication)?.ActiveUIDocument.Document?.IsBackgroundCalculationInProgress() == true)
-            Thread.Sleep(1000);*/
-
-        // Do not show the Revit dialog
-        e.OverrideResult(1);
-
-        // todo возможно стоить добавить обработку по e.DialogId
-        /*
-TaskDialog_Save_File
-Dialog_Revit_JournalAbort
-TaskDialog_Calculation_In_Progress
-*/
+        switch (e.DialogId)
+        {
+            case "TaskDialog_Save_File":
+                e.OverrideResult(1002);
+                break;
+            case "Dialog_Revit_JournalAbort":
+            case "TaskDialog_Calculation_In_Progress":
+            default:
+                e.OverrideResult(1);
+                break;
+        }
     }
 
     private void SendResults(AcadTestClient acadTestClient, ITestResult result)
