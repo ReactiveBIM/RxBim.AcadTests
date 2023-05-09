@@ -97,12 +97,6 @@ public class RevitTestTasks
         {
             process.Start();
             process.WaitForInputIdle();
-
-            foreach (var revitWorker in Process.GetProcessesByName("RevitWorker"))
-            {
-                revitWorker.Kill();
-            }
-
             await process.WaitForExitAsync(cancellationToken);
             process.Close();
         }

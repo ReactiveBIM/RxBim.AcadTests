@@ -60,6 +60,12 @@ public class Cmd : RxBimCommand
             uiApplication.Application.WriteJournalComment("Cmd finished", true);
             /*var closeCmd = RevitCommandId.LookupPostableCommandId(PostableCommand.ExitRevit);
             uiApplication.PostCommand(closeCmd);*/
+
+            foreach (var revitWorker in Process.GetProcessesByName("RevitWorker"))
+            {
+                revitWorker.Kill();
+            }
+
             return PluginResult.Succeeded;
         }
         catch (Exception e)

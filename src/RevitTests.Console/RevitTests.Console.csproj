@@ -18,14 +18,17 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="revitCmd.zip">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <PackageCopyToOutput>true</PackageCopyToOutput>
-        </Content>
         <Content Include="RevitTests.Console.runtimeconfig.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
             <PackageCopyToOutput>true</PackageCopyToOutput>
         </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="revitCmd.zip">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <PackageCopyToOutput>true</PackageCopyToOutput>
+        </None>
     </ItemGroup>
 
     <PropertyGroup>
