@@ -25,10 +25,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="revitCmd.zip">
+        <Content Update="revitCmd.zip">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
             <PackageCopyToOutput>true</PackageCopyToOutput>
-        </None>
+        </Content>
     </ItemGroup>
 
     <PropertyGroup>
