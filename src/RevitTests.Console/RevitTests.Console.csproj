@@ -10,26 +10,31 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj" />
+        <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CommandLineParser" Version="2.9.1" />
+        <PackageReference Include="CommandLineParser" Version="2.9.1"/>
     </ItemGroup>
 
     <ItemGroup>
+        <Content Include="..\RevitTests.Cmd\revitCmd.zip">
+            <Link>revitCmd.zip</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <PackageCopyToOutput>true</PackageCopyToOutput>
+        </Content>
         <Content Include="RevitTests.Console.runtimeconfig.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
             <PackageCopyToOutput>true</PackageCopyToOutput>
         </Content>
     </ItemGroup>
 
-    <ItemGroup>
-        <Content Include="revitCmd.zip">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <PackageCopyToOutput>true</PackageCopyToOutput>
-        </Content>
-    </ItemGroup>
+    <!--  <ItemGroup>
+          <Content Include="revitCmd.zip">
+              <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+              <PackageCopyToOutput>true</PackageCopyToOutput>
+          </Content>
+      </ItemGroup>-->
 
     <PropertyGroup>
         <Description>Revit tests framework console.</Description>

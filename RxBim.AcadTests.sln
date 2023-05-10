@@ -36,6 +36,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitTests.Cmd", "src\RevitTests.Cmd\RevitTests.Cmd.csproj", "{4E4BD102-BCAB-4C5A-BEDB-909B5C1B64F2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitTests.Console", "src\RevitTests.Console\RevitTests.Console.csproj", "{D921677D-729F-444A-9F72-B42530AE979D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{716AB9E7-2841-4714-9097-06DFD984D65C} = {716AB9E7-2841-4714-9097-06DFD984D65C}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxBim.Example.Revit.IntegrationTests", "tests\RxBim.Example.Revit.IntegrationTests\RxBim.Example.Revit.IntegrationTests.csproj", "{57BFC641-F562-48BA-A1BA-43B7AC497DFF}"
 EndProject
