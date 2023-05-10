@@ -101,11 +101,10 @@ public class Cmd : RxBimCommand
 
     private void UiApplicationOnDialogBoxShowing(object sender, DialogBoxShowingEventArgs e)
     {
-        // todo можно попробовать так проверять все документы и пробовать закрыть ревит через журнал
         switch (e.DialogId)
         {
             case "TaskDialog_Save_File":
-                e.OverrideResult(1002);
+                e.OverrideResult(7);
                 break;
             case "Dialog_Revit_JournalAbort":
             case "TaskDialog_Calculation_In_Progress":

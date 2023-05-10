@@ -30,7 +30,7 @@ public class RevitTestTasks
             var server = new AcadTestSdk().AcadTestServer;
             var serverTask = server.Start(options, cancellationToken);
             var workDir = Path.GetDirectoryName(options.AssemblyPath)!;
-            CopyRevitCmd(workDir);
+            /*CopyRevitCmd(workDir);*/
             CreateAddIn(workDir);
             var journal = CreateJournal(workDir);
             await Run(journal, cancellationToken);
