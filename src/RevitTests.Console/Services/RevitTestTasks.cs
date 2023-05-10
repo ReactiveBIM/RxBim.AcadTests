@@ -30,7 +30,7 @@ public class RevitTestTasks
             var server = new AcadTestSdk().AcadTestServer;
             var serverTask = server.Start(options, cancellationToken);
             var workDir = Path.GetDirectoryName(options.AssemblyPath)!;
-            /*CopyRevitCmd(workDir);*/
+            CopyRevitCmd(workDir);
             CreateAddIn(workDir);
             var journal = CreateJournal(workDir);
             await Run(journal, cancellationToken);
@@ -68,7 +68,6 @@ public class RevitTestTasks
         sb.AppendLine("Set Jrn = CrsJournalScript ");
         sb.AppendLine(
             $"Jrn.RibbonEvent \"Execute external command:3cdcad5f-8afe-4871-8ad0-a3f699946319:{CommandName}\"");
-        /*sb.AppendLine("Jrn.Data \"Transaction Successful\", \"\"");*/
         /*sb.AppendLine("Jrn.Command \"Internal\" , \"Close the active project , ID_REVIT_FILE_CLOSE\"");*/
         sb.AppendLine("Jrn.Command \"Internal\" , \"Quit the application; prompts to save projects , ID_APP_EXIT\"");
         var path = Path.Combine(workDir, "journal.txt");
