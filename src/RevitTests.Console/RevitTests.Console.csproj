@@ -29,13 +29,6 @@
         </Content>
     </ItemGroup>
 
-    <!--  <ItemGroup>
-          <Content Include="revitCmd.zip">
-              <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-              <PackageCopyToOutput>true</PackageCopyToOutput>
-          </Content>
-      </ItemGroup>-->
-
     <PropertyGroup>
         <Description>Revit tests framework console.</Description>
         <PackageId>RxBim.RevitTests.Console</PackageId>

@@ -4,9 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading;
 using AcadTests.SDK;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
@@ -49,21 +47,16 @@ public class Cmd : RxBimCommand
             var result = RunTests(assembly, testAssemblyRunner, testFilter, testListener);
             SendResults(acadTestClient, result);
 
-            while (uiApplication.Application.Documents
+            // не работает
+            /*while (uiApplication.Application.Documents
                    .Cast<Document>()
                    .Any(doc => doc.IsBackgroundCalculationInProgress()))
             {
                 Thread.Sleep(1000);
                 uiApplication.Application.WriteJournalComment("Thread.Sleep", true);
-            }
+            }*/
 
             uiApplication.Application.WriteJournalComment("Cmd finished", true);
-            /*var closeCmd = RevitCommandId.LookupPostableCommandId(PostableCommand.ExitRevit);
-            uiApplication.PostCommand(closeCmd);*/
-
-            while (uiApplication.ActiveUIDocument.Document?.IsBackgroundCalculationInProgress() == true)
-                Thread.Sleep(1000);
-
             foreach (var revitWorker in Process.GetProcessesByName("RevitWorker"))
             {
                 revitWorker.Kill();
@@ -93,7 +86,7 @@ public class Cmd : RxBimCommand
         testAssemblyRunner.Load(assemblyPath,
             new Dictionary<string, object>
             {
-                { FrameworkPackageSettings.RunOnMainThread, true }
+                { FrameworkPackageSettings.RunOnMainThread, true },
             });
         var result = testAssemblyRunner.Run(testListener, testFilter);
         return result;

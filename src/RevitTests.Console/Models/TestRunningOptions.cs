@@ -6,19 +6,20 @@ using AcadTests.SDK.Abstractions;
 using CommandLine;
 
 /// <summary>
-///     Параметры тестирования
+/// Test params.
 /// </summary>
 public class TestRunningOptions : ITestRunningOptions
 {
     /// <summary>
-    ///     Results file path.
+    /// Results file path.
     /// </summary>
     [Option('r', "results", Required = true, HelpText = "Set results file path.")]
     public string ResultsFilePath { get; set; } =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "results.xml");
 
+    // TODO переименовать
     /// <summary>
-    ///     The version of autocad.
+    /// The version of program.
     /// </summary>
     [Option('v', "acadVersion", Required = false, HelpText = "The version of autocad.")]
     public int AcadVersion { get; set; }
@@ -28,7 +29,7 @@ public class TestRunningOptions : ITestRunningOptions
     public string AssemblyPath { get; set; } = string.Empty;
 
     /// <summary>
-    ///     Debug mode.
+    /// Debug mode.
     /// </summary>
     [Option('d', "debug", Required = false, HelpText = "Set debug mode.")]
     public bool Debug { get; set; } = false;
