@@ -56,7 +56,6 @@ public class Cmd : RxBimCommand
                 uiApplication.Application.WriteJournalComment("Thread.Sleep", true);
             }*/
 
-            uiApplication.Application.WriteJournalComment("Cmd finished", true);
             foreach (var revitWorker in Process.GetProcessesByName("RevitWorker"))
             {
                 revitWorker.Kill();
