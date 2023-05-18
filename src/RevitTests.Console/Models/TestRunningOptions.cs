@@ -17,7 +17,6 @@ public class TestRunningOptions : ITestRunningOptions
     public string ResultsFilePath { get; set; } =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "results.xml");
 
-    // TODO переименовать
     /// <summary>
     /// The version of program.
     /// </summary>
