@@ -52,7 +52,7 @@ public class ResultConverter
             {
                 Name = xmlElement.Attributes["name"]?.Value
             };
-            var childNodes = xmlElement.SelectNodes("./test-case");
+            var childNodes = xmlElement.SelectNodes(".//test-case");
             if (childNodes != null)
             {
                 foreach (XmlElement @case in childNodes)
