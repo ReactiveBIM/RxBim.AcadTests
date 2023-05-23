@@ -97,7 +97,7 @@ public class Build : AutocadRxBimBuild, IPublish
                         StartInfo = new ProcessStartInfo
                         {
                             FileName = "dotnet",
-                            Arguments = consoleDllPath + " " + $@"-a {assemblyPath} -r {results} -v 2019",
+                            Arguments = consoleDllPath + " " + $@"-a {assemblyPath} -r {results} -v 2019 -d",
                         }
                     };
 

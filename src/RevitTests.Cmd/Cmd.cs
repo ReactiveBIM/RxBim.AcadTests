@@ -23,6 +23,8 @@ using TestingUtils;
 [Regeneration(RegenerationOption.Manual)]
 public class Cmd : RxBimCommand
 {
+    private AcadTestClient _acadTestClient;
+
     /// <inheritdoc />
     [UsedImplicitly]
     public PluginResult ExecuteCommand(
@@ -34,7 +36,7 @@ public class Cmd : RxBimCommand
     {
         try
         {
-            Debug.WriteLine($"Start command");
+            _acadTestClient = acadTestClient;
             uiApplication.DialogBoxShowing += UiApplicationOnDialogBoxShowing;
             uiApplication.ApplicationClosing += UiApplicationOnApplicationClosing;
             var options = acadTestClient.GetTestRunningOptions().GetAwaiter().GetResult();
@@ -60,16 +62,14 @@ public class Cmd : RxBimCommand
 
             foreach (var revitWorker in Process.GetProcessesByName("RevitWorker"))
             {
-                Trace.WriteLine("kill revitWorker");
                 revitWorker.Kill();
             }
 
-            Debug.WriteLine($"Finish command");
+            Process.GetCurrentProcess().Kill();
             return PluginResult.Succeeded;
         }
         catch (Exception e)
         {
-            Debug.WriteLine($"Unhandled exception {e}");
             acadTestClient.SendResult(e.ToString());
             return PluginResult.Failed;
         }
@@ -103,7 +103,6 @@ public class Cmd : RxBimCommand
 
     private void UiApplicationOnDialogBoxShowing(object sender, DialogBoxShowingEventArgs e)
     {
-        Debug.WriteLine($"New dialog {e.DialogId}");
         switch (e.DialogId)
         {
             case "TaskDialog_Save_File":
