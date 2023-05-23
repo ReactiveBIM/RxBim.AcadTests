@@ -23,8 +23,6 @@ using TestingUtils;
 [Regeneration(RegenerationOption.Manual)]
 public class Cmd : RxBimCommand
 {
-    private AcadTestClient _acadTestClient;
-
     /// <inheritdoc />
     [UsedImplicitly]
     public PluginResult ExecuteCommand(
@@ -36,7 +34,6 @@ public class Cmd : RxBimCommand
     {
         try
         {
-            _acadTestClient = acadTestClient;
             uiApplication.DialogBoxShowing += UiApplicationOnDialogBoxShowing;
             uiApplication.ApplicationClosing += UiApplicationOnApplicationClosing;
             var options = acadTestClient.GetTestRunningOptions().GetAwaiter().GetResult();

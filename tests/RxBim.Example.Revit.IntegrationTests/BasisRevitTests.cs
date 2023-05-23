@@ -1,15 +1,16 @@
 ﻿namespace RxBim.Example.Revit.IntegrationTests;
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Structure;
 using Autodesk.Revit.UI;
-using Di;
 using FluentAssertions;
 using NUnit.Framework;
 using RevitTests.TestingUtils;
+using RxBim.Di;
 
 /// <summary>
 /// Revit tests.
@@ -78,6 +79,29 @@ public class BasisRevitTests
             .WhereElementIsNotElementType()
             .ToElements()
             .Count.Should().Be(56);
+    }
+
+
+    /// <summary>
+    /// Run FilteredElementsCollector.
+    /// </summary>
+    [Test]
+    public void LongTest()
+    {
+        var timer = new Stopwatch();
+        timer.Start();
+        while (timer.ElapsedMilliseconds < 15 * 60 * 1000)
+        {
+            var wall = new FilteredElementCollector(_document)
+                .OfCategory(BuiltInCategory.OST_Walls)
+                .WhereElementIsNotElementType()
+                .ToElements()
+                .First();
+            var tr = new Transaction(_document);
+            tr.Start("set mark");
+            wall.get_Parameter(BuiltInParameter.ALL_MODEL_MARK).Set(timer.ElapsedMilliseconds.ToString());
+            tr.Commit();
+        }
     }
 
     /// <summary>
