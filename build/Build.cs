@@ -48,25 +48,13 @@ public class Build : AutocadRxBimBuild, IPublish
                 foreach (var project in projects)
                 {
                     var outputDirectory = solution.Directory / "testoutput" / project.Name;
-                    DotNetTasks.DotNetBuild(settings => DotNetBuildSettingsExtensions
+                    DotNetBuild(settings => DotNetBuildSettingsExtensions
                         .SetProjectFile<DotNetBuildSettings>(settings, project)
                         .SetConfiguration("Debug")
                         .SetOutputDirectory(outputDirectory));
                     var assemblyName = project.Name + ".dll";
                     var assemblyPath = outputDirectory / assemblyName;
                     var results = outputDirectory / "result.xml";
-
-                    // TODO
-                    /*var ts = new CancellationTokenSource(20000);
-                var runner = new AcadTestTasks();
-                await runner.Run(new TestRunningOptions()
-                {
-                    Debug = false,
-                    AcadVersion = 2019,
-                    AssemblyPath = assemblyPath,
-                    ResultsFilePath = results,
-                    UseAcCoreConsole = false
-                }, ts.Token);*/
                     var startInfo = new ProcessStartInfo(
                         @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\AcadTests.Console\bin\Debug\net472\AcadTests.Console.exe",
                         $@"-a {assemblyPath} -r {results} -v 2019");

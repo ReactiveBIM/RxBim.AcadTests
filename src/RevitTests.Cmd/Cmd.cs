@@ -34,6 +34,7 @@ public class Cmd : RxBimCommand
     {
         try
         {
+            Debug.WriteLine($"Start command");
             uiApplication.DialogBoxShowing += UiApplicationOnDialogBoxShowing;
             var options = acadTestClient.GetTestRunningOptions().GetAwaiter().GetResult();
             if (options.Debug)
@@ -58,13 +59,16 @@ public class Cmd : RxBimCommand
 
             foreach (var revitWorker in Process.GetProcessesByName("RevitWorker"))
             {
+                Trace.WriteLine("kill revitWorker");
                 revitWorker.Kill();
             }
 
+            Debug.WriteLine($"Finish command");
             return PluginResult.Succeeded;
         }
         catch (Exception e)
         {
+            Debug.WriteLine($"Unhandled exception {e}");
             acadTestClient.SendResult(e.ToString());
             return PluginResult.Failed;
         }
@@ -86,6 +90,11 @@ public class Cmd : RxBimCommand
             new Dictionary<string, object>
             {
                 { FrameworkPackageSettings.RunOnMainThread, true },
+                { FrameworkPackageSettings.DefaultCulture, "ru-RU" },
+                { FrameworkPackageSettings.SynchronousEvents, true },
+                { FrameworkPackageSettings.DefaultUICulture, "ru-RU" },
+                { FrameworkPackageSettings.InternalTraceLevel, "Debug" },
+                { FrameworkPackageSettings.NumberOfTestWorkers, 0 }
             });
         var result = testAssemblyRunner.Run(testListener, testFilter);
         return result;
@@ -93,6 +102,7 @@ public class Cmd : RxBimCommand
 
     private void UiApplicationOnDialogBoxShowing(object sender, DialogBoxShowingEventArgs e)
     {
+        Debug.WriteLine($"New dialog {e.DialogId}");
         switch (e.DialogId)
         {
             case "TaskDialog_Save_File":
