@@ -36,6 +36,7 @@ public class Cmd : RxBimCommand
         {
             Debug.WriteLine($"Start command");
             uiApplication.DialogBoxShowing += UiApplicationOnDialogBoxShowing;
+            uiApplication.ApplicationClosing += UiApplicationOnApplicationClosing;
             var options = acadTestClient.GetTestRunningOptions().GetAwaiter().GetResult();
             if (options.Debug)
                 Debugger.Launch();
@@ -114,6 +115,11 @@ public class Cmd : RxBimCommand
                 e.OverrideResult(1);
                 break;
         }
+    }
+
+    private void UiApplicationOnApplicationClosing(object sender, ApplicationClosingEventArgs e)
+    {
+        Process.GetCurrentProcess().Kill();
     }
 
     private void SendResults(AcadTestClient acadTestClient, ITestResult result)
