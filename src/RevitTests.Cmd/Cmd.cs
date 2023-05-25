@@ -35,7 +35,6 @@ public class Cmd : RxBimCommand
         try
         {
             uiApplication.DialogBoxShowing += UiApplicationOnDialogBoxShowing;
-            uiApplication.ApplicationClosing += UiApplicationOnApplicationClosing;
             var options = acadTestClient.GetTestRunningOptions().GetAwaiter().GetResult();
             if (options.Debug)
                 Debugger.Launch();
@@ -62,7 +61,6 @@ public class Cmd : RxBimCommand
                 revitWorker.Kill();
             }
 
-            Process.GetCurrentProcess().Kill();
             return PluginResult.Succeeded;
         }
         catch (Exception e)
@@ -88,11 +86,6 @@ public class Cmd : RxBimCommand
             new Dictionary<string, object>
             {
                 { FrameworkPackageSettings.RunOnMainThread, true },
-                { FrameworkPackageSettings.DefaultCulture, "ru-RU" },
-                { FrameworkPackageSettings.SynchronousEvents, true },
-                { FrameworkPackageSettings.DefaultUICulture, "ru-RU" },
-                { FrameworkPackageSettings.InternalTraceLevel, "Debug" },
-                { FrameworkPackageSettings.NumberOfTestWorkers, 0 }
             });
         var result = testAssemblyRunner.Run(testListener, testFilter);
         return result;
@@ -111,11 +104,6 @@ public class Cmd : RxBimCommand
                 e.OverrideResult(1);
                 break;
         }
-    }
-
-    private void UiApplicationOnApplicationClosing(object sender, ApplicationClosingEventArgs e)
-    {
-        Process.GetCurrentProcess().Kill();
     }
 
     private void SendResults(AcadTestClient acadTestClient, ITestResult result)
