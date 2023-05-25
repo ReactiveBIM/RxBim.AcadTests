@@ -2,17 +2,29 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net472</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\AcadTests.Cmd\AcadTests.Cmd.csproj"/>
         <ProjectReference Include="..\AcadTests.ScriptUtils\AcadTests.ScriptUtils.csproj"/>
+        <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="CommandLineParser" Version="2.9.1"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="..\AcadTests.Cmd\acadCmd.zip">
+            <Link>acadCmd.zip</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <PackageCopyToOutput>true</PackageCopyToOutput>
+        </Content>
+        <Content Update="AcadTests.Console.runtimeconfig.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <PackageCopyToOutput>true</PackageCopyToOutput>
+        </Content>
     </ItemGroup>
 
     <PropertyGroup>

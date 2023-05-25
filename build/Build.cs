@@ -48,6 +48,8 @@ public class Build : AutocadRxBimBuild, IPublish
                 foreach (var project in projects)
                 {
                     var outputDirectory = solution.Directory / "testoutput" / project.Name;
+                    if (Directory.Exists(outputDirectory))
+                        Directory.Delete(outputDirectory, true);
                     DotNetBuild(settings => DotNetBuildSettingsExtensions
                         .SetProjectFile<DotNetBuildSettings>(settings, project)
                         .SetConfiguration("Debug")
@@ -55,11 +57,20 @@ public class Build : AutocadRxBimBuild, IPublish
                     var assemblyName = project.Name + ".dll";
                     var assemblyPath = outputDirectory / assemblyName;
                     var results = outputDirectory / "result.xml";
-                    var startInfo = new ProcessStartInfo(
-                        @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\AcadTests.Console\bin\Debug\net472\AcadTests.Console.exe",
-                        $@"-a {assemblyPath} -r {results} -v 2019");
+                    var consoleDllPath = typeof(AcadTests.Console.Services.AcadTestTasks).Assembly.Location;
+                    var process = new Process
+                    {
+                        StartInfo = new ProcessStartInfo
+                        {
+                            FileName = "dotnet",
+                            Arguments = consoleDllPath + " " + $@"-a {assemblyPath} -r {results} -v 2019",
+                        }
+                    };
+                    /*var startInfo = new ProcessStartInfo(
+                        @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\src\AcadTests.Console\bin\Debug\net472\AcadTests.Console.exe",
+                        $@"-a {assemblyPath} -r {results} -v 2019 -d");
                     var process = new Process();
-                    process.StartInfo = startInfo;
+                    process.StartInfo = startInfo;*/
                     process.Start();
                     await process.WaitForExitAsync();
                     var resultPath = outputDirectory / "result.html";
@@ -84,14 +95,13 @@ public class Build : AutocadRxBimBuild, IPublish
                     var outputDirectory = solution.Directory / "testoutput" / project.Name;
                     if (Directory.Exists(outputDirectory))
                         Directory.Delete(outputDirectory, true);
-                    DotNetTasks.DotNetBuild(settings => DotNetBuildSettingsExtensions
+                    DotNetBuild(settings => DotNetBuildSettingsExtensions
                         .SetProjectFile<DotNetBuildSettings>(settings, project)
                         .SetConfiguration("Debug")
                         .SetOutputDirectory(outputDirectory));
                     var assemblyName = project.Name + ".dll";
                     var assemblyPath = outputDirectory / assemblyName;
                     var results = outputDirectory / "result.xml";
-
                     var process = new Process
                     {
                         StartInfo = new ProcessStartInfo

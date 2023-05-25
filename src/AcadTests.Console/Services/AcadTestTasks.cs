@@ -2,9 +2,10 @@ namespace AcadTests.Console.Services;
 
 using System;
 using System.IO;
+using System.IO.Compression;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Cmd;
 using Models;
 using ScriptUtils;
 using ScriptUtils.Extensions;
@@ -28,6 +29,8 @@ public class AcadTestTasks
         {
             var server = new AcadTestSdk().AcadTestServer;
             var serverTask = server.Start(options, cancellationToken);
+            var workDir = Path.GetDirectoryName(options.AssemblyPath)!;
+            CopyRevitCmd(workDir);
             var runner = new AutocadScriptRunner
             {
                 UseConsole = options.UseAcCoreConsole,
@@ -38,7 +41,8 @@ public class AcadTestTasks
                     .SetStartMode(false)
                     .SetFiledia(false)
                     .SetSecureLoad(false)
-                    .NetLoadCommand(typeof(Command).Assembly.Location)
+                    .NetLoadCommand(
+                        Path.Combine(workDir, "AcadTests.Cmd.dll"))
                     .AddCommand("AutocadTestFrameworkCommand")
                     .SetSecureLoad(true)
                     .SetFiledia(true)
@@ -52,5 +56,12 @@ public class AcadTestTasks
         {
             Console.WriteLine(e.ToString());
         }
+    }
+
+    private string CopyRevitCmd(string workDir)
+    {
+        var zipPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, "acadCmd.zip");
+        ZipFile.ExtractToDirectory(zipPath, workDir, true);
+        return zipPath;
     }
 }

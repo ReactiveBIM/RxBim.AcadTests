@@ -23,4 +23,8 @@
         <PackageId>RxBim.AcadTests.Cmd</PackageId>
         <IsPackable>true</IsPackable>
     </PropertyGroup>
+
+    <Target Name="ZipOutputPath" AfterTargets="Build">
+        <ZipDirectory SourceDirectory="$(OutputPath)" DestinationFile="$(MSBuildProjectDirectory)\acadCmd.zip" Overwrite="true" />
+    </Target>
 </Project>
