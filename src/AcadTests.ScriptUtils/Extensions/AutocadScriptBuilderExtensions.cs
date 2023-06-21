@@ -67,8 +67,8 @@ public static class AutocadScriptBuilderExtensions
     /// </param>
     public static IAutocadScriptBuilder QuitCommand(this IAutocadScriptBuilder builder)
     {
-        builder.AddCommand("QUIT");
-        builder.AddCommand("Y");
+        builder.AddCommand("_QUIT");
+        builder.AddCommand("_Y");
         return builder;
     }
 }
