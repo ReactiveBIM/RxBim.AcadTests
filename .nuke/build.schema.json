@@ -106,6 +106,10 @@
           "type": "string",
           "description": "Select project"
         },
+        "ReleaseMessage": {
+          "type": "string",
+          "description": "The message for the release tag"
+        },
         "Root": {
           "type": "string",
           "description": "Root directory during build execution"
@@ -187,6 +191,10 @@
               "Test"
             ]
           }
+        },
+        "TimestampRevisionVersion": {
+          "type": "boolean",
+          "description": "Adds timestamp revision version"
         },
         "Verbosity": {
           "type": "string",

@@ -1,11 +1,12 @@
 ﻿<Project>
     <PropertyGroup>
+        <TargetFramework>net472</TargetFramework>
         <LangVersion>10</LangVersion>
         <Nullable>enable</Nullable>
         <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
         <NoWarn>CS0618</NoWarn>
         <PlatformTarget>x64</PlatformTarget>
-        <Version>1.0.0-dev034</Version>
+        <Version>1.0.0-dev035</Version>
         <NoWarn>NU1701</NoWarn>
     </PropertyGroup>
 
@@ -22,13 +23,13 @@
     </ItemGroup>
 
     <ItemGroup Condition=" '$(UseDi)' == 'true' ">
-        <PackageReference Include="RxBim.Di" Version="1.2.1" />
+        <PackageReference Include="RxBim.Di" Version="1.2.2" />
     </ItemGroup>
     <ItemGroup Condition=" '$(UseAcad)' == 'true' ">
         <PackageReference Include="AutoCAD2019.Base" Version="1.0.3" ExcludeAssets="build; runtime" />
     </ItemGroup>
     <ItemGroup Condition=" '$(UseSimpleInjector)' == 'true' ">
-        <PackageReference Include="RxBim.Di.SimpleInjector" Version="1.1.2" />
+        <PackageReference Include="RxBim.Di.SimpleInjector" Version="1.1.3" />
     </ItemGroup>
 
 
