@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Nuke.Common" Version="6.3.0" />
+        <PackageReference Include="RazorLight" Version="2.3.0" />
+        <PackageReference Include="RxBim.Nuke.AutoCAD" Version="2.2.6" />
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="Models\Result.cshtml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+    </ItemGroup>
+    <PropertyGroup>
+        <Description>Autocad tests nuke utils.</Description>
+        <PackageId>RxBim.AcadTests.Nuke</PackageId>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+
+</Project>
