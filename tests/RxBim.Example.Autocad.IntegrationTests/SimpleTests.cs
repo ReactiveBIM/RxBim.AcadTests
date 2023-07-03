@@ -1,4 +1,6 @@
-﻿namespace RxBim.Example.Autocad.IntegrationTests;
+﻿using Autodesk.AutoCAD.ApplicationServices.Core;
+
+namespace RxBim.Example.Autocad.IntegrationTests;
 
 using System;
 using System.Reflection;
@@ -23,10 +25,7 @@ public class SimpleTests
     {
         var testingDiConfigurator = new TestingDiConfigurator();
         testingDiConfigurator.Configure(Assembly.GetExecutingAssembly());
-        _container = testingDiConfigurator.Container;
     }
-
-    private IContainer _container = null!;
 
     /// <summary>
     ///     Пустой тест.
@@ -61,7 +60,8 @@ public class SimpleTests
     [Test]
     public void DrawNewCircleTest()
     {
-        var acCurDb = _container.GetService<Database>();
+        Application.DocumentManager.MdiActiveDocument.LockDocument();
+        var acCurDb = Application.DocumentManager.MdiActiveDocument.Database;
         using var acTrans = acCurDb.TransactionManager.StartTransaction();
         var acBlkTbl = (BlockTable)acTrans.GetObject(acCurDb.BlockTableId, OpenMode.ForRead);
         var acBlkTblRec = (BlockTableRecord)acTrans.GetObject(acBlkTbl[BlockTableRecord.ModelSpace], OpenMode.ForWrite);

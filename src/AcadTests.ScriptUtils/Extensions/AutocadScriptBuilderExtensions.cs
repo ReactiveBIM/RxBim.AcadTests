@@ -60,7 +60,7 @@ public static class AutocadScriptBuilderExtensions
     }
 
     /// <summary>
-    ///     The QUIT command
+    /// The QUIT command
     /// </summary>
     /// <param name="builder">
     ///     <see cref="IAutocadScriptBuilder" />
