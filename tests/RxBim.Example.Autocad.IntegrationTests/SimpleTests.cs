@@ -60,7 +60,7 @@ public class SimpleTests
     [Test]
     public void DrawNewCircleTest()
     {
-        Application.DocumentManager.MdiActiveDocument.LockDocument();
+        using var lockDoc = Application.DocumentManager.MdiActiveDocument.LockDocument();
         var acCurDb = Application.DocumentManager.MdiActiveDocument.Database;
         using var acTrans = acCurDb.TransactionManager.StartTransaction();
         var acBlkTbl = (BlockTable)acTrans.GetObject(acCurDb.BlockTableId, OpenMode.ForRead);
