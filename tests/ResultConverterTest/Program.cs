@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using AcadTests.Nuke;
+using AcadTests.Nuke.Services;
 
 var xmlPath = string.Empty;
 while (!File.Exists(xmlPath))
@@ -10,4 +10,6 @@ while (!File.Exists(xmlPath))
 }
 
 var resultPath = Path.Combine(Path.GetDirectoryName(xmlPath)!, "result.html");
-await new ResultConverter().Convert(xmlPath, resultPath);
+await TestResultDataXmlToHtmlConverter
+    .Initialize()
+    .Convert(xmlPath, resultPath);

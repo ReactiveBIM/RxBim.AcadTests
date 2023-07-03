@@ -44,7 +44,7 @@ public class OtherTests
     [Test]
     public void GetObjectFromAcadTest()
     {
-        // получаем текущую БД 
+        // получаем текущую БД
         var db = HostApplicationServices.WorkingDatabase;
 
         // начинаем транзакцию
