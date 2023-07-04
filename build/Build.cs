@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using AcadTests.Nuke;
+using AcadTests.Nuke.Services;
 using Bimlab.Nuke.Components;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
@@ -74,7 +74,8 @@ public class Build : AutocadRxBimBuild, IPublish
                     process.Start();
                     await process.WaitForExitAsync();
                     var resultPath = outputDirectory / "result.html";
-                    await new ResultConverter()
+                    await TestResultDataXmlToHtmlConverter
+                        .Initialize()
                         .Convert(results, resultPath);
                 }
             });
@@ -114,7 +115,8 @@ public class Build : AutocadRxBimBuild, IPublish
                     process.Start();
                     process.WaitForExit();
                     var resultPath = outputDirectory / "result.html";
-                    await new ResultConverter()
+                    await TestResultDataXmlToHtmlConverter
+                        .Initialize()
                         .Convert(results, resultPath);
                 }
             });
