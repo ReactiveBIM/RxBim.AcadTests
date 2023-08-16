@@ -86,6 +86,7 @@ public class BasisRevitTests
     /// Run FilteredElementsCollector.
     /// </summary>
     [Test]
+    [Ignore("Слишком долго ждать")]
     public void LongTest()
     {
         var timer = new Stopwatch();

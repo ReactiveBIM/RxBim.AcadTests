@@ -8,9 +8,9 @@ using Models;
 public class TestResultDataValidationService
 {
     /// <summary>
-    /// Initialize a new instance of <see cref="TestResultDataValidationService"/>
+    /// Create a new instance of <see cref="TestResultDataValidationService"/>
     /// </summary>
-    public static TestResultDataValidationService Initialize() => new();
+    public static TestResultDataValidationService Create() => new();
 
     /// <summary>
     /// Checks if all tests pass.

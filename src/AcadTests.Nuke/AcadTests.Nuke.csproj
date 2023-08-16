@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -10,15 +9,21 @@
         <PackageReference Include="RazorLight" Version="2.3.0" />
         <PackageReference Include="RxBim.Nuke.AutoCAD" Version="2.2.6" />
     </ItemGroup>
+    
     <ItemGroup>
         <EmbeddedResource Include="Models\Result.cshtml">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
     </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\AcadTests.Console\AcadTests.Console.csproj" />
+      <ProjectReference Include="..\RevitTests.Console\RevitTests.Console.csproj" />
+    </ItemGroup>
+    
     <PropertyGroup>
         <Description>Autocad tests nuke utils.</Description>
         <PackageId>RxBim.AcadTests.Nuke</PackageId>
         <IsPackable>true</IsPackable>
     </PropertyGroup>
-
 </Project>
