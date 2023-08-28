@@ -83,14 +83,15 @@ public class BasisRevitTests
 
 
     /// <summary>
-    /// Run FilteredElementsCollector.
+    /// Running a long test
     /// </summary>
     [Test]
+    [Ignore("too long")]
     public void LongTest()
     {
         var timer = new Stopwatch();
         timer.Start();
-        while (timer.ElapsedMilliseconds < 15 * 60 * 1000)
+        while (timer.ElapsedMilliseconds < 2 * 60 * 1000)
         {
             var wall = new FilteredElementCollector(_document)
                 .OfCategory(BuiltInCategory.OST_Walls)

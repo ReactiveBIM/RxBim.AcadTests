@@ -58,21 +58,7 @@ public class Build : AutocadRxBimBuild, IPublish
                     var assemblyPath = outputDirectory / assemblyName;
                     var results = outputDirectory / "result.xml";
                     var consoleDllPath = typeof(AcadTests.Console.Services.AcadTestTasks).Assembly.Location;
-                    var process = new Process
-                    {
-                        StartInfo = new ProcessStartInfo
-                        {
-                            FileName = "dotnet",
-                            Arguments = consoleDllPath + " " + $@"-a {assemblyPath} -r {results} -v 2019",
-                        }
-                    };
-                    /*var startInfo = new ProcessStartInfo(
-                        @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\src\AcadTests.Console\bin\Debug\net472\AcadTests.Console.exe",
-                        $@"-a {assemblyPath} -r {results} -v 2019 -d");
-                    var process = new Process();
-                    process.StartInfo = startInfo;*/
-                    process.Start();
-                    await process.WaitForExitAsync();
+                    DotNet(consoleDllPath + " " + $@"-a {assemblyPath} -r {results} -v 2019");
                     var resultPath = outputDirectory / "result.html";
                     await new ResultConverter()
                         .Convert(results, resultPath);
@@ -102,17 +88,7 @@ public class Build : AutocadRxBimBuild, IPublish
                     var assemblyName = project.Name + ".dll";
                     var assemblyPath = outputDirectory / assemblyName;
                     var results = outputDirectory / "result.xml";
-                    var process = new Process
-                    {
-                        StartInfo = new ProcessStartInfo
-                        {
-                            FileName = "dotnet",
-                            Arguments = consoleDllPath + " " + $@"-a {assemblyPath} -r {results} -v 2019",
-                        }
-                    };
-
-                    process.Start();
-                    process.WaitForExit();
+                    DotNet(consoleDllPath + " " + $@"-a {assemblyPath} -r {results} -v 2019");
                     var resultPath = outputDirectory / "result.html";
                     await new ResultConverter()
                         .Convert(results, resultPath);
