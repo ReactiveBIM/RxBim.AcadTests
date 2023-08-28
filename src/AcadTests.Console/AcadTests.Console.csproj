@@ -3,15 +3,16 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net6.0</TargetFramework>
+        <AssemblyName>RxBim.AcadTests.Console</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\AcadTests.ScriptUtils\AcadTests.ScriptUtils.csproj"/>
-        <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj"/>
+        <ProjectReference Include="..\AcadTests.ScriptUtils\AcadTests.ScriptUtils.csproj" />
+        <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CommandLineParser" Version="2.9.1"/>
+        <PackageReference Include="CommandLineParser" Version="2.9.1" />
     </ItemGroup>
 
     <ItemGroup>
@@ -20,15 +21,12 @@
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
             <PackageCopyToOutput>true</PackageCopyToOutput>
         </Content>
-        <Content Update="AcadTests.Console.runtimeconfig.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <PackageCopyToOutput>true</PackageCopyToOutput>
-        </Content>
     </ItemGroup>
 
     <PropertyGroup>
+        <PackAsTool>true</PackAsTool>
         <Description>Autocad tests framework console.</Description>
-        <PackageId>RxBim.AcadTests.Console</PackageId>
+        <PackageId>$(AssemblyName)</PackageId>
         <IsPackable>true</IsPackable>
     </PropertyGroup>
 </Project>

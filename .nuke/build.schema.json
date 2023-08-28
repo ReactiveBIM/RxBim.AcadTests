@@ -151,7 +151,8 @@
               "RevitIntegrationTests",
               "SignAssemblies",
               "TagProject",
-              "Test"
+              "Test",
+              "UpdateRevitTestConsole"
             ]
           }
         },
@@ -188,7 +189,8 @@
               "RevitIntegrationTests",
               "SignAssemblies",
               "TagProject",
-              "Test"
+              "Test",
+              "UpdateRevitTestConsole"
             ]
           }
         },

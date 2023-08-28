@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <PackAsTool>true</PackAsTool>
         <OutputType>Exe</OutputType>
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
+        <AssemblyName>RxBim.RevitTests.Console</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
@@ -24,8 +24,9 @@
     </ItemGroup>
 
     <PropertyGroup>
+        <PackAsTool>true</PackAsTool>
         <Description>Revit tests framework console.</Description>
-        <PackageId>RxBim.RevitTests.Console</PackageId>
+        <PackageId>$(AssemblyName)</PackageId>
         <IsPackable>true</IsPackable>
     </PropertyGroup>
 
