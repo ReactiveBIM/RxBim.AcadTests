@@ -34,6 +34,7 @@ public class Build : AutocadRxBimBuild, IPublish
     const string FeatureBranches = "feature/**";
 
     const string RevitTestTool = "RxBim.RevitTests.Console";
+    const string AcadTestTool = "RxBim.AcadTests.Console";
 
     public Build()
     {
@@ -51,7 +52,7 @@ public class Build : AutocadRxBimBuild, IPublish
                 if (!projects.Any())
                     throw new ArgumentException("project not found");
                 DotNetToolUpdate(settings => settings
-                    .SetPackageName(RevitTestTool)
+                    .SetPackageName(AcadTestTool)
                     .SetVersion("1.0.1-dev003")
                     .EnableGlobal());
                 foreach (var project in projects)
@@ -67,7 +68,7 @@ public class Build : AutocadRxBimBuild, IPublish
                     var assemblyPath = outputDirectory / assemblyName;
                     var results = outputDirectory / "result.xml";
                     ProcessTasks
-                        .StartProcess(RevitTestTool, $@"-a {assemblyPath} -r {results} -v 2019")
+                        .StartProcess(AcadTestTool, $@"-a {assemblyPath} -r {results} -v 2019")
                         .WaitForExit();
                     var resultPath = outputDirectory / "result.html";
                     await new ResultConverter()
@@ -93,7 +94,7 @@ public class Build : AutocadRxBimBuild, IPublish
                 if (!projects.Any())
                     throw new ArgumentException("project not found");
                 DotNetToolUpdate(settings => settings
-                    .SetPackageName("RxBim.RevitTests.Console")
+                    .SetPackageName(RevitTestTool)
                     .SetVersion("1.0.1-dev003")
                     .EnableGlobal());
                 foreach (var project in projects)
@@ -109,7 +110,7 @@ public class Build : AutocadRxBimBuild, IPublish
                     var assemblyPath = outputDirectory / assemblyName;
                     var results = outputDirectory / "result.xml";
                     ProcessTasks
-                        .StartProcess("RxBim.RevitTests.Console", $@"-a {assemblyPath} -r {results} -v 2019")
+                        .StartProcess(RevitTestTool, $@"-a {assemblyPath} -r {results} -v 2019")
                         .WaitForExit();
                     var resultPath = outputDirectory / "result.html";
                     await new ResultConverter()
