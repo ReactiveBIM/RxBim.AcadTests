@@ -33,6 +33,8 @@ public class Build : AutocadRxBimBuild, IPublish
     const string DevelopBranch = "develop";
     const string FeatureBranches = "feature/**";
 
+    const string RevitTestTool = "RxBim.RevitTests.Console";
+
     public Build()
     {
         Console.OutputEncoding = Encoding.UTF8;
@@ -48,6 +50,10 @@ public class Build : AutocadRxBimBuild, IPublish
                     .ToList();
                 if (!projects.Any())
                     throw new ArgumentException("project not found");
+                DotNetToolUpdate(settings => settings
+                    .SetPackageName(RevitTestTool)
+                    .SetVersion("1.0.1-dev003")
+                    .EnableGlobal());
                 foreach (var project in projects)
                 {
                     var outputDirectory = solution.Directory / "testoutput" / project.Name;
@@ -61,7 +67,7 @@ public class Build : AutocadRxBimBuild, IPublish
                     var assemblyPath = outputDirectory / assemblyName;
                     var results = outputDirectory / "result.xml";
                     ProcessTasks
-                        .StartProcess("revittests.console", $@"-a {assemblyPath} -r {results} -v 2019")
+                        .StartProcess(RevitTestTool, $@"-a {assemblyPath} -r {results} -v 2019")
                         .WaitForExit();
                     var resultPath = outputDirectory / "result.html";
                     await new ResultConverter()
@@ -72,7 +78,7 @@ public class Build : AutocadRxBimBuild, IPublish
     Target UpdateRevitTestConsole => _ => _.Executes(() =>
         DotNetToolUpdate(settings => settings
             .SetPackageName("RxBim.RevitTests.Console")
-            .SetVersion("1.0.1-dev002")
+            .SetVersion("1.0.1-dev003")
             .EnableGlobal()));
 
     Target RevitIntegrationTests =>
@@ -88,7 +94,7 @@ public class Build : AutocadRxBimBuild, IPublish
                     throw new ArgumentException("project not found");
                 DotNetToolUpdate(settings => settings
                     .SetPackageName("RxBim.RevitTests.Console")
-                    .SetVersion("1.0.1-dev002")
+                    .SetVersion("1.0.1-dev003")
                     .EnableGlobal());
                 foreach (var project in projects)
                 {
