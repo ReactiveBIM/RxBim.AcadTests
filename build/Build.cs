@@ -1,12 +1,14 @@
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using AcadTests.Nuke;
+using AcadTests.Nuke.Services;
 using Bimlab.Nuke.Components;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
+using Nuke.Common.ProjectModel;
+using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using RxBim.Nuke.AutoCAD;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
@@ -24,7 +26,7 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
     OnPushBranches = new[] { MasterBranch, "release/**" },
     InvokedTargets = new[] { nameof(Test), nameof(IPublish.Publish) },
     ImportSecrets = new[] { "NUGET_API_KEY", "ALL_PACKAGES" })]
-public class Build : AutocadRxBimBuild, IPublish, IIntegrationTest
+public class Build : AutocadRxBimBuild, IPublish
 {
     const string MasterBranch = "master";
     const string DevelopBranch = "develop";
@@ -63,13 +65,23 @@ public class Build : AutocadRxBimBuild, IPublish, IIntegrationTest
                         .SetOutputDirectory(outputDirectory));
                     var assemblyName = project.Name + ".dll";
                     var assemblyPath = outputDirectory / assemblyName;
-                    var results = outputDirectory / "result.xml";
+                    var xmlResultPath = outputDirectory / "result.xml";
                     ProcessTasks
-                        .StartProcess(AcadTestTool, $@"-a {assemblyPath} -r {results} -v 2019")
+                        .StartProcess(AcadTestTool, $@"-a {assemblyPath} -r {xmlResultPath} -v 2019")
                         .WaitForExit();
-                    var resultPath = outputDirectory / "result.html";
-                    await new ResultConverter()
-                        .Convert(results, resultPath);
+                    var htmlResultPath = outputDirectory / "result.html";
+
+                    var testResultData = await TestResultDataXmlParseService
+                        .Create()
+                        .GetTestResultData(xmlResultPath);
+                    var allTestsArePassed =
+                        TestResultDataValidationService.Create().AreAllTestsPassed(testResultData);
+                    await TestResultDataHtmlSaveService.Create()
+                        .SaveResultTestData(testResultData, htmlResultPath);
+                    if (!allTestsArePassed)
+                    {
+                        throw new Exception("Failed tests found");
+                    }
                 }
             });
 
@@ -105,13 +117,23 @@ public class Build : AutocadRxBimBuild, IPublish, IIntegrationTest
                         .SetOutputDirectory(outputDirectory));
                     var assemblyName = project.Name + ".dll";
                     var assemblyPath = outputDirectory / assemblyName;
-                    var results = outputDirectory / "result.xml";
+                    var xmlResultPath = outputDirectory / "result.xml";
                     ProcessTasks
-                        .StartProcess(RevitTestTool, $@"-a {assemblyPath} -r {results} -v 2019")
+                        .StartProcess(RevitTestTool, $@"-a {assemblyPath} -r {xmlResultPath} -v 2019")
                         .WaitForExit();
-                    var resultPath = outputDirectory / "result.html";
-                    await new ResultConverter()
-                        .Convert(results, resultPath);
+                    var htmlResultPath = outputDirectory / "result.html";
+
+                    var testResultData = await TestResultDataXmlParseService
+                        .Create()
+                        .GetTestResultData(xmlResultPath);
+                    var allTestsArePassed =
+                        TestResultDataValidationService.Create().AreAllTestsPassed(testResultData);
+                    await TestResultDataHtmlSaveService.Create()
+                        .SaveResultTestData(testResultData, htmlResultPath);
+                    if (!allTestsArePassed)
+                    {
+                        throw new Exception("Failed tests found");
+                    }
                 }
             });
 

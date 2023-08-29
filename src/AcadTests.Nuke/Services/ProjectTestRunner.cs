@@ -1,68 +1,58 @@
-namespace AcadTests.Nuke.Services
+namespace AcadTests.Nuke.Services;
+
+using global::Nuke.Common.ProjectModel;
+using global::Nuke.Common.Tooling;
+using global::Nuke.Common.Tools.DotNet;
+
+/// <summary>
+/// Project test runner.
+/// </summary>
+public class ProjectTestRunner
 {
-    using System.Diagnostics;
-    using global::Nuke.Common.ProjectModel;
-    using global::Nuke.Common.Tools.DotNet;
-    using static global::Nuke.Common.Tools.DotNet.DotNetTasks;
+    private readonly Solution _solution;
 
     /// <summary>
-    /// Project test runner.
+    /// Initializes a new instance of the <see cref="ProjectTestRunner"/> class.
     /// </summary>
-    public class ProjectTestRunner
+    /// <param name="solution"><see cref="Solution"/>.</param>
+    public ProjectTestRunner(Solution solution)
     {
-        private readonly Solution _solution;
+        _solution = solution;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectTestRunner"/> class.
-        /// </summary>
-        /// <param name="solution"><see cref="Solution"/>.</param>
-        public ProjectTestRunner(Solution solution)
+    /// <summary>
+    /// Run project tests.
+    /// </summary>
+    /// <param name="project">Project.</param>
+    /// <param name="testTool">Path to console Dll.</param>
+    /// <exception cref="Exception">Exception occurs if at least one test fails.</exception>
+    public async Task RunTests(Project project, string testTool)
+    {
+        var outputDirectory = _solution.Directory / "testoutput" / project.Name;
+        if (Directory.Exists(outputDirectory))
+            Directory.Delete(outputDirectory, true);
+        DotNetTasks.DotNetBuild(settings => DotNetBuildSettingsExtensions
+            .SetProjectFile<DotNetBuildSettings>(settings, project)
+            .SetConfiguration("Debug")
+            .SetOutputDirectory(outputDirectory));
+        var assemblyName = project.Name + ".dll";
+        var assemblyPath = outputDirectory / assemblyName;
+        var xmlResultPath = outputDirectory / "result.xml";
+        ProcessTasks
+            .StartProcess(testTool, $@"-a {assemblyPath} -r {xmlResultPath} -v 2019")
+            .WaitForExit();
+        var htmlResultPath = outputDirectory / "result.html";
+
+        var testResultData = await TestResultDataXmlParseService
+            .Create()
+            .GetTestResultData(xmlResultPath);
+        var allTestsArePassed =
+            TestResultDataValidationService.Create().AreAllTestsPassed(testResultData);
+        await TestResultDataHtmlSaveService.Create()
+            .SaveResultTestData(testResultData, htmlResultPath);
+        if (!allTestsArePassed)
         {
-            _solution = solution;
-        }
-
-        /// <summary>
-        /// Run project tests.
-        /// </summary>
-        /// <param name="project">Project.</param>
-        /// <param name="consoleDllPath">Path to console Dll.</param>
-        /// <exception cref="Exception">Exception occurs if at least one test fails.</exception>
-        public async Task RunTests(Project project, string consoleDllPath)
-        {
-            var outputDirectory = _solution.Directory / "testoutput" / project.Name;
-            if (Directory.Exists(outputDirectory))
-                Directory.Delete(outputDirectory, true);
-            DotNetBuild(settings => DotNetBuildSettingsExtensions
-                .SetProjectFile<DotNetBuildSettings>(settings, project)
-                .SetConfiguration("Debug")
-                .SetOutputDirectory(outputDirectory));
-            var assemblyName = project.Name + ".dll";
-            var assemblyPath = outputDirectory / assemblyName;
-            var xmlResultPath = outputDirectory / "result.xml";
-            var process = new Process
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = "dotnet",
-                    Arguments = consoleDllPath + " " + $"-a {assemblyPath} -r {xmlResultPath} -v 2019",
-                }
-            };
-
-            process.Start();
-            await process.WaitForExitAsync();
-            var htmlResultPath = outputDirectory / "result.html";
-
-            var testResultData = await TestResultDataXmlParseService
-                .Create()
-                .GetTestResultData(xmlResultPath);
-            var allTestsArePassed =
-                TestResultDataValidationService.Create().AreAllTestsPassed(testResultData);
-            await TestResultDataHtmlSaveService.Create()
-                .SaveResultTestData(testResultData, htmlResultPath);
-            if (!allTestsArePassed)
-            {
-                throw new Exception("Failed tests found");
-            }
+            throw new Exception("Failed tests found");
         }
     }
 }

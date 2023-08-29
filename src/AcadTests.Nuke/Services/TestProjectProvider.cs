@@ -4,7 +4,7 @@ namespace AcadTests.Nuke.Services
     using global::Nuke.Common.ProjectModel;
 
     /// <summary>
-    /// <see cref="ProjectInfo"/> provider of solution test projects.
+    /// <see cref="Project"/> provider of solution test projects.
     /// </summary>
     public class TestProjectProvider
     {
