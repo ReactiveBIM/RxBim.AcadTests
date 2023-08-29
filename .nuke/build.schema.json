@@ -76,6 +76,10 @@
           "type": "string",
           "description": "NuGet source URL"
         },
+        "OnlySelectedProjects": {
+          "type": "boolean",
+          "description": "Test only selected projects"
+        },
         "Packages": {
           "type": "array",
           "description": "Project name list",
@@ -128,6 +132,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "AutocadIntegrationTests",
               "BuildFromTag",
               "BuildInnoExe",
               "BuildMsi",
@@ -141,7 +146,6 @@
               "GeneratePackageContentsFile",
               "GenerateProjectProps",
               "InstallWixTools",
-              "IntegrationTests",
               "List",
               "Pack",
               "Prerelease",
@@ -166,6 +170,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "AutocadIntegrationTests",
               "BuildFromTag",
               "BuildInnoExe",
               "BuildMsi",
@@ -179,7 +184,6 @@
               "GeneratePackageContentsFile",
               "GenerateProjectProps",
               "InstallWixTools",
-              "IntegrationTests",
               "List",
               "Pack",
               "Prerelease",
@@ -192,6 +196,13 @@
               "Test",
               "UpdateRevitTestConsole"
             ]
+          }
+        },
+        "TestProjects": {
+          "type": "array",
+          "description": "Collection of test projects",
+          "items": {
+            "type": "string"
           }
         },
         "TimestampRevisionVersion": {

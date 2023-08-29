@@ -52,7 +52,7 @@ public class OtherTests
     [Test]
     public void CheckCirclesRadius()
     {
-        // получаем текущую БД 
+        // получаем текущую БД
         var db = HostApplicationServices.WorkingDatabase;
 
         // начинаем транзакцию

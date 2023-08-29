@@ -43,7 +43,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxBim.Example.Revit.Integra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitTests.TestingUtils", "src\RevitTests.TestingUtils\RevitTests.TestingUtils.csproj", "{70A117BF-16BF-40D8-B574-91E0B9EFDD61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResultConverterTest", "tests\ResultConverterTest\ResultConverterTest.csproj", "{78077E16-0666-4BFD-AF11-A851D2C2DA67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcadTests.Nuke.Tests", "tests\AcadTests.Nuke.Tests\AcadTests.Nuke.Tests.csproj", "{78077E16-0666-4BFD-AF11-A851D2C2DA67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

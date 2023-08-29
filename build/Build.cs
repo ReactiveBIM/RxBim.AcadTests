@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -8,8 +7,6 @@ using AcadTests.Nuke;
 using Bimlab.Nuke.Components;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
-using Nuke.Common.ProjectModel;
-using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using RxBim.Nuke.AutoCAD;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
@@ -27,7 +24,7 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
     OnPushBranches = new[] { MasterBranch, "release/**" },
     InvokedTargets = new[] { nameof(Test), nameof(IPublish.Publish) },
     ImportSecrets = new[] { "NUGET_API_KEY", "ALL_PACKAGES" })]
-public class Build : AutocadRxBimBuild, IPublish
+public class Build : AutocadRxBimBuild, IPublish, IIntegrationTest
 {
     const string MasterBranch = "master";
     const string DevelopBranch = "develop";
