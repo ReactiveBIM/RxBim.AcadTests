@@ -13,7 +13,7 @@
 
 @foreach (var fixture in Model.Fixtures)
 {
-    <h3>@Model.AssemblyName - @fixture.Name - @(fixture.Success ? "✔" : "❌")</h3>
+    <h3>@Model.AssemblyFileName - @fixture.Name - @(fixture.Success ? "✔" : "❌")</h3>
 
     <table class="table">
         <thead>
@@ -21,17 +21,17 @@
             <th scope="col">Test name</th>
             <th scope="col">Result</th>
             <th scope="col">Execution time</th>
-            <th scope="col">Failure message</th>
+            <th scope="col">Result message</th>
         </tr>
         </thead>
         <tbody>
         @foreach (var caseData in fixture.Cases)
         {
-            <tr class="@(caseData.Success ? "table-success" : "table-danger")">
+            <tr class="@(caseData.Success ? caseData.Skipped ? "table-warning" : "table-success" : "table-danger")">
                 <td>@caseData.Name</td>
-                <td>@(caseData.Success ? "✔" : "❌")</td>
+                <td>@(caseData.Success ? caseData.Skipped ? "❔" : "✔" : "❌")</td>
                 <td>@caseData.ExecutionTime</td>
-                <td>@(string.IsNullOrWhiteSpace(caseData.Failure) ? "-" : caseData.Failure)</td>
+                <td>@(string.IsNullOrWhiteSpace(caseData.ResultMessage) ? "-" : caseData.ResultMessage)</td>
             </tr>
         }
         </tbody>

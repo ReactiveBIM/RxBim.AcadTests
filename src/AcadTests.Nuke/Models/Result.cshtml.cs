@@ -3,6 +3,6 @@
 /// <summary>
 ///     Result template.
 /// </summary>
-public class Result
+public partial class Result
 {
 }
