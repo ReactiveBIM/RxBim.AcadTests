@@ -15,14 +15,6 @@
         <PackageReference Include="CommandLineParser" Version="2.9.1" />
     </ItemGroup>
 
-    <ItemGroup>
-        <Content Include="..\RevitTests.Cmd\revitCmd.zip">
-            <Link>revitCmd.zip</Link>
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <PackageCopyToOutput>true</PackageCopyToOutput>
-        </Content>
-    </ItemGroup>
-
     <PropertyGroup>
         <PackAsTool>true</PackAsTool>
         <Description>Revit tests framework console.</Description>

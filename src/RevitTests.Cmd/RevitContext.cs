@@ -1,11 +1,11 @@
-namespace RevitTests.TestingUtils;
+namespace RevitTests.Cmd;
 
 using Autodesk.Revit.UI;
 
 /// <summary>
-/// bla
+/// The revit context
 /// </summary>
-public static class Helper
+public static class RevitContext
 {
     /// <summary>
     /// UI app

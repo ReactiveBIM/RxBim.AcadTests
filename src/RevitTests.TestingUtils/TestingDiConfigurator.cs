@@ -1,6 +1,7 @@
 ﻿namespace RevitTests.TestingUtils
 {
     using AcadTests.TestingUtils.Di;
+    using Cmd;
     using JetBrains.Annotations;
     using RxBim.Di;
 
@@ -16,12 +17,12 @@
         /// <inheritdoc />
         protected override void ConfigureBaseDependencies()
         {
-            var uiApp = Helper.UiApplication!;
+            var uiApp = RevitContext.UiApplication!;
             Container
                 .AddInstance(uiApp)
                 .AddInstance(uiApp.Application)
                 .AddTransient(() => uiApp.ActiveUIDocument)
-                .AddTransient(() => uiApp.ActiveUIDocument?.Document!);
+                .AddTransient(() => uiApp.ActiveUIDocument.Document);
         }
     }
 }

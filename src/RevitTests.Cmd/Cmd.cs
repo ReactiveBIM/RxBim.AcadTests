@@ -16,7 +16,6 @@ using NUnit.Framework.Api;
 using NUnit.Framework.Interfaces;
 using RxBim.Command.Revit;
 using RxBim.Shared;
-using TestingUtils;
 
 /// <inheritdoc />
 [Transaction(TransactionMode.Manual)]
@@ -42,8 +41,8 @@ public class Cmd : RxBimCommand
             if (!File.Exists(assembly))
                 throw new FileNotFoundException(assembly);
 
-            Assembly.Load(typeof(Helper).Assembly.Location);
-            Helper.UiApplication = uiApplication;
+            Assembly.Load(typeof(RevitContext).Assembly.Location);
+            RevitContext.UiApplication = uiApplication;
             var result = RunTests(assembly, testAssemblyRunner, testFilter, testListener);
             SendResults(acadTestClient, result);
 
