@@ -25,8 +25,9 @@ public class ProjectTestRunner
     /// </summary>
     /// <param name="project">Project.</param>
     /// <param name="testTool">Path to console Dll.</param>
+    /// <param name="isDebug">Is debug mode</param>
     /// <exception cref="Exception">Exception occurs if at least one test fails.</exception>
-    public async Task RunTests(Project project, string testTool)
+    public async Task RunTests(Project project, string testTool, bool isDebug)
     {
         var outputDirectory = _solution.Directory / "testoutput" / project.Name;
         if (Directory.Exists(outputDirectory))
@@ -39,7 +40,7 @@ public class ProjectTestRunner
         var assemblyPath = outputDirectory / assemblyName;
         var xmlResultPath = outputDirectory / "result.xml";
         ProcessTasks
-            .StartProcess(testTool, $@"-a {assemblyPath} -r {xmlResultPath} -v 2019")
+            .StartProcess(testTool, $@"-a {assemblyPath} -r {xmlResultPath} -v 2019{(isDebug ? " -d" : string.Empty)}")
             .WaitForExit();
         var htmlResultPath = outputDirectory / "result.html";
 

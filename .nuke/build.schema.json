@@ -63,6 +63,10 @@
           "type": "boolean",
           "description": "Ignore unreachable sources during Restore"
         },
+        "IsDebug": {
+          "type": "boolean",
+          "description": "Is debug mode"
+        },
         "NoLogo": {
           "type": "boolean",
           "description": "Disables displaying the NUKE logo"
@@ -75,6 +79,10 @@
         "NugetSource": {
           "type": "string",
           "description": "NuGet source URL"
+        },
+        "OnlySelectedProjects": {
+          "type": "boolean",
+          "description": "Test only selected projects"
         },
         "Packages": {
           "type": "array",
@@ -148,11 +156,10 @@
               "Publish",
               "Release",
               "Restore",
-              "RevitIntegrationTests",
               "SignAssemblies",
               "TagProject",
               "Test",
-              "UpdateRevitTestConsole"
+              "UpdateTestsTool"
             ]
           }
         },
@@ -186,13 +193,31 @@
               "Publish",
               "Release",
               "Restore",
-              "RevitIntegrationTests",
               "SignAssemblies",
               "TagProject",
               "Test",
-              "UpdateRevitTestConsole"
+              "UpdateTestsTool"
             ]
           }
+        },
+        "TestProjects": {
+          "type": "array",
+          "description": "Collection of test projects",
+          "items": {
+            "type": "string"
+          }
+        },
+        "TestToolName": {
+          "type": "string",
+          "description": "Test runner tool",
+          "enum": [
+            "Acad",
+            "Revit"
+          ]
+        },
+        "TestToolVersion": {
+          "type": "string",
+          "description": "Test runner tool version"
         },
         "TimestampRevisionVersion": {
           "type": "boolean",

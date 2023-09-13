@@ -11,18 +11,8 @@ using Services;
 /// Contains targets for running integration tests.
 /// </summary>
 [PublicAPI]
-public interface IIntegrationTest : IHazSolution
+public interface IRunIntegrationTests : IHazSolution
 {
-    /// <summary>
-    /// RevitTestTool
-    /// </summary>
-    const string RevitTestTool = "RxBim.RevitTests.Console";
-
-    /// <summary>
-    /// AcadTestTool
-    /// </summary>
-    const string AcadTestTool = "RxBim.AcadTests.Console";
-
     /// <summary>
     /// TestProjectProvider.
     /// </summary>
@@ -38,6 +28,24 @@ public interface IIntegrationTest : IHazSolution
     /// </summary>
     [Parameter("Test only selected projects")]
     bool OnlySelectedProjects => TryGetValue<bool?>(() => OnlySelectedProjects) ?? false;
+
+    /// <summary>
+    /// Test runner tool
+    /// </summary>
+    [Parameter("Test runner tool")]
+    TestTool TestToolName => TryGetValue(() => TestToolName) ?? TestTool.Acad;
+
+    /// <summary>
+    /// Test runner tool
+    /// </summary>
+    [Parameter("Test runner tool version")]
+    string? TestToolVersion => TryGetValue(() => TestToolVersion);
+
+    /// <summary>
+    /// Is debug mode
+    /// </summary>
+    [Parameter("Is debug mode")]
+    bool IsDebug => TryGetValue<bool?>(() => IsDebug) ?? false;
 
     /// <summary>
     /// Collection of test projects.
@@ -60,38 +68,34 @@ public interface IIntegrationTest : IHazSolution
     }
 
     /// <summary>
-    /// Runs integration tests for Revit.
+    /// Update tests runner.
     /// </summary>
-    Target RevitIntegrationTests =>
-        definition => definition
-            .Description("Starts execution of integration tests in the Revit environment")
-            .Executes(async () =>
-            {
-                DotNetTasks.DotNetToolUpdate(settings => settings
-                    .SetPackageName(RevitTestTool)
-                    .SetVersion("1.0.1-dev003")
-                    .EnableGlobal());
-                foreach (var project in TestProjects)
+    Target UpdateTestsTool =>
+        _ => _
+            .Requires(() => TestToolName)
+            .Executes(() =>
+                DotNetTasks.DotNetToolUpdate(settings =>
                 {
-                    await ProjectTestRunner.RunTests(project, RevitTestTool);
-                }
-            });
+                    settings = settings
+                        .SetPackageName(TestToolName)
+                        .EnableGlobal();
+                    if (!string.IsNullOrEmpty(TestToolVersion))
+                        settings = settings.SetVersion(TestToolVersion);
+                    return settings;
+                }));
 
     /// <summary>
-    /// Runs integration tests for Autocad.
+    /// Runs integration tests for Revit.
     /// </summary>
-    Target AutocadIntegrationTests =>
+    Target IntegrationTests =>
         definition => definition
-            .Description("Starts execution of integration tests in the Autocad environment")
+            .DependsOn(UpdateTestsTool)
+            .Description("Starts execution of integration tests")
             .Executes(async () =>
             {
-                DotNetTasks.DotNetToolUpdate(settings => settings
-                    .SetPackageName(AcadTestTool)
-                    .SetVersion("1.0.1-dev003")
-                    .EnableGlobal());
                 foreach (var project in TestProjects)
                 {
-                    await ProjectTestRunner.RunTests(project, AcadTestTool);
+                    await ProjectTestRunner.RunTests(project, TestToolName, IsDebug);
                 }
             });
 }
