@@ -63,6 +63,10 @@
           "type": "boolean",
           "description": "Ignore unreachable sources during Restore"
         },
+        "IsDebug": {
+          "type": "boolean",
+          "description": "Is debug mode"
+        },
         "NoLogo": {
           "type": "boolean",
           "description": "Disables displaying the NUKE logo"
@@ -132,7 +136,6 @@
           "items": {
             "type": "string",
             "enum": [
-              "AutocadIntegrationTests",
               "BuildFromTag",
               "BuildInnoExe",
               "BuildMsi",
@@ -146,16 +149,17 @@
               "GeneratePackageContentsFile",
               "GenerateProjectProps",
               "InstallWixTools",
+              "IntegrationTests",
               "List",
               "Pack",
               "Prerelease",
               "Publish",
               "Release",
               "Restore",
-              "RevitIntegrationTests",
               "SignAssemblies",
               "TagProject",
-              "Test"
+              "Test",
+              "UpdateTestsTool"
             ]
           }
         },
@@ -169,7 +173,6 @@
           "items": {
             "type": "string",
             "enum": [
-              "AutocadIntegrationTests",
               "BuildFromTag",
               "BuildInnoExe",
               "BuildMsi",
@@ -183,16 +186,17 @@
               "GeneratePackageContentsFile",
               "GenerateProjectProps",
               "InstallWixTools",
+              "IntegrationTests",
               "List",
               "Pack",
               "Prerelease",
               "Publish",
               "Release",
               "Restore",
-              "RevitIntegrationTests",
               "SignAssemblies",
               "TagProject",
-              "Test"
+              "Test",
+              "UpdateTestsTool"
             ]
           }
         },
@@ -202,6 +206,18 @@
           "items": {
             "type": "string"
           }
+        },
+        "TestToolName": {
+          "type": "string",
+          "description": "Test runner tool",
+          "enum": [
+            "Acad",
+            "Revit"
+          ]
+        },
+        "TestToolVersion": {
+          "type": "string",
+          "description": "Test runner tool version"
         },
         "TimestampRevisionVersion": {
           "type": "boolean",

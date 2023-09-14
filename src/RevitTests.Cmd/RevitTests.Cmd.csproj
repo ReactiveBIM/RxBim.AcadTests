@@ -13,7 +13,6 @@
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj" />
-        <ProjectReference Include="..\RevitTests.TestingUtils\RevitTests.TestingUtils.csproj" />
     </ItemGroup>
     <PropertyGroup>
         <PackageGuid>f9e7899b-780f-4002-a8b3-3a999ba53982</PackageGuid>
@@ -25,10 +24,4 @@
         <PackageId>RxBim.RevitTests.Cmd</PackageId>
         <IsPackable>true</IsPackable>
     </PropertyGroup>
-
-
-    <Target Name="ZipOutputPath" AfterTargets="Build">
-        <ZipDirectory SourceDirectory="$(OutputPath)" DestinationFile="$(MSBuildProjectDirectory)\revitCmd.zip" Overwrite="true" />
-    </Target>
-
 </Project>

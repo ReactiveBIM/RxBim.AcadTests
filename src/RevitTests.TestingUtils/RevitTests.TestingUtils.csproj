@@ -5,25 +5,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="2019.0.1" />
+        <Compile Include="..\AcadTests.TestingUtils\Di\ITestConfiguration.cs">
+            <Link>ITestConfiguration.cs</Link>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-            <_Parameter1>RevitTests.Cmd</_Parameter1>
-        </AssemblyAttribute>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="System.Runtime.CompilerServices.Unsafe">
-        <HintPath>..\..\testoutput\RxBim.Example.Revit.IntegrationTests\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Include="..\AcadTests.TestingUtils\Di\ITestConfiguration.cs">
-        <Link>ITestConfiguration.cs</Link>
-      </Compile>
+        <ProjectReference Include="..\RevitTests.Cmd\RevitTests.Cmd.csproj"/>
     </ItemGroup>
 
     <PropertyGroup>

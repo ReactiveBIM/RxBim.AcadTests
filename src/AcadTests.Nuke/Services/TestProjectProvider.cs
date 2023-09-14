@@ -4,7 +4,7 @@ namespace AcadTests.Nuke.Services
     using global::Nuke.Common.ProjectModel;
 
     /// <summary>
-    /// <see cref="ProjectInfo"/> provider of solution test projects.
+    /// <see cref="Project"/> provider of solution test projects.
     /// </summary>
     public class TestProjectProvider
     {
@@ -34,7 +34,7 @@ namespace AcadTests.Nuke.Services
                 .Prepend(("All projects", "All projects"));
 
             var selectedProjectNames = SelectionUtility
-                .PromptForOptions("Select projects with spacebar:", true, options.ToArray());
+                .PromptForOptions("Select projects with space bar:", true, options.ToArray());
 
             return Projects.Where(project => selectedProjectNames.Contains(project.Name)).ToArray();
         }

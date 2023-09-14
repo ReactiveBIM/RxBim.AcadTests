@@ -83,10 +83,10 @@ public class BasisRevitTests
 
 
     /// <summary>
-    /// Run FilteredElementsCollector.
+    /// Running a long test
     /// </summary>
     [Test]
-    [Ignore("Слишком долго ждать")]
+    [Ignore("too long")]
     public void LongTest()
     {
         var timer = new Stopwatch();

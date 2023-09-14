@@ -97,7 +97,7 @@ public class AutocadScriptRunner : IAutocadScriptRunner
         File.Move(tempScriptFilePath, tempScriptFilePath);
         var param = new StringBuilder();
 
-        param.Append("/language \"en-US\"");
+        param.Append("/language \"ru-RU\"");
         if (!string.IsNullOrWhiteSpace(_templateFile))
             param.Append($" /t \"{_templateFile}\"");
         if (!string.IsNullOrWhiteSpace(script))
