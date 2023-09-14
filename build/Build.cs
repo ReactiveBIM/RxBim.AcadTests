@@ -11,6 +11,7 @@ using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
+using Nuke.Common.Tools.Git;
 using RxBim.Nuke.AutoCAD;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
@@ -54,6 +55,16 @@ public class Build : AutocadRxBimBuild, IPublish, IRunIntegrationTests
     ///     Main
     /// </summary>
     public static int Main() => Execute<Build>(x => x.From<IPublish>().List);
+
+    Target CleanWorkDir =>
+        targetDefinition => targetDefinition
+            .Before<IPublish>(p => p.Release)
+            .DependentFor<IPublish>(p => p.Pack)
+            .After(Compile)
+            .Executes(() =>
+            {
+                GitTasks.Git("reset --hard");
+            });
 
     T From<T>()
         where T : INukeBuild =>
