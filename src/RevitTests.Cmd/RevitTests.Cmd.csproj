@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <UseSimpleInjector>true</UseSimpleInjector>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="NUnit" Version="3.13.3" />
+        <PackageReference Include="NUnit.Engine" Version="3.16.3" />
+        <PackageReference Include="NUnit.Engine.Api" Version="3.16.3" />
+        <PackageReference Include="NUnit.Runners" Version="3.12.0" />
+        <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
+        <PackageReference Include="RxBim.Command.Revit.2019" Version="1.9.2" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj" />
+    </ItemGroup>
+    <PropertyGroup>
+        <PackageGuid>f9e7899b-780f-4002-a8b3-3a999ba53982</PackageGuid>
+        <UpgradeCode>efeffffd-fb08-41df-b62b-50429e1383d9</UpgradeCode>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Description>The command to run the revit tests.</Description>
+        <PackageId>RxBim.RevitTests.Cmd</PackageId>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+</Project>

@@ -1,17 +1,19 @@
-using static Nuke.Common.Tools.DotNet.DotNetTasks;
-
-namespace _build;
-
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using AcadTests.Nuke;
+using AcadTests.Nuke.Components;
+using AcadTests.Nuke.Services;
 using Bimlab.Nuke.Components;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
+using Nuke.Common.ProjectModel;
+using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
+using Nuke.Common.Tools.Git;
 using RxBim.Nuke.AutoCAD;
+using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 /// <inheritdoc cref="RxBim.Nuke.AutoCAD.AutocadRxBimBuild" />
 [GitHubActions("CI",
@@ -26,7 +28,7 @@ using RxBim.Nuke.AutoCAD;
     OnPushBranches = new[] { MasterBranch, "release/**" },
     InvokedTargets = new[] { nameof(Test), nameof(IPublish.Publish) },
     ImportSecrets = new[] { "NUGET_API_KEY", "ALL_PACKAGES" })]
-public class Build : AutocadRxBimBuild, IPublish
+public class Build : AutocadRxBimBuild, IPublish, IRunIntegrationTests
 {
     const string MasterBranch = "master";
     const string DevelopBranch = "develop";
@@ -37,65 +39,33 @@ public class Build : AutocadRxBimBuild, IPublish
         Console.OutputEncoding = Encoding.UTF8;
     }
 
+    new Target Test =>
+        targetDefinition => targetDefinition
+            .Before(Clean)
+            .Before<IRestore>()
+            .Executes(() =>
+            {
+                DotNetTest(settings => settings
+                    .SetProjectFile(From<IHazSolution>().Solution.Path)
+                    .SetConfiguration(From<IHazConfiguration>().Configuration)
+                    .SetFilter("FullyQualifiedName!~IntegrationTests"));
+            });
+
     /// <summary>
-    /// Main 
+    ///     Main
     /// </summary>
     public static int Main() => Execute<Build>(x => x.From<IPublish>().List);
 
-    Target IntegrationTests =>
-        _ => _
-            .Executes(async () =>
+    Target CleanWorkDir =>
+        targetDefinition => targetDefinition
+            .Before<IPublish>(p => p.Release)
+            .DependentFor<IPublish>(p => p.Pack)
+            .After(Compile)
+            .Executes(() =>
             {
-                var solution = Solution;
-                var projects = solution.AllProjects
-                    .Where(x => x.Name.EndsWith(".IntegrationTests"))
-                    .ToList();
-                if (!projects.Any())
-                    throw new ArgumentException("project not found");
-                foreach (var project in projects)
-                {
-                    var outputDirectory = solution.Directory / "testoutput" / project.Name;
-                    DotNetBuild(settings => settings
-                        .SetProjectFile(project)
-                        .SetConfiguration("Debug")
-                        .SetOutputDirectory(outputDirectory));
-                    var assemblyName = project.Name + ".dll";
-                    var assemblyPath = outputDirectory / assemblyName;
-                    var results = outputDirectory / "result.xml";
-
-                    // TODO
-                    /*var ts = new CancellationTokenSource(20000);
-                var runner = new AcadTestTasks();
-                await runner.Run(new TestRunningOptions()
-                {
-                    Debug = false,
-                    AcadVersion = 2019,
-                    AssemblyPath = assemblyPath,
-                    ResultsFilePath = results,
-                    UseAcCoreConsole = false
-                }, ts.Token);*/
-                    var startInfo = new ProcessStartInfo(
-                        @"C:\Users\ivachevev\RiderProjects\RxBim.AcadTests\AcadTests.Console\bin\Debug\net472\AcadTests.Console.exe",
-                        $@"-a {assemblyPath} -r {results} -v 2019 -d");
-                    var process = new Process();
-                    process.StartInfo = startInfo;
-                    process.Start();
-                    await process.WaitForExitAsync();
-                    var resultPath = outputDirectory / "result.html";
-                    await new ResultConverter()
-                        .Convert(results, resultPath);
-                }
+                GitTasks.Git("reset --hard");
             });
 
-    public Target Test => _ => _
-        .Before<IRestore>()
-        .Executes(() =>
-        {
-            DotNetTest(settings => settings
-                .SetProjectFile(From<IHazSolution>().Solution.Path)
-                .SetConfiguration(From<IHazConfiguration>().Configuration));
-        });
-    
     T From<T>()
         where T : INukeBuild =>
         (T)(object)this;
