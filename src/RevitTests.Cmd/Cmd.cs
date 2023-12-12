@@ -97,10 +97,13 @@ public class Cmd : RxBimCommand
             case "TaskDialog_Save_File":
                 e.OverrideResult(7);
                 break;
+            /*case "TaskDialog_Command_Failure_For_Extenal_Command":
+                e.OverrideResult(0);
+                break;*/
             case "Dialog_Revit_JournalAbort":
             case "TaskDialog_Calculation_In_Progress":
             default:
-                e.OverrideResult(1);
+                e.OverrideResult(1); // Ok
                 break;
         }
     }

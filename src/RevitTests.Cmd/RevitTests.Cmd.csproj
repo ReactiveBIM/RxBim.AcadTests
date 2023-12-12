@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <UseSimpleInjector>true</UseSimpleInjector>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="NUnit" Version="3.13.3" />
@@ -9,7 +8,7 @@
         <PackageReference Include="NUnit.Engine.Api" Version="3.16.3" />
         <PackageReference Include="NUnit.Runners" Version="3.12.0" />
         <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
-        <PackageReference Include="RxBim.Command.Revit.2019" Version="1.9.2" />
+        <PackageReference Include="RxBim.Command.Revit.2019" Version="1.9.3-rc001" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj" />
