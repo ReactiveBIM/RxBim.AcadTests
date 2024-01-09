@@ -6,7 +6,7 @@
         <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
         <NoWarn>CS0618</NoWarn>
         <PlatformTarget>x64</PlatformTarget>
-        <Version>1.0.2-dev001</Version>
+        <Version>1.0.2</Version>
         <NoWarn>NU1701</NoWarn>
     </PropertyGroup>
 
@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup Condition=" '$(UseDi)' == 'true' ">
-        <PackageReference Include="RxBim.Di" Version="2.0.0-rc001" />
+        <PackageReference Include="RxBim.Di" Version="2.0.0" />
     </ItemGroup>
     <ItemGroup Condition=" '$(UseAcad)' == 'true' ">
         <PackageReference Include="AutoCAD2019.Base" Version="1.0.3" ExcludeAssets="build; runtime" />
