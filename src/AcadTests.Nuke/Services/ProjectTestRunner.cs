@@ -32,8 +32,8 @@ public class ProjectTestRunner
         var outputDirectory = _solution.Directory / "testoutput" / project.Name;
         if (Directory.Exists(outputDirectory))
             Directory.Delete(outputDirectory, true);
-        DotNetTasks.DotNetBuild(settings => DotNetBuildSettingsExtensions
-            .SetProjectFile<DotNetBuildSettings>(settings, project)
+        DotNetTasks.DotNetBuild(settings => settings
+            .SetProjectFile<DotNetBuildSettings>(project)
             .SetConfiguration("Debug")
             .SetOutputDirectory(outputDirectory));
         var assemblyName = project.Name + ".dll";
