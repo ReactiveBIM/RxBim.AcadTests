@@ -78,6 +78,7 @@ public interface IRunIntegrationTests : IHazSolution
                 {
                     settings = settings
                         .SetPackageName(TestToolName)
+                        .ClearSources()
                         .EnableGlobal();
                     if (!string.IsNullOrEmpty(TestToolVersion))
                         settings = settings.SetVersion(TestToolVersion);
