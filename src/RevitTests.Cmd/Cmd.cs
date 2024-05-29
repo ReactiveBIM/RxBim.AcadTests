@@ -100,6 +100,12 @@ public class Cmd : RxBimCommand
             /*case "TaskDialog_Command_Failure_For_Extenal_Command":
                 e.OverrideResult(0);
                 break;*/
+            case "TaskDialog_Changes_Not_Saved":
+                e.OverrideResult(1003); // Не сохранять проект
+                break;
+            case "TaskDialog_Close_Project_Without_Saving":
+                e.OverrideResult(1001); // Освободить все элементы и рабочие наборы
+                break;
             case "Dialog_Revit_JournalAbort":
             case "TaskDialog_Calculation_In_Progress":
             default:
