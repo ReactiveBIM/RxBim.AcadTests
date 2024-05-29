@@ -6,7 +6,7 @@
         <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
         <NoWarn>CS0618</NoWarn>
         <PlatformTarget>x64</PlatformTarget>
-        <Version>1.0.5</Version>
+        <Version>1.0.5-dev001</Version>
         <NoWarn>NU1701</NoWarn>
     </PropertyGroup>
 
