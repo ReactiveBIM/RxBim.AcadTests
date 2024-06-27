@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Build Schema",
   "$ref": "#/definitions/build",
+  "title": "Build Schema",
   "definitions": {
     "build": {
       "type": "object",
@@ -12,7 +12,7 @@
         },
         "AllPackages": {
           "type": "boolean",
-          "description": "All projects"
+          "description": "If true, selects all packages to build. Otherwise, you will be prompted to select packages to build"
         },
         "Cert": {
           "type": "string",
@@ -86,7 +86,7 @@
         },
         "Packages": {
           "type": "array",
-          "description": "Project name list",
+          "description": "Package names list",
           "items": {
             "type": "string"
           }
@@ -114,10 +114,6 @@
           "type": "string",
           "description": "Select project"
         },
-        "ReleaseMessage": {
-          "type": "string",
-          "description": "The message for the release tag"
-        },
         "Root": {
           "type": "string",
           "description": "Root directory during build execution"
@@ -125,6 +121,10 @@
         "RxBimEnvironment": {
           "type": "string",
           "description": "Environment variable"
+        },
+        "SeriesMaxAny": {
+          "type": "boolean",
+          "description": "Supports any maximum version of CAD"
         },
         "ServerUrl": {
           "type": "string",
@@ -136,6 +136,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "AddPublishTags",
               "BuildFromTag",
               "BuildInnoExe",
               "BuildMsi",
@@ -146,13 +147,16 @@
               "CleanWorkDir",
               "Compile",
               "CompileToTemp",
+              "DeleteLocalPacks",
+              "Develop",
               "GenerateAdditionalFiles",
               "GeneratePackageContentsFile",
               "GenerateProjectProps",
               "InstallWixTools",
               "IntegrationTests",
-              "List",
               "Pack",
+              "PackagesList",
+              "PackLocal",
               "Prerelease",
               "Publish",
               "Release",
@@ -174,6 +178,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "AddPublishTags",
               "BuildFromTag",
               "BuildInnoExe",
               "BuildMsi",
@@ -184,13 +189,16 @@
               "CleanWorkDir",
               "Compile",
               "CompileToTemp",
+              "DeleteLocalPacks",
+              "Develop",
               "GenerateAdditionalFiles",
               "GeneratePackageContentsFile",
               "GenerateProjectProps",
               "InstallWixTools",
               "IntegrationTests",
-              "List",
               "Pack",
+              "PackagesList",
+              "PackLocal",
               "Prerelease",
               "Publish",
               "Release",

@@ -1,15 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
 using AcadTests.Nuke.Components;
-using AcadTests.Nuke.Services;
 using Bimlab.Nuke.Components;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
-using Nuke.Common.ProjectModel;
-using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.Git;
 using RxBim.Nuke.AutoCAD;
@@ -46,15 +40,15 @@ public class Build : AutocadRxBimBuild, IPublish, IRunIntegrationTests
             .Executes(() =>
             {
                 DotNetTest(settings => settings
-                    .SetProjectFile(From<IHazSolution>().Solution.Path)
-                    .SetConfiguration(From<IHazConfiguration>().Configuration)
+                    .SetProjectFile(From<IHasSolution>().Solution.Path)
+                    .SetConfiguration(From<IHasConfiguration>().Configuration)
                     .SetFilter("FullyQualifiedName!~IntegrationTests"));
             });
 
     /// <summary>
     ///     Main
     /// </summary>
-    public static int Main() => Execute<Build>(x => x.From<IPublish>().List);
+    public static int Main() => Execute<Build>(x => x.From<IPublish>().PackagesList);
 
     Target CleanWorkDir =>
         targetDefinition => targetDefinition
