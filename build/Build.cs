@@ -48,7 +48,7 @@ public class Build : AutocadRxBimBuild, IPublish, IRunIntegrationTests
     /// <summary>
     ///     Main
     /// </summary>
-    public static int Main() => Execute<Build>(x => x.From<IPublish>().List);
+    public static int Main() => Execute<Build>(x => x.From<IPublish>().PackagesList);
 
     Target CleanWorkDir =>
         targetDefinition => targetDefinition
