@@ -33,7 +33,7 @@
         <Company>pik-group.com</Company>
         <Authors>Reactive BIM</Authors>
         <Product>AcadTestFramework</Product>
-        <Copyright>Copyright ©2023 Reactive BIM</Copyright>
+        <Copyright>Copyright ©2024 Reactive BIM</Copyright>
         <PackageTags>Acad test framework</PackageTags>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <PackageProjectUrl>https://github.com/ReactiveBIM/RxBim.AcadTests</PackageProjectUrl>
