@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FE3062B5-3E3B-47F9-95E9-38FC380F35FE}"
 	ProjectSection(SolutionItems) = preProject
-		src\Directory.Build.Props = src\Directory.Build.Props
+		src\Directory.Build.props = src\Directory.Build.props
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxBim.Example.Autocad.IntegrationTests", "tests\RxBim.Example.Autocad.IntegrationTests\RxBim.Example.Autocad.IntegrationTests.csproj", "{9266344E-57D4-4D40-92B7-02A34A70CC88}"

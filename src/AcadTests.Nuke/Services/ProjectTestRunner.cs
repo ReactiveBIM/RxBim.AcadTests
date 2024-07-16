@@ -39,8 +39,9 @@ public class ProjectTestRunner
         var assemblyName = project.Name + ".dll";
         var assemblyPath = outputDirectory / assemblyName;
         var xmlResultPath = outputDirectory / "result.xml";
+        var arguments = $@"-a {assemblyPath} -r {xmlResultPath} -v 2019{(isDebug ? " -d" : string.Empty)}";
         ProcessTasks
-            .StartProcess(testTool, $@"-a {assemblyPath} -r {xmlResultPath} -v 2019{(isDebug ? " -d" : string.Empty)}")
+            .StartProcess(testTool, arguments)
             .WaitForExit();
         var htmlResultPath = outputDirectory / "result.html";
 
