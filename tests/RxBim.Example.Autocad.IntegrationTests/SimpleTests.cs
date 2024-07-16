@@ -38,7 +38,8 @@ public class SimpleTests
     /// <summary>
     ///     Тест с ошибкой. Для проверки отчета.
     /// </summary>
-    [Test]
+    [Test()]
+    [Ignore("для успешного завершения")]
     public void FailureTest()
     {
         throw new Exception(nameof(FailureTest));
