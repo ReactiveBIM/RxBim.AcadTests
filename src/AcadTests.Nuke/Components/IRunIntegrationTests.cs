@@ -11,7 +11,7 @@ using Services;
 /// Contains targets for running integration tests.
 /// </summary>
 [PublicAPI]
-public interface IRunIntegrationTests : IHazSolution
+public interface IRunIntegrationTests : IHasSolution
 {
     /// <summary>
     /// TestProjectProvider.
