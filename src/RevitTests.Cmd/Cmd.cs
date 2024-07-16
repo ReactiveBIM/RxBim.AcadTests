@@ -46,15 +46,6 @@ public class Cmd : RxBimCommand
             var result = RunTests(assembly, testAssemblyRunner, testFilter, testListener);
             SendResults(acadTestClient, result);
 
-            // не работает
-            /*while (uiApplication.Application.Documents
-                   .Cast<Document>()
-                   .Any(doc => doc.IsBackgroundCalculationInProgress()))
-            {
-                Thread.Sleep(1000);
-                uiApplication.Application.WriteJournalComment("Thread.Sleep", true);
-            }*/
-
             foreach (var revitWorker in Process.GetProcessesByName("RevitWorker"))
             {
                 revitWorker.Kill();
@@ -97,9 +88,6 @@ public class Cmd : RxBimCommand
             case "TaskDialog_Save_File":
                 e.OverrideResult(7);
                 break;
-            /*case "TaskDialog_Command_Failure_For_Extenal_Command":
-                e.OverrideResult(0);
-                break;*/
             case "TaskDialog_Changes_Not_Saved":
                 e.OverrideResult(1003); // Не сохранять проект
                 break;
