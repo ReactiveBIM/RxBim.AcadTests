@@ -12,10 +12,6 @@
         <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    </ItemGroup>
-
     <PropertyGroup>
         <PackAsTool>true</PackAsTool>
         <Description>Revit tests framework console.</Description>
