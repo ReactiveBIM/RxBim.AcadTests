@@ -5,6 +5,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <AssemblyName>RxBim.RevitTests.Console</AssemblyName>
+        <UseCommandLineParser>true</UseCommandLineParser>
     </PropertyGroup>
 
     <ItemGroup>
