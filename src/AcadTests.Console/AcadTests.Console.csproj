@@ -4,15 +4,12 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>net6.0</TargetFramework>
         <AssemblyName>RxBim.AcadTests.Console</AssemblyName>
+        <UseCommandLineParser>true</UseCommandLineParser>
     </PropertyGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\AcadTests.ScriptUtils\AcadTests.ScriptUtils.csproj" />
         <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="CommandLineParser" Version="2.9.1" />
     </ItemGroup>
 
     <ItemGroup>
