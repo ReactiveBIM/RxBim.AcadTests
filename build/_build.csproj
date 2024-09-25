@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Nuke.Common" Version="8.0.0" />
-    <PackageReference Include="RxBim.Nuke.AutoCAD" Version="2.2.8-dev009" />
+    <PackageReference Include="RxBim.Nuke.AutoCAD" Version="2.2.9-rc001" />
   </ItemGroup>
 
   <ItemGroup>
