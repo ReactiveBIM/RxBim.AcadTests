@@ -3,6 +3,7 @@
 using AcadTests.SDK;
 using Autodesk.AutoCAD.ApplicationServices.Core;
 using JetBrains.Annotations;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework.Api;
 using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
@@ -15,17 +16,17 @@ using TestListener = Services.TestListener;
 public class Config : ICommandConfiguration
 {
     /// <inheritdoc />
-    public void Configure(IContainer container)
+    public void Configure(IServiceCollection services)
     {
-        container.AddInstance(Application.DocumentManager);
-        container.AddInstance(new AcadTestSdk().AcadTestClient);
-        container.AddSingleton<ITestListener, TestListener>();
+        services.AddSingleton(Application.DocumentManager);
+        services.AddSingleton(new AcadTestSdk().AcadTestClient);
+        services.AddSingleton<ITestListener, TestListener>();
 
-        container.AddTransient<ITestAssemblyBuilder, DefaultTestAssemblyBuilder>();
-        container.Decorate<ITestAssemblyBuilder, MyTestAssemblyBuilder>();
+        services.AddTransient<ITestAssemblyBuilder, DefaultTestAssemblyBuilder>();
+        services.Decorate<ITestAssemblyBuilder, MyTestAssemblyBuilder>();
 
-        container.AddTransient<ITestAssemblyRunner>(() =>
-            new NUnitTestAssemblyRunner(container.GetService<ITestAssemblyBuilder>()));
-        container.AddSingleton<ITestFilter>(() => TestFilter.Empty);
+        services.AddTransient<ITestAssemblyRunner>(sp =>
+            new NUnitTestAssemblyRunner(sp.GetService<ITestAssemblyBuilder>()));
+        services.AddSingleton<ITestFilter>(_ => TestFilter.Empty);
     }
 }

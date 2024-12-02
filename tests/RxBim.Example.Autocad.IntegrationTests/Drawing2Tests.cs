@@ -10,10 +10,13 @@ using RxBim.Di;
 
 namespace RxBim.Example.Autocad.IntegrationTests;
 
+using System;
+using Microsoft.Extensions.DependencyInjection;
+
 [TestFixture]
 public class Drawing1Tests
 {
-    private IContainer _container = null!;
+    private IServiceProvider _container = null!;
 
     /// <summary>
     /// Настройка тестов
@@ -23,7 +26,7 @@ public class Drawing1Tests
     {
         var testingDiConfigurator = new TestingDiConfigurator();
         testingDiConfigurator.Configure(Assembly.GetExecutingAssembly());
-        _container = testingDiConfigurator.Container;
+        _container = testingDiConfigurator.Build();
 
         var docName = "drawing2.dwg";
         var docManager = _container.GetService<DocumentCollection>();

@@ -8,6 +8,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Structure;
 using Autodesk.Revit.UI;
 using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using RevitTests.TestingUtils;
 using RxBim.Di;
@@ -29,7 +30,7 @@ public class BasisRevitTests
     {
         var configurator = new TestingDiConfigurator();
         configurator.Configure(GetType().Assembly);
-        var container = configurator.Container;
+        var container = configurator.Build();
 
         _uiApplication = container.GetService<UIApplication>();
         var modelPath = Path.Combine(Environment.CurrentDirectory, "rac_basic_sample_project.rvt");
