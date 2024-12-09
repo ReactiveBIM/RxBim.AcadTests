@@ -15,6 +15,11 @@
         {
         }
 
+        /// <summary>
+        /// Сервисы для тестов.
+        /// </summary>
+        public IServiceCollection TestServices => Services;
+
         /// <inheritdoc />
         protected override void ConfigureBaseDependencies()
         {
