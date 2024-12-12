@@ -1,10 +1,357 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "$ref": "#/definitions/build",
-  "title": "Build Schema",
   "definitions": {
-    "build": {
+    "Host": {
+      "type": "string",
+      "enum": [
+        "AppVeyor",
+        "AzurePipelines",
+        "Bamboo",
+        "Bitbucket",
+        "Bitrise",
+        "GitHubActions",
+        "GitLab",
+        "Jenkins",
+        "Rider",
+        "SpaceAutomation",
+        "TeamCity",
+        "Terminal",
+        "TravisCI",
+        "VisualStudio",
+        "VSCode"
+      ]
+    },
+    "ExecutableTarget": {
+      "type": "string",
+      "enum": [
+        "AddPublishTags",
+        "BuildFromTag",
+        "BuildInnoExe",
+        "BuildMsi",
+        "CheckCurrentBranch",
+        "CheckProductionVersion",
+        "CheckStageVersion",
+        "Clean",
+        "CleanWorkDir",
+        "Compile",
+        "CompileToTemp",
+        "DeleteLocalPacks",
+        "Develop",
+        "GenerateAdditionalFiles",
+        "GeneratePackageContentsFile",
+        "GenerateProjectProps",
+        "InstallWixTools",
+        "IntegrationTests",
+        "Pack",
+        "PackagesList",
+        "PackLocal",
+        "Prerelease",
+        "Publish",
+        "Release",
+        "Restore",
+        "SignAssemblies",
+        "TagProject",
+        "Test",
+        "UpdateTestsTool"
+      ]
+    },
+    "Project": {
       "type": "object",
+      "properties": {
+        "Solution": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/Solution"
+            }
+          ]
+        },
+        "ProjectId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "TypeId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "SolutionFolder": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/SolutionFolder"
+            }
+          ]
+        },
+        "Path": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "Directory": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "Configurations": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Solution": {
+      "type": "object",
+      "properties": {
+        "Path": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "FileName": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "Directory": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "Header": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "Properties": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "ExtensibilityGlobals": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "Configurations": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "AllProjects": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        },
+        "AllSolutionFolders": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/SolutionFolder"
+          }
+        },
+        "Projects": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        },
+        "SolutionFolders": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/SolutionFolder"
+          }
+        }
+      }
+    },
+    "SolutionFolder": {
+      "type": "object",
+      "properties": {
+        "Solution": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/Solution"
+            }
+          ]
+        },
+        "ProjectId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "TypeId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "SolutionFolder": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/SolutionFolder"
+            }
+          ]
+        },
+        "Items": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "SolutionFolders": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/SolutionFolder"
+          }
+        },
+        "Projects": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        }
+      }
+    },
+    "Verbosity": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "Verbose",
+        "Normal",
+        "Minimal",
+        "Quiet"
+      ]
+    },
+    "NukeBuild": {
+      "properties": {
+        "Continue": {
+          "type": "boolean",
+          "description": "Indicates to continue a previously failed build attempt"
+        },
+        "Help": {
+          "type": "boolean",
+          "description": "Shows the help text for this build assembly"
+        },
+        "Host": {
+          "description": "Host for execution. Default is 'automatic'",
+          "$ref": "#/definitions/Host"
+        },
+        "NoLogo": {
+          "type": "boolean",
+          "description": "Disables displaying the NUKE logo"
+        },
+        "Partition": {
+          "type": "string",
+          "description": "Partition to use on CI"
+        },
+        "Plan": {
+          "type": "boolean",
+          "description": "Shows the execution plan (HTML)"
+        },
+        "Profile": {
+          "type": "array",
+          "description": "Defines the profiles to load",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Root": {
+          "type": "string",
+          "description": "Root directory during build execution"
+        },
+        "Skip": {
+          "type": "array",
+          "description": "List of targets to be skipped. Empty list skips all dependencies",
+          "items": {
+            "$ref": "#/definitions/ExecutableTarget"
+          }
+        },
+        "Target": {
+          "type": "array",
+          "description": "List of targets to be invoked. Default is '{default_target}'",
+          "items": {
+            "$ref": "#/definitions/ExecutableTarget"
+          }
+        },
+        "Verbosity": {
+          "description": "Logging verbosity during build execution. Default is 'Normal'",
+          "$ref": "#/definitions/Verbosity"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
       "properties": {
         "Algorithm": {
           "type": "string",
@@ -26,38 +373,9 @@
             "Release"
           ]
         },
-        "Continue": {
-          "type": "boolean",
-          "description": "Indicates to continue a previously failed build attempt"
-        },
         "Csp": {
           "type": "string",
           "description": "CSP containing for Private key"
-        },
-        "Help": {
-          "type": "boolean",
-          "description": "Shows the help text for this build assembly"
-        },
-        "Host": {
-          "type": "string",
-          "description": "Host for execution. Default is 'automatic'",
-          "enum": [
-            "AppVeyor",
-            "AzurePipelines",
-            "Bamboo",
-            "Bitbucket",
-            "Bitrise",
-            "GitHubActions",
-            "GitLab",
-            "Jenkins",
-            "Rider",
-            "SpaceAutomation",
-            "TeamCity",
-            "Terminal",
-            "TravisCI",
-            "VisualStudio",
-            "VSCode"
-          ]
         },
         "IgnoreFailedSources": {
           "type": "boolean",
@@ -67,18 +385,22 @@
           "type": "boolean",
           "description": "Is debug mode"
         },
-        "NoLogo": {
-          "type": "boolean",
-          "description": "Disables displaying the NUKE logo"
-        },
         "NugetApiKey": {
           "type": "string",
           "description": "Nuget API key",
           "default": "Secrets must be entered via 'nuke :secrets [profile]'"
         },
+        "NugetConfigRoot": {
+          "type": "string",
+          "description": "NuGet config root"
+        },
         "NugetSource": {
           "type": "string",
           "description": "NuGet source URL"
+        },
+        "NugetSourceName": {
+          "type": "string",
+          "description": "NuGet source name"
         },
         "OnlySelectedProjects": {
           "type": "boolean",
@@ -91,32 +413,13 @@
             "type": "string"
           }
         },
-        "Partition": {
-          "type": "string",
-          "description": "Partition to use on CI"
-        },
-        "Plan": {
-          "type": "boolean",
-          "description": "Shows the execution plan (HTML)"
-        },
         "PrivateKey": {
           "type": "string",
           "description": "Private key container"
         },
-        "Profile": {
-          "type": "array",
-          "description": "Defines the profiles to load",
-          "items": {
-            "type": "string"
-          }
-        },
         "Project": {
           "type": "string",
           "description": "Select project"
-        },
-        "Root": {
-          "type": "string",
-          "description": "Root directory during build execution"
         },
         "RxBimEnvironment": {
           "type": "string",
@@ -130,91 +433,15 @@
           "type": "string",
           "description": "Timestamp server URL"
         },
-        "Skip": {
-          "type": "array",
-          "description": "List of targets to be skipped. Empty list skips all dependencies",
-          "items": {
-            "type": "string",
-            "enum": [
-              "AddPublishTags",
-              "BuildFromTag",
-              "BuildInnoExe",
-              "BuildMsi",
-              "CheckCurrentBranch",
-              "CheckProductionVersion",
-              "CheckStageVersion",
-              "Clean",
-              "CleanWorkDir",
-              "Compile",
-              "CompileToTemp",
-              "DeleteLocalPacks",
-              "Develop",
-              "GenerateAdditionalFiles",
-              "GeneratePackageContentsFile",
-              "GenerateProjectProps",
-              "InstallWixTools",
-              "IntegrationTests",
-              "Pack",
-              "PackagesList",
-              "PackLocal",
-              "Prerelease",
-              "Publish",
-              "Release",
-              "Restore",
-              "SignAssemblies",
-              "TagProject",
-              "Test",
-              "UpdateTestsTool"
-            ]
-          }
-        },
         "Solution": {
           "type": "string",
           "description": "Path to a solution file that is automatically loaded"
-        },
-        "Target": {
-          "type": "array",
-          "description": "List of targets to be invoked. Default is '{default_target}'",
-          "items": {
-            "type": "string",
-            "enum": [
-              "AddPublishTags",
-              "BuildFromTag",
-              "BuildInnoExe",
-              "BuildMsi",
-              "CheckCurrentBranch",
-              "CheckProductionVersion",
-              "CheckStageVersion",
-              "Clean",
-              "CleanWorkDir",
-              "Compile",
-              "CompileToTemp",
-              "DeleteLocalPacks",
-              "Develop",
-              "GenerateAdditionalFiles",
-              "GeneratePackageContentsFile",
-              "GenerateProjectProps",
-              "InstallWixTools",
-              "IntegrationTests",
-              "Pack",
-              "PackagesList",
-              "PackLocal",
-              "Prerelease",
-              "Publish",
-              "Release",
-              "Restore",
-              "SignAssemblies",
-              "TagProject",
-              "Test",
-              "UpdateTestsTool"
-            ]
-          }
         },
         "TestProjects": {
           "type": "array",
           "description": "Collection of test projects",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Project"
           }
         },
         "TestToolName": {
@@ -232,18 +459,11 @@
         "TimestampRevisionVersion": {
           "type": "boolean",
           "description": "Adds timestamp revision version"
-        },
-        "Verbosity": {
-          "type": "string",
-          "description": "Logging verbosity during build execution. Default is 'Normal'",
-          "enum": [
-            "Minimal",
-            "Normal",
-            "Quiet",
-            "Verbose"
-          ]
         }
       }
+    },
+    {
+      "$ref": "#/definitions/NukeBuild"
     }
-  }
+  ]
 }

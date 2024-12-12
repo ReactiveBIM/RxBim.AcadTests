@@ -3,6 +3,7 @@
     using AcadTests.TestingUtils.Di;
     using Cmd;
     using JetBrains.Annotations;
+    using Microsoft.Extensions.DependencyInjection;
     using RxBim.Di;
 
     /// <inheritdoc />
@@ -14,15 +15,20 @@
         {
         }
 
+        /// <summary>
+        /// Сервисы для тестов.
+        /// </summary>
+        public IServiceCollection TestServices => Services;
+
         /// <inheritdoc />
         protected override void ConfigureBaseDependencies()
         {
             var uiApp = RevitContext.UiApplication!;
-            Container
-                .AddInstance(uiApp)
-                .AddInstance(uiApp.Application)
-                .AddTransient(() => uiApp.ActiveUIDocument)
-                .AddTransient(() => uiApp.ActiveUIDocument.Document);
+            Services
+                .AddSingleton(uiApp)
+                .AddSingleton(uiApp.Application)
+                .AddTransient(_ => uiApp.ActiveUIDocument)
+                .AddTransient(_ => uiApp.ActiveUIDocument.Document);
         }
     }
 }

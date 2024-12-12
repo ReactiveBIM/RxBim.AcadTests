@@ -6,6 +6,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Di;
 using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using RevitTests.TestingUtils;
 
@@ -23,7 +24,7 @@ public class RevitFamilyFileTests
     {
         var configurator = new TestingDiConfigurator();
         configurator.Configure(GetType().Assembly);
-        var container = configurator.Container;
+        var container = configurator.Build();
 
         _uiApplication = container.GetService<UIApplication>();
         var modelPath = Path.Combine(Environment.CurrentDirectory, "rac_basic_sample_family.rfa");

@@ -1,6 +1,7 @@
 ﻿namespace AcadTests.TestingUtils.Di;
 
 using Autodesk.AutoCAD.ApplicationServices.Core;
+using Microsoft.Extensions.DependencyInjection;
 using RxBim.Di;
 
 /// <inheritdoc />
@@ -14,10 +15,10 @@ public class TestingDiConfigurator : DiConfigurator<ITestConfiguration>
     /// <inheritdoc />
     protected override void ConfigureBaseDependencies()
     {
-        Container
-            .AddInstance(Application.DocumentManager)
-            .AddInstance(Application.DocumentManager.MdiActiveDocument)
-            .AddInstance(Application.DocumentManager.MdiActiveDocument.Database)
-            .AddInstance(Application.DocumentManager.MdiActiveDocument.Editor);
+        Services
+            .AddSingleton(Application.DocumentManager)
+            .AddSingleton(Application.DocumentManager.MdiActiveDocument)
+            .AddSingleton(Application.DocumentManager.MdiActiveDocument.Database)
+            .AddSingleton(Application.DocumentManager.MdiActiveDocument.Editor);
     }
 }
