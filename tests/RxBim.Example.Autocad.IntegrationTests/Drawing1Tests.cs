@@ -2,6 +2,7 @@ using System.Linq;
 
 namespace RxBim.Example.Autocad.IntegrationTests;
 
+using System;
 using System.IO;
 using System.Reflection;
 using AcadTests.TestingUtils.Di;
@@ -9,6 +10,7 @@ using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
 using Di;
 using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 
 /// <summary>
@@ -25,7 +27,7 @@ public class OtherTests
     {
         var testingDiConfigurator = new TestingDiConfigurator();
         testingDiConfigurator.Configure(Assembly.GetExecutingAssembly());
-        _container = testingDiConfigurator.Container;
+        _container = testingDiConfigurator.Build();
         var docName = "drawing1.dwg";
         var docManager = _container.GetService<DocumentCollection>();
         var drawingPath = GetDrawingPath(docName);
@@ -44,7 +46,7 @@ public class OtherTests
         
     }
 
-    private IContainer _container = null!;
+    private IServiceProvider _container = null!;
 
     /// <summary>
     /// Тест на получение объектов из чертежа.

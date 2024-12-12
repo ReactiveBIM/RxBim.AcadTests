@@ -3,7 +3,6 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <NoWarn>NU1702</NoWarn>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
