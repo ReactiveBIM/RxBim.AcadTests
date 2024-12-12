@@ -18,8 +18,8 @@ public class Config : ICommandConfiguration
     /// <inheritdoc />
     public void Configure(IServiceCollection services)
     {
-        services.AddSingleton(Application.DocumentManager);
-        services.AddSingleton(new AcadTestSdk().AcadTestClient);
+        services.AddSingleton(_ => Application.DocumentManager);
+        services.AddSingleton(_ => new AcadTestSdk().AcadTestClient);
         services.AddSingleton<ITestListener, TestListener>();
 
         services.AddTransient<ITestAssemblyBuilder, DefaultTestAssemblyBuilder>();

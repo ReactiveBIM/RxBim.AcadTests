@@ -15,7 +15,7 @@ public class Config : ICommandConfiguration
     /// <inheritdoc />
     public void Configure(IServiceCollection services)
     {
-        services.AddSingleton(new AcadTestSdk().AcadTestClient);
+        services.AddSingleton(_ => new AcadTestSdk().AcadTestClient);
         services.AddSingleton<ITestListener, TestListener>();
         services.AddTransient<ITestAssemblyBuilder, DefaultTestAssemblyBuilder>();
         services.AddTransient<ITestAssemblyRunner>(sp =>
