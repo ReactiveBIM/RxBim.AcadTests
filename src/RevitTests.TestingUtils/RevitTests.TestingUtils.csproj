@@ -5,13 +5,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="..\AcadTests.TestingUtils\Di\ITestConfiguration.cs">
-            <Link>ITestConfiguration.cs</Link>
-        </Compile>
+        <ProjectReference Include="..\RevitTests.Cmd\RevitTests.Cmd.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\RevitTests.Cmd\RevitTests.Cmd.csproj"/>
+      <Compile Include="..\AutocadTests.TestingUtils\Di\ITestConfiguration.cs">
+        <Link>ITestConfiguration.cs</Link>
+      </Compile>
     </ItemGroup>
 
     <PropertyGroup>

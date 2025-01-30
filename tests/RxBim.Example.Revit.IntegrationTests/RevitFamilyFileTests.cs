@@ -4,7 +4,6 @@ using System;
 using System.IO;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using Di;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;

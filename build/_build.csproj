@@ -13,11 +13,13 @@
 
   <ItemGroup>
     <PackageReference Include="Nuke.Common" Version="8.1.4" />
-    <PackageReference Include="RxBim.Nuke.AutoCAD" Version="3.0.0" />
+    <PackageReference Include="RxBim.Nuke.AutoCAD" Version="3.0.1-dev001" />
+    <PackageReference Include="RxBim.Nuke.Versions" Version="3.0.1-dev001" />
+    <PackageReference Include="RxBim.Nuke.Generators" Version="3.0.1-dev001" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\AcadTests.Nuke\AcadTests.Nuke.csproj" />
+    <ProjectReference Include="..\src\Tests.Nuke\Tests.Nuke.csproj" />
   </ItemGroup>
 
   <ItemGroup>

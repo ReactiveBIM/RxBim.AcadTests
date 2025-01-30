@@ -1,6 +1,6 @@
 ﻿namespace RevitTests.TestingUtils
 {
-    using AcadTests.TestingUtils.Di;
+    using AutocadTests.TestingUtils.Di;
     using Cmd;
     using JetBrains.Annotations;
     using Microsoft.Extensions.DependencyInjection;

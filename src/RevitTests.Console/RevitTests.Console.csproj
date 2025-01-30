@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj" />
+        <ProjectReference Include="..\Tests.SDK\Tests.SDK.csproj" />
     </ItemGroup>
 
     <PropertyGroup>

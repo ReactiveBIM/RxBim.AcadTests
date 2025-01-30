@@ -1,7 +1,5 @@
 namespace RevitTests.Console.Models;
 
-using System;
-using System.IO;
 using AcadTests.SDK.Abstractions;
 using CommandLine;
 

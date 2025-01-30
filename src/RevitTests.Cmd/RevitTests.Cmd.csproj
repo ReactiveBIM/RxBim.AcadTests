@@ -7,7 +7,7 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <ProjectReference Include="..\AcadTests.SDK\AcadTests.SDK.csproj" />
+        <ProjectReference Include="..\Tests.SDK\Tests.SDK.csproj" />
     </ItemGroup>
     <PropertyGroup>
         <PackageGuid>f9e7899b-780f-4002-a8b3-3a999ba53982</PackageGuid>

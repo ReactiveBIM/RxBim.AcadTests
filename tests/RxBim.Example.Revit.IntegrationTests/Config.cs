@@ -1,7 +1,6 @@
 namespace RxBim.Example.Revit.IntegrationTests;
 
-using AcadTests.TestingUtils.Di;
-using Di;
+using AutocadTests.TestingUtils.Di;
 using Microsoft.Extensions.DependencyInjection;
 
 public class Config : ITestConfiguration

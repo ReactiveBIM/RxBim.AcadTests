@@ -1,9 +1,9 @@
 namespace RevitTests.Console.Services;
 
-using System;
+using Abstractions;
 using CommandLine;
-using RevitTests.Console.Abstractions;
-using RevitTests.Console.Models;
+using Models;
+using Console = System.Console;
 
 /// <inheritdoc />
 public class TestRunningOptionsFactory : ITestRunningOptionsFactory

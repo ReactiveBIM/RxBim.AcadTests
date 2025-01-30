@@ -1,17 +1,15 @@
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using AcadTests.TestingUtils.Di;
-using Autodesk.AutoCAD.ApplicationServices;
-using Autodesk.AutoCAD.DatabaseServices;
-using FluentAssertions;
-using NUnit.Framework;
-using RxBim.Di;
-
 namespace RxBim.Example.Autocad.IntegrationTests;
 
 using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using AutocadTests.TestingUtils.Di;
+using Autodesk.AutoCAD.ApplicationServices;
+using Autodesk.AutoCAD.DatabaseServices;
+using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using NUnit.Framework;
 
 [TestFixture]
 public class Drawing1Tests

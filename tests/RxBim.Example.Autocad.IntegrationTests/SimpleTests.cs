@@ -1,13 +1,11 @@
-﻿using Autodesk.AutoCAD.ApplicationServices.Core;
-
-namespace RxBim.Example.Autocad.IntegrationTests;
+﻿namespace RxBim.Example.Autocad.IntegrationTests;
 
 using System;
 using System.Reflection;
-using AcadTests.TestingUtils.Di;
+using AutocadTests.TestingUtils.Di;
+using Autodesk.AutoCAD.ApplicationServices.Core;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
-using Di;
 using FluentAssertions;
 using NUnit.Framework;
 

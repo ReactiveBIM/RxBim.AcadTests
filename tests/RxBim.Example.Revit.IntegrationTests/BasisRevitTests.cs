@@ -11,7 +11,6 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using RevitTests.TestingUtils;
-using RxBim.Di;
 
 /// <summary>
 /// Revit tests.

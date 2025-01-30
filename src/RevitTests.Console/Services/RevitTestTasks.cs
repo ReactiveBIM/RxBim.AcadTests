@@ -1,8 +1,6 @@
 namespace RevitTests.Console.Services;
 
 using System.Diagnostics;
-using System.IO.Compression;
-using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
 using AcadTests.SDK;

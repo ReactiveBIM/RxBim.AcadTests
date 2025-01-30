@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <UseAcadCommand>true</UseAcadCommand>
+        <UseTestEnvitonment>true</UseTestEnvitonment>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <ProjectReference Include="..\Tests.SDK\Tests.SDK.csproj" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <Description>The command to run the autocad tests.</Description>
+        <PackageId>RxBim.AcadTests.Cmd</PackageId>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+
+    <Target Name="ZipOutputPath" AfterTargets="Build">
+        <ZipDirectory SourceDirectory="$(OutputPath)" DestinationFile="$(MSBuildProjectDirectory)\acadCmd.zip" Overwrite="true" />
+    </Target>
+</Project>
