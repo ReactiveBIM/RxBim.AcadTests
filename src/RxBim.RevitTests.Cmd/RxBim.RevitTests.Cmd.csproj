@@ -4,6 +4,7 @@
     <PropertyGroup>
         <UseRevitCommand>true</UseRevitCommand>
         <UseTestEnvitonment>true</UseTestEnvitonment>
+        <AssemblyName>$(MSBuildProjectName).$(ApplicationVersion)</AssemblyName>
     </PropertyGroup>
     
     <ItemGroup>

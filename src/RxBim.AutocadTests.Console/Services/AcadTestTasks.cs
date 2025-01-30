@@ -42,7 +42,7 @@ public class AcadTestTasks
                     .SetFiledia(false)
                     .SetSecureLoad(false)
                     .NetLoadCommand(
-                        Path.Combine(workDir, "AcadTests.Cmd.dll"))
+                        Path.Combine(workDir, $"RxBim.AcadTests.Cmd.{options.AcadVersion}.dll"))
                     .AddCommand("AutocadTestFrameworkCommand")
                     .SetSecureLoad(true)
                     .SetFiledia(true)

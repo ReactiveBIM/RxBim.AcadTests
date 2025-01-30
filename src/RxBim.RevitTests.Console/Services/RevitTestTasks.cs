@@ -28,7 +28,7 @@ public class RevitTestTasks
             var server = new AcadTestSdk().AcadTestServer;
             var serverTask = server.Start(options, cancellationToken);
             var workDir = Path.GetDirectoryName(options.AssemblyPath)!;
-            CreateAddIn(workDir);
+            CreateAddIn(workDir, options);
             var journal = CreateJournal(workDir);
             await Run(journal, options, cancellationToken);
             var testResults = await serverTask;
@@ -40,9 +40,9 @@ public class RevitTestTasks
         }
     }
 
-    private string CreateAddIn(string workDir)
+    private string CreateAddIn(string workDir, TestRunningOptions options)
     {
-        var assemblyPath = Path.Combine(workDir, "RevitTests.Cmd.dll");
+        var assemblyPath = Path.Combine(workDir, $"RxBim.RevitTests.Cmd.{options.RevitVersion}.dll");
         var addins = new XElement("RevitAddIns");
         var addin = new XElement("AddIn", new XAttribute("Type", "Command"));
         addin.Add(new XElement("Text", "Revit tests sample"));

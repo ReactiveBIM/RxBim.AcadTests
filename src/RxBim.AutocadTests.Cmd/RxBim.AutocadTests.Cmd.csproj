@@ -3,6 +3,7 @@
     <PropertyGroup>
         <UseAcadCommand>true</UseAcadCommand>
         <UseTestEnvitonment>true</UseTestEnvitonment>
+        <AssemblyName>$(MSBuildProjectName).$(ApplicationVersion)</AssemblyName>
     </PropertyGroup>
     
     <ItemGroup>
