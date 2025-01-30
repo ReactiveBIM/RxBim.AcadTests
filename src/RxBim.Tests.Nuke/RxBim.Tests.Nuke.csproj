@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseNuke>true</UseNuke>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Models\Result.cshtml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+    </ItemGroup>
+
+    <PropertyGroup>
+        <Description>Nuke utils for runing tests.</Description>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+</Project>

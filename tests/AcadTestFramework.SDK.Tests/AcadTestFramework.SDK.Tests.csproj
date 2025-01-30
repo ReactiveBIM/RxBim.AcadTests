@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Tests.SDK\Tests.SDK.csproj" />
+        <ProjectReference Include="..\..\src\RxBim.Tests.SDK\RxBim.Tests.SDK.csproj" />
     </ItemGroup>
 
 </Project>

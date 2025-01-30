@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Tests.Nuke\Tests.Nuke.csproj" />
+      <ProjectReference Include="..\..\src\RxBim.Tests.Nuke\RxBim.Tests.Nuke.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Description>Autocad tests SDK.</Description>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+
+</Project>

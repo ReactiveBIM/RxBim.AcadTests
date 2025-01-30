@@ -18,6 +18,9 @@ public class RevitFamilyFileTests
     private Document _document;
     private UIApplication _uiApplication;
 
+    /// <summary>
+    /// Настройки.
+    /// </summary>
     [OneTimeSetUp]
     public void Setup()
     {
@@ -31,6 +34,9 @@ public class RevitFamilyFileTests
         _document = container.GetService<Document>();
     }
 
+    /// <summary>
+    /// Тест документа.
+    /// </summary>
     [Test]
     public void IsFamilyDocTest()
     {

@@ -1,6 +1,5 @@
 using System;
 using System.Text;
-using Tests.Nuke.Components;
 using Bimlab.Nuke.Components;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
@@ -8,6 +7,8 @@ using Nuke.Common.Execution;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.Git;
 using RxBim.Nuke.AutoCAD;
+using RxBim.Nuke.Versions;
+using RxBim.Tests.Nuke.Components;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 /// <inheritdoc cref="RxBim.Nuke.AutoCAD.AutocadRxBimBuild" />
@@ -51,6 +52,7 @@ public partial class Build : AutocadRxBimBuild, IRunIntegrationTests
     const string FeatureBranches = "feature/**";
     const string BugfixBranches = "bugfix/**";
 
+    /// <inheritdoc />
     public Build()
     {
         Console.OutputEncoding = Encoding.UTF8;
@@ -82,6 +84,8 @@ public partial class Build : AutocadRxBimBuild, IRunIntegrationTests
             {
                 GitTasks.Git("reset --hard");
             });
+
+    string IVersionBuild.ProjectNamePrefix => "RxBim.";
 
     T From<T>()
         where T : INukeBuild =>

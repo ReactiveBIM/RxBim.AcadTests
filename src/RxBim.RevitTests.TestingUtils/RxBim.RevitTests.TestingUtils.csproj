@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <UseDi>true</UseDi>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\RxBim.RevitTests.Cmd\RxBim.RevitTests.Cmd.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="..\RxBim.AutocadTests.TestingUtils\Di\ITestConfiguration.cs">
+        <Link>ITestConfiguration.cs</Link>
+      </Compile>
+    </ItemGroup>
+
+    <PropertyGroup>
+        <Description>Revit tests DI utils.</Description>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+
+</Project>

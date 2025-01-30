@@ -1,8 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <PlatformTarget>x64</PlatformTarget>
-        <TargetFramework>net472</TargetFramework>
         <UseDi>true</UseDi>
         <PreserveCompilationContext>true</PreserveCompilationContext>
     </PropertyGroup>
@@ -12,7 +10,7 @@
         <PackageReference Include="NUnit" Version="3.13.3" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\..\src\AutocadTests.TestingUtils\AutocadTests.TestingUtils.csproj" />
+        <ProjectReference Include="..\..\src\RxBim.AutocadTests.TestingUtils\RxBim.AutocadTests.TestingUtils.csproj" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="drawing1.dwg">
@@ -22,10 +20,7 @@
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
     </ItemGroup>
-    <ItemGroup>
+    <ItemGroup Condition="'$(ApplicationVersion)' != '2025'">
         <Reference Include="WindowsBase" />
     </ItemGroup>
-
-    <Import Project=".\RxBim.Build.Props" Condition="Exists('.\RxBim.Build.Props')" />
-
 </Project>

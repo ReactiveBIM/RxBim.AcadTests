@@ -11,6 +11,9 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 
+/// <summary>
+/// Тесты.
+/// </summary>
 [TestFixture]
 public class Drawing1Tests
 {
