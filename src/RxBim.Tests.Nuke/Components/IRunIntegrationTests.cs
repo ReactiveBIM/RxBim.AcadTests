@@ -90,7 +90,7 @@ public interface IRunIntegrationTests : IHasSolution
     /// </summary>
     Target IntegrationTests =>
         definition => definition
-            .DependsOn(UpdateTestsTool)
+            /*.DependsOn(UpdateTestsTool)*/
             .Description("Starts execution of integration tests")
             .Executes(async () =>
             {
