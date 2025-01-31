@@ -12,7 +12,7 @@ using Console = System.Console;
 /// </summary>
 public class RevitTestTasks
 {
-    private const string CommandName = "RevitTests.Cmd.Cmd";
+    private const string CommandName = "RxBim.RevitTests.Cmd.Cmd";
 
     /// <summary>
     ///     Запускает тестирование.
