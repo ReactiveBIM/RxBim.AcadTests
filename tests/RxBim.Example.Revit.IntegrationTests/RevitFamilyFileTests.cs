@@ -4,7 +4,6 @@ using System;
 using System.IO;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using Di;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
@@ -19,6 +18,9 @@ public class RevitFamilyFileTests
     private Document _document;
     private UIApplication _uiApplication;
 
+    /// <summary>
+    /// Настройки.
+    /// </summary>
     [OneTimeSetUp]
     public void Setup()
     {
@@ -32,6 +34,9 @@ public class RevitFamilyFileTests
         _document = container.GetService<Document>();
     }
 
+    /// <summary>
+    /// Тест документа.
+    /// </summary>
     [Test]
     public void IsFamilyDocTest()
     {

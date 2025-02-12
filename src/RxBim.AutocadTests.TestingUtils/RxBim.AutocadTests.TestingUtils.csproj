@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <UseDi>true</UseDi>
+        <UseAcadCommand>true</UseAcadCommand>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Description>Autocad tests DI utils.</Description>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+</Project>

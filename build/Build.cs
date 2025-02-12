@@ -1,33 +1,58 @@
 using System;
 using System.Text;
-using AcadTests.Nuke.Components;
 using Bimlab.Nuke.Components;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
+using Nuke.Common.Execution;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.Git;
 using RxBim.Nuke.AutoCAD;
+using RxBim.Nuke.Versions;
+using RxBim.Tests.Nuke.Components;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 /// <inheritdoc cref="RxBim.Nuke.AutoCAD.AutocadRxBimBuild" />
+[UnsetVisualStudioEnvironmentVariables]
 [GitHubActions("CI",
     GitHubActionsImage.WindowsLatest,
     FetchDepth = 0,
-    OnPushBranches = new[] { DevelopBranch, FeatureBranches },
-    InvokedTargets = new[] { nameof(Test), nameof(IPublish.Publish) },
-    ImportSecrets = new[] { "NUGET_API_KEY", "ALL_PACKAGES" })]
+    OnPushBranches = new[]
+    {
+        DevelopBranch, FeatureBranches, BugfixBranches
+    },
+    InvokedTargets = new[]
+    {
+        nameof(Test), nameof(IPublish.Publish)
+    },
+    ImportSecrets = new[]
+    {
+        "NUGET_API_KEY", "ALL_PACKAGES"
+    })]
 [GitHubActions("Publish",
     GitHubActionsImage.WindowsLatest,
     FetchDepth = 0,
-    OnPushBranches = new[] { MasterBranch, "release/**" },
-    InvokedTargets = new[] { nameof(Test), nameof(IPublish.Publish) },
-    ImportSecrets = new[] { "NUGET_API_KEY", "ALL_PACKAGES" })]
-public class Build : AutocadRxBimBuild, IPublish, IRunIntegrationTests
+    OnPushBranches = new[]
+    {
+        MasterBranch, ReleaseBranches, HotfixBranches
+    },
+    InvokedTargets = new[]
+    {
+        nameof(Test), nameof(IPublish.Publish)
+    },
+    ImportSecrets = new[]
+    {
+        "NUGET_API_KEY", "ALL_PACKAGES"
+    })]
+public partial class Build : AutocadRxBimBuild, IRunIntegrationTests
 {
     const string MasterBranch = "master";
     const string DevelopBranch = "develop";
+    const string ReleaseBranches = "release/**";
+    const string HotfixBranches = "hotfix/**";
     const string FeatureBranches = "feature/**";
+    const string BugfixBranches = "bugfix/**";
 
+    /// <inheritdoc />
     public Build()
     {
         Console.OutputEncoding = Encoding.UTF8;
@@ -59,6 +84,8 @@ public class Build : AutocadRxBimBuild, IPublish, IRunIntegrationTests
             {
                 GitTasks.Git("reset --hard");
             });
+
+    string IVersionBuild.ProjectNamePrefix => "RxBim.";
 
     T From<T>()
         where T : INukeBuild =>

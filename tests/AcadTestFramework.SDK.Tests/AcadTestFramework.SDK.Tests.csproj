@@ -3,7 +3,6 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
@@ -14,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\AcadTests.SDK\AcadTests.SDK.csproj" />
+        <ProjectReference Include="..\..\src\RxBim.Tests.SDK\RxBim.Tests.SDK.csproj" />
     </ItemGroup>
 
 </Project>
