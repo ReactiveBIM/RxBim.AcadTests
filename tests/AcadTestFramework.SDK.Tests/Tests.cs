@@ -3,10 +3,10 @@ namespace AcadTestFramework.SDK.Tests;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AcadTests.SDK;
-using AcadTests.SDK.Helpers;
 using FluentAssertions;
 using NUnit.Framework;
+using RxBim.Tests.SDK;
+using RxBim.Tests.SDK.Helpers;
 
 /// <summary>
 ///     Тесты

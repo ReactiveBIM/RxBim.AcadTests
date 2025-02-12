@@ -11,7 +11,6 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using RevitTests.TestingUtils;
-using RxBim.Di;
 
 /// <summary>
 /// Revit tests.
@@ -52,7 +51,11 @@ public class BasisRevitTests
     [Test]
     public void ReadPropertiesTest()
     {
+#if !RVT2024 && !RVT2025
         var sampleChair = _document.GetElement(new ElementId(990317)) as FamilyInstance;
+#else
+        var sampleChair = _document.GetElement(new ElementId((long)990317)) as FamilyInstance;
+#endif
         var lp = sampleChair?.Location as LocationPoint;
         lp.Should().NotBeNull();
         lp!.Point.Z.Should().BeApproximately(0, 1e-6);
@@ -113,7 +116,11 @@ public class BasisRevitTests
     public void CreateFamilyInstanceTest()
     {
         using var tr = new Transaction(_document, "CreateChain");
+#if !RVT2024 && !RVT2025
         var fs = _document.GetElement(new ElementId(990191)) as FamilySymbol;
+#else
+        var fs = _document.GetElement(new ElementId((long)990191)) as FamilySymbol;
+#endif
         tr.Start();
         var newChain = _document.Create.NewFamilyInstance(
             new XYZ(-8.93862219885585, 6.15996740717654, 0),

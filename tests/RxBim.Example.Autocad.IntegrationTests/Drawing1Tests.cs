@@ -1,14 +1,11 @@
-using System.Linq;
-
 namespace RxBim.Example.Autocad.IntegrationTests;
 
 using System;
 using System.IO;
 using System.Reflection;
-using AcadTests.TestingUtils.Di;
+using AutocadTests.TestingUtils.Di;
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
-using Di;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
