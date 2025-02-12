@@ -25,14 +25,18 @@
         </PackageReference>
     </ItemGroup>
 
+    <PropertyGroup>
+        <RxBimVersion>3.0.1-dev001</RxBimVersion>
+    </PropertyGroup>
+
     <ItemGroup Condition=" '$(UseDi)' == 'true' ">
-        <PackageReference Include="RxBim.Di" Version="3.0.1-dev001" />
+        <PackageReference Include="RxBim.Di" Version="$(RxBimVersion)" />
     </ItemGroup>
     <ItemGroup Condition=" '$(UseAcadCommand)' == 'true' ">
-        <PackageReference Include="RxBim.Command.Autocad.$(ApplicationVersion)" Version="3.0.1-dev001" />
+        <PackageReference Include="RxBim.Command.Autocad.$(ApplicationVersion)" Version="$(RxBimVersion)" />
     </ItemGroup>
     <ItemGroup Condition=" '$(UseRevitCommand)' == 'true' ">
-        <PackageReference Include="RxBim.Command.Revit.$(ApplicationVersion)" Version="3.0.1-dev001" />
+        <PackageReference Include="RxBim.Command.Revit.$(ApplicationVersion)" Version="$(RxBimVersion)" />
     </ItemGroup>
     <ItemGroup Condition=" '$(UseCommandLineParser)' == 'true' ">
         <PackageReference Include="CommandLineParser" Version="2.9.1" />
