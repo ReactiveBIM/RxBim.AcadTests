@@ -30,6 +30,12 @@ public interface IRunIntegrationTests : IHasSolution
     bool OnlySelectedProjects => TryGetValue<bool?>(() => OnlySelectedProjects) ?? false;
 
     /// <summary>
+    /// App version
+    /// </summary>
+    [Parameter]
+    string AppVersion => TryGetValue<string?>(() => AppVersion) ?? "2019";
+
+    /// <summary>
     /// Test runner tool
     /// </summary>
     [Parameter("Test runner tool")]
@@ -90,13 +96,13 @@ public interface IRunIntegrationTests : IHasSolution
     /// </summary>
     Target IntegrationTests =>
         definition => definition
-            /*.DependsOn(UpdateTestsTool)*/
+            .DependsOn(UpdateTestsTool)
             .Description("Starts execution of integration tests")
             .Executes(async () =>
             {
                 foreach (var project in TestProjects)
                 {
-                    await ProjectTestRunner.RunTests(project, TestToolName, IsDebug);
+                    await ProjectTestRunner.RunTests(project, TestToolName, IsDebug, AppVersion);
                 }
             });
 }

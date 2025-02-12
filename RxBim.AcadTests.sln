@@ -21,6 +21,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxBim.Example.Autocad.IntegrationTests", "tests\RxBim.Example.Autocad.IntegrationTests\RxBim.Example.Autocad.IntegrationTests.csproj", "{9266344E-57D4-4D40-92B7-02A34A70CC88}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{005A1D66-EF42-4E92-8470-4B736151EB90}"
+	ProjectSection(SolutionItems) = preProject
+		tests\Directory.Build.props = tests\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxBim.Tests.SDK", "src\RxBim.Tests.SDK\RxBim.Tests.SDK.csproj", "{91361B2A-889E-44BC-A4A6-CDAF4FBCAD1C}"
 EndProject
