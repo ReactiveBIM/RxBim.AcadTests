@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
         <PlatformTarget>x64</PlatformTarget>
-        <Version>1.2.0</Version>
+        <Version>1.2.1</Version>
         <NoWarn>NU1901;NU1902;NU1903;NU1904;CS8618</NoWarn>
     </PropertyGroup>
 
@@ -26,7 +26,7 @@
     </ItemGroup>
 
     <PropertyGroup>
-        <RxBimVersion>3.0.1-dev001</RxBimVersion>
+        <RxBimVersion>3.0.1</RxBimVersion>
     </PropertyGroup>
 
     <ItemGroup Condition=" '$(UseDi)' == 'true' ">
