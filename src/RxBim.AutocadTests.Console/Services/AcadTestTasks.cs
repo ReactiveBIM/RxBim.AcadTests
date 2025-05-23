@@ -60,7 +60,7 @@ public class AcadTestTasks
 
     private string CopyRevitCmd(string workDir)
     {
-        var zipPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, "acadCmd.zip");
+        var zipPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, "autocadCmd.zip");
         ZipFile.ExtractToDirectory(zipPath, workDir, true);
         return zipPath;
     }
