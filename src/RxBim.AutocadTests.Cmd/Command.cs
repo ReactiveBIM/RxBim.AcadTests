@@ -1,10 +1,10 @@
 ﻿namespace RxBim.AutocadTests.Cmd;
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using Autodesk.AutoCAD.EditorInput;
+using Autodesk.AutoCAD.Runtime;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using NUnit;
@@ -16,7 +16,7 @@ using Shared.Autocad;
 using Tests.SDK;
 
 /// <inheritdoc />
-[RxBimCommandClass("AutocadTestFrameworkCommand")]
+[RxBimCommandClass("AutocadTestFrameworkCommand", CommandFlags.Session)]
 [PublicAPI]
 public class Command : RxBimCommand
 {
@@ -62,7 +62,7 @@ public class Command : RxBimCommand
             SendResults(acadTestClient, result);
             return PluginResult.Succeeded;
         }
-        catch (Exception e)
+        catch (System.Exception e)
         {
             acadTestClient.SendResult(e.ToString());
             return PluginResult.Failed;
