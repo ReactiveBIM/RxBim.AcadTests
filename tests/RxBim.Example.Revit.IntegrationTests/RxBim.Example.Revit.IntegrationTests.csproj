@@ -3,11 +3,12 @@
     <PropertyGroup>
         <UseDi>true</UseDi>
         <PreserveCompilationContext>true</PreserveCompilationContext>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="FluentAssertions" Version="6.10.0" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
-        <PackageReference Include="NUnit" Version="3.13.3" />
+        <PackageReference Include="FluentAssertions" Version="8.7.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+        <PackageReference Include="NUnit" Version="4.4.0" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(ApplicationVersion)' != '2025'">
@@ -15,9 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="rac_basic_sample_project.rvt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
       <None Update="rac_basic_sample_family.rfa">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>

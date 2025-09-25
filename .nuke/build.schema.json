@@ -509,6 +509,9 @@
           "type": "boolean",
           "description": "Adds timestamp revision version"
         },
+        "Version": {
+          "type": "string"
+        },
         "VersionNumber": {
           "type": "string",
           "description": "Version number for all types of CAD applications: '2022', '2023' etc",

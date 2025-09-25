@@ -22,6 +22,11 @@ using Tests.SDK;
 [Regeneration(RegenerationOption.Manual)]
 public class Cmd : RxBimCommand
 {
+#if NETCOREAPP
+    /// <inheritdoc/>
+    protected override bool RunInSeparatedContext => false;
+#endif
+
     /// <inheritdoc />
     [UsedImplicitly]
     public PluginResult ExecuteCommand(
@@ -41,7 +46,7 @@ public class Cmd : RxBimCommand
             if (!File.Exists(assembly))
                 throw new FileNotFoundException(assembly);
 
-            Assembly.Load(typeof(RevitContext).Assembly.Location);
+            Assembly.LoadFrom(typeof(RevitContext).Assembly.Location);
             RevitContext.UiApplication = uiApplication;
             var result = RunTests(assembly, testAssemblyRunner, testFilter, testListener);
             SendResults(acadTestClient, result);
@@ -72,10 +77,11 @@ public class Cmd : RxBimCommand
         ITestFilter testFilter,
         ITestListener testListener)
     {
-        testAssemblyRunner.Load(assemblyPath,
+        var res = testAssemblyRunner.Load(
+            assemblyPath,
             new Dictionary<string, object>
             {
-                { FrameworkPackageSettings.RunOnMainThread, true },
+                { FrameworkPackageSettings.RunOnMainThread, true }
             });
         var result = testAssemblyRunner.Run(testListener, testFilter);
         return result;

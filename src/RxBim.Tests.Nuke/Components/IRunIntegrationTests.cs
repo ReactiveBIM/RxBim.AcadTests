@@ -33,7 +33,7 @@ public interface IRunIntegrationTests : IHasSolution
     /// App version
     /// </summary>
     [Parameter]
-    string AppVersion => TryGetValue<string?>(() => AppVersion) ?? "2019";
+    string Version => TryGetValue<string?>(() => Version) ?? "2019";
 
     /// <summary>
     /// Test runner tool
@@ -102,7 +102,7 @@ public interface IRunIntegrationTests : IHasSolution
             {
                 foreach (var project in TestProjects)
                 {
-                    await ProjectTestRunner.RunTests(project, TestToolName, IsDebug, AppVersion);
+                    await ProjectTestRunner.RunTests(project, TestToolName, IsDebug, Version);
                 }
             });
 }
