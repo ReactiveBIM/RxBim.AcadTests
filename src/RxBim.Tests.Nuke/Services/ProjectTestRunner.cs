@@ -44,18 +44,11 @@ public class ProjectTestRunner
         ProcessTasks
             .StartProcess(testTool, arguments)
             .WaitForExit();
-        var htmlResultPath = outputDirectory / "result.html";
+        var testResultData = await TestResultDataXmlParseService.GetTestResultData(xmlResultPath);
 
-        var testResultData = await TestResultDataXmlParseService
-            .Create()
-            .GetTestResultData(xmlResultPath);
-        var allTestsArePassed =
-            TestResultDataValidationService.Create().AreAllTestsPassed(testResultData);
-        await TestResultDataHtmlSaveService.Create()
-            .SaveResultTestData(testResultData, htmlResultPath);
-        if (!allTestsArePassed)
-        {
-            throw new Exception("Failed tests found");
-        }
+        var htmlResultPath = outputDirectory / "result.html";
+        await TestResultDataHtmlSaveService.SaveResultTestData(testResultData, htmlResultPath);
+
+        TestResultDataValidationService.ThrowIfNotAllTestsPassed(testResultData);
     }
 }

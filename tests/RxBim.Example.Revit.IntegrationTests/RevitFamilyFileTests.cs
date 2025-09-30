@@ -1,3 +1,5 @@
+using RxBim.RevitTests.TestingUtils;
+
 namespace RxBim.Example.Revit.IntegrationTests;
 
 using System;
@@ -7,7 +9,6 @@ using Autodesk.Revit.UI;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
-using RevitTests.TestingUtils;
 
 /// <summary>
 /// Tests in .rfa file

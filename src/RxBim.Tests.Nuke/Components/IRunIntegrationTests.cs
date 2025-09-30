@@ -30,28 +30,40 @@ public interface IRunIntegrationTests : IHasSolution
     bool OnlySelectedProjects => TryGetValue<bool?>(() => OnlySelectedProjects) ?? false;
 
     /// <summary>
-    /// App version
+    /// Test project names.
     /// </summary>
-    [Parameter]
-    string AppVersion => TryGetValue<string?>(() => AppVersion) ?? "2019";
+    [Parameter("Test project names")]
+    string? ProjectNames => TryGetValue(() => ProjectNames);
 
     /// <summary>
-    /// Test runner tool
+    /// App version.
+    /// </summary>
+    [Parameter]
+    string Version => TryGetValue<string?>(() => Version) ?? "2019";
+
+    /// <summary>
+    /// Test runner tool.
     /// </summary>
     [Parameter("Test runner tool")]
     TestTool TestToolName => TryGetValue(() => TestToolName) ?? TestTool.Acad;
 
     /// <summary>
-    /// Test runner tool
+    /// Test runner tool version.
     /// </summary>
     [Parameter("Test runner tool version")]
     string? TestToolVersion => TryGetValue(() => TestToolVersion);
 
     /// <summary>
-    /// Is debug mode
+    /// Is debug mode.
     /// </summary>
     [Parameter("Is debug mode")]
     bool IsDebug => TryGetValue<bool?>(() => IsDebug) ?? false;
+
+    /// <summary>
+    /// Skip update for test tool CLI.
+    /// </summary>
+    [Parameter("Skip update for test tool CLI.")]
+    bool SkipUpdateTool => TryGetValue<bool?>(() => SkipUpdateTool) ?? false;
 
     /// <summary>
     /// Collection of test projects.
@@ -65,6 +77,14 @@ public interface IRunIntegrationTests : IHasSolution
             if (projects is not null)
                 return projects;
 
+            if (ProjectNames is not null)
+            {
+                var names = ProjectNames.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                projects = TestProjectProvider.Projects
+                    .Where(p => names.Contains(p.Name, StringComparer.OrdinalIgnoreCase)).ToArray();
+                return projects;
+            }
+
             projects = OnlySelectedProjects
                 ? TestProjectProvider.GetSelectedProjects()
                 : TestProjectProvider.Projects;
@@ -77,8 +97,9 @@ public interface IRunIntegrationTests : IHasSolution
     /// Update tests runner.
     /// </summary>
     Target UpdateTestsTool =>
-        _ => _
+        definition => definition
             .Requires(() => TestToolName)
+            .OnlyWhenStatic(() => !SkipUpdateTool)
             .Executes(() =>
                 DotNetTasks.DotNetToolUpdate(settings =>
                 {
@@ -102,7 +123,7 @@ public interface IRunIntegrationTests : IHasSolution
             {
                 foreach (var project in TestProjects)
                 {
-                    await ProjectTestRunner.RunTests(project, TestToolName, IsDebug, AppVersion);
+                    await ProjectTestRunner.RunTests(project, TestToolName, IsDebug, Version);
                 }
             });
 }

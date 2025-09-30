@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor Runner
+participant RevitTestTask
+participant Revit
+participant TestServer
+database OutputDirectory
+
+Runner -> Runner : GetTestRunningOptions
+
+Runner -> RevitTestTask ++ : Run(options)
+    RevitTestTask -> TestServer ++ : Start(options)
+    RevitTestTask -> RevitTestTask : CreateAddIn
+    RevitTestTask -> RevitTestTask : CreatJournal
+    RevitTestTask -> Revit ++ : Run(journal, options)
+    Revit <-> TestServer : Execute test\n(see "CadApp" diagram\nCadApp = Revit)
+    Revit --> RevitTestTask -- : Exit
+    TestServer --> RevitTestTask -- : Test results
+    RevitTestTask -> OutputDirectory : Write result file (test results)
+RevitTestTask --> Runner -- : return
+
+@enduml

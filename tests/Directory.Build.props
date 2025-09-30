@@ -3,6 +3,11 @@
         <AssemblyName>$(MSBuildProjectName)</AssemblyName>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentAssertions" Version="8.7.1" />
+        <PackageReference Include="NUnit" Version="4.4.0" />
+    </ItemGroup>
     
     <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))"/>
 </Project>

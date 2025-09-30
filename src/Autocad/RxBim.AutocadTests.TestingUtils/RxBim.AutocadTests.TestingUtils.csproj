@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <UseDi>true</UseDi>
+        <UseAcadCommand>true</UseAcadCommand>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Description>Autocad tests DI utils. Make sure to set the value "CopyLocalLockFileAssemblies=true" in the properties of the test project.</Description>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\RxBim.AutocadTests.Cmd\RxBim.AutocadTests.Cmd.csproj" />
+    </ItemGroup>
+</Project>

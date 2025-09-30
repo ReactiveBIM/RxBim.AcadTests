@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    
+    <PropertyGroup>
+        <UseRevitCommand>true</UseRevitCommand>
+        <UseTestEnvironment>true</UseTestEnvironment>
+        <!-- Название сборки используется в консоли запуска Revit -->
+        <AssemblyName>$(MSBuildProjectName).$(ApplicationVersion)</AssemblyName>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <ProjectReference Include="..\..\RxBim.Tests.SDK\RxBim.Tests.SDK.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Compile Include="..\..\Autocad\RxBim.AutocadTests.Cmd\Abstractions\ITestService.cs">
+        <Link>Abstractions\ITestService.cs</Link>
+      </Compile>
+      <Compile Include="..\..\Autocad\RxBim.AutocadTests.Cmd\Services\TestListener.cs">
+        <Link>Services\TestListener.cs</Link>
+      </Compile>
+      <Compile Include="..\..\Autocad\RxBim.AutocadTests.Cmd\Services\TestService.cs">
+        <Link>Services\TestService.cs</Link>
+      </Compile>
+    </ItemGroup>    
+    
+    <PropertyGroup>
+        <PackageGuid>f9e7899b-780f-4002-a8b3-3a999ba53982</PackageGuid>
+        <UpgradeCode>efeffffd-fb08-41df-b62b-50429e1383d9</UpgradeCode>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Description>The command to run the revit tests.</Description>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+</Project>
