@@ -1,9 +1,9 @@
-using System;
 using System.Text;
 using Bimlab.Nuke.Components;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.Execution;
+using Nuke.Common.ProjectModel;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.Git;
 using RxBim.Nuke.AutoCAD;
@@ -73,7 +73,7 @@ public partial class Build : AutocadRxBimBuild, IRunIntegrationTests
     /// <summary>
     ///     Main
     /// </summary>
-    public static int Main() => Execute<Build>(x => x.From<IPublish>().PackagesList);
+    public static int Main() => Execute<Build>(x => /*x.From<IPublish>().PackagesList*/ x.UpdateToolsLocal);
 
     Target CleanWorkDir =>
         targetDefinition => targetDefinition
@@ -84,6 +84,44 @@ public partial class Build : AutocadRxBimBuild, IRunIntegrationTests
             {
                 GitTasks.Git("reset --hard");
             });
+
+    Target UpdateToolsLocal => targetDefinition => targetDefinition
+        .Requires(() => From<IRunIntegrationTests>().TestToolName)
+        .Executes(() =>
+        {
+            var testToolName = From<IRunIntegrationTests>().TestToolName;
+            //// var project = Solution.GetProject(testToolName); // not working
+            var project = Solution.GetAllProjects(testToolName).FirstOrDefault();
+            if (project is null)
+                throw new Exception($"Project {testToolName} does not exist");
+                
+            var outputDirectory = Solution.Directory / "nupkg" / project.Name;
+            if (Directory.Exists(outputDirectory))
+                Directory.Delete(outputDirectory, true);
+            
+            DotNetPack(settings => settings
+                .SetProject(project)
+                .SetConfiguration("Debug")
+                .SetOutputDirectory(outputDirectory));
+
+            try
+            {
+                DotNetToolUninstall(settings => settings
+                    .SetPackageName(testToolName)
+                    .EnableGlobal());
+            }
+            catch
+            {
+                // throws when CLI tool has not been installed before
+            }
+            
+            DotNetToolUpdate(settings => settings
+                .SetPackageName(testToolName)
+                .EnableGlobal()
+                .SetVersion(project.GetProperty("PackageVersion"))
+                .SetSources(outputDirectory)
+            );
+        });
 
     string IVersionBuild.ProjectNamePrefix => "RxBim.";
 

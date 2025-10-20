@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <PreserveCompilationContext>true</PreserveCompilationContext>
+        <RootNamespace>AcadTests.Nuke.Tests</RootNamespace>
+        <NotRefenceApi>true</NotRefenceApi>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\RxBim.Tests.Nuke\RxBim.Tests.Nuke.csproj" />
+    </ItemGroup>
+</Project>

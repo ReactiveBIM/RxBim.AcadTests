@@ -8,26 +8,10 @@ using System.Threading.Tasks;
 using Abstractions;
 using Helpers;
 
-/// <summary>
-///     Клиент
-/// </summary>
-public class AcadTestClient
+/// <inheritdoc />
+internal class AcadTestClient(string pipeName) : IAcadTestClient
 {
-    private readonly string _pipeName;
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="AcadTestClient" /> class.
-    /// </summary>
-    /// <param name="pipeName">Pipe name</param>
-    public AcadTestClient(string pipeName)
-    {
-        _pipeName = pipeName;
-    }
-
-    /// <summary>
-    ///     Посылает сообщение
-    /// </summary>
-    /// <param name="message">сообщение</param>
+    /// <inheritdoc />
     public void SendMessage(string message)
     {
         using var pipe = new NamedPipeClientStream(".",
@@ -40,16 +24,13 @@ public class AcadTestClient
         pipe.Write(msg, 0, msg.Length);
     }
 
-    /// <summary>
-    ///     comment
-    /// </summary>
-    /// <returns></returns>
+    /// <inheritdoc />
     public Task<ITestRunningOptions> GetTestRunningOptions()
     {
         using var pipeClient =
             new NamedPipeClientStream(
                 ".",
-                _pipeName,
+                pipeName,
                 PipeDirection.In,
                 PipeOptions.None,
                 TokenImpersonationLevel.Impersonation);
@@ -60,10 +41,7 @@ public class AcadTestClient
         return Task.FromResult(options);
     }
 
-    /// <summary>
-    ///     comment
-    /// </summary>
-    /// <param name="result">сообщение</param>
+    /// <inheritdoc />
     public void SendResult(string result)
     {
         using var pipe = new NamedPipeClientStream(".",

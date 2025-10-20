@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <UseAcadCommand>true</UseAcadCommand>
+        <UseTestEnvironment>true</UseTestEnvironment>
+        <!-- Название сборки используется в консоли запуска Autocad -->
+        <AssemblyName>$(MSBuildProjectName).$(ApplicationVersion)</AssemblyName>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <ProjectReference Include="..\..\RxBim.Tests.SDK\RxBim.Tests.SDK.csproj" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <Description>The command to run the autocad tests.</Description>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+</Project>

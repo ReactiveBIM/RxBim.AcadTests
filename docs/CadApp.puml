@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant CadAppTestTask
+box CAD application environment
+participant CadApp
+participant TestAssemblyRunner
+end box
+participant TestClient
+participant TestServer
+
+CadAppTestTask -> CadApp ++ : Run(journal, options)
+CadApp -> TestClient ++ : GetTestRunningOptions
+TestClient -> TestServer: Connect, ReadObject
+TestServer --> TestClient: return options
+TestClient --> CadApp : return options
+CadApp -> TestAssemblyRunner ++ : Load test assembly
+CadApp -> TestAssemblyRunner : Run
+TestAssemblyRunner --> CadApp -- : Return test result\n(ITestResult)
+CadApp -> CadApp : Convert result\n(ITestResult -> XML string)
+CadApp -> TestClient : Send result (XML string)
+TestClient -> TestServer -- : Send result
+CadApp --> CadAppTestTask -- : Exit
+
+@enduml                      

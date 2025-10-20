@@ -19,8 +19,8 @@ public class TestTool : Enumeration
 
     static TestTool()
     {
-        Acad = new TestTool() { Value = "RxBim.AutocadTests.Console" };
-        Revit = new TestTool() { Value = "RxBim.RevitTests.Console" };
+        Acad = new TestTool { Value = "RxBim.AutocadTests.Console" };
+        Revit = new TestTool { Value = "RxBim.RevitTests.Console" };
     }
 
     /// <summary>Implicit to string cast operator.</summary>

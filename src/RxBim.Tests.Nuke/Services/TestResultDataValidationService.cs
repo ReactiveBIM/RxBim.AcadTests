@@ -5,19 +5,17 @@ using Models;
 /// <summary>
 /// Service that checks test results data.
 /// </summary>
-public class TestResultDataValidationService
+public static class TestResultDataValidationService
 {
     /// <summary>
-    /// Create a new instance of <see cref="TestResultDataValidationService"/>
-    /// </summary>
-    public static TestResultDataValidationService Create() => new();
-
-    /// <summary>
-    /// Checks if all tests pass.
+    /// Throws exception if not all tests pass.
     /// </summary>
     /// <param name="testResultData"><see cref="TestResultData"/></param>
-    public bool AreAllTestsPassed(TestResultData testResultData)
+    public static void ThrowIfNotAllTestsPassed(TestResultData testResultData)
     {
-        return testResultData.Fixtures.All(testFixture => testFixture.Cases.All(testCase => testCase.Success));
+        var allTestsArePassed =
+            testResultData.Fixtures.All(testFixture => testFixture.Cases.All(testCase => testCase.Success));
+        if (!allTestsArePassed)
+            throw new Exception("Failed tests found");
     }
 }

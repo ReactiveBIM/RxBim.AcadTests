@@ -1,5 +1,7 @@
 namespace RxBim.Tests.SDK;
 
+using Abstractions;
+
 /// <summary>
 ///     AcadTestSdk
 /// </summary>
@@ -10,7 +12,7 @@ public class AcadTestSdk
     /// <summary>
     ///     Client
     /// </summary>
-    public AcadTestClient AcadTestClient { get; } = new(PipeName);
+    public IAcadTestClient AcadTestClient { get; } = new AcadTestClient(PipeName);
 
     /// <summary>
     ///     Server

@@ -1,4 +1,6 @@
-﻿namespace RxBim.Example.Revit.IntegrationTests;
+﻿using RxBim.RevitTests.TestingUtils;
+
+namespace RxBim.Example.Revit.IntegrationTests;
 
 using System;
 using System.Diagnostics;
@@ -10,7 +12,6 @@ using Autodesk.Revit.UI;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
-using RevitTests.TestingUtils;
 
 /// <summary>
 /// Revit tests.
@@ -51,14 +52,10 @@ public class BasisRevitTests
     [Test]
     public void ReadPropertiesTest()
     {
-#if !RVT2024 && !RVT2025
-        var sampleChair = _document.GetElement(new ElementId(990317)) as FamilyInstance;
-#else
-        var sampleChair = _document.GetElement(new ElementId((long)990317)) as FamilyInstance;
-#endif
+        var sampleChair = GetElement(990317);
         var lp = sampleChair?.Location as LocationPoint;
         lp.Should().NotBeNull();
-        lp!.Point.Z.Should().BeApproximately(0, 1e-6);
+        lp.Point.Z.Should().BeApproximately(0, 1e-6);
     }
 
     /// <summary>
@@ -95,7 +92,7 @@ public class BasisRevitTests
     {
         var timer = new Stopwatch();
         timer.Start();
-        while (timer.ElapsedMilliseconds < 15 * 60 * 1000)
+        while (timer.Elapsed.TotalMinutes < 15)
         {
             var wall = new FilteredElementCollector(_document)
                 .OfCategory(BuiltInCategory.OST_Walls)
@@ -116,11 +113,7 @@ public class BasisRevitTests
     public void CreateFamilyInstanceTest()
     {
         using var tr = new Transaction(_document, "CreateChain");
-#if !RVT2024 && !RVT2025
-        var fs = _document.GetElement(new ElementId(990191)) as FamilySymbol;
-#else
-        var fs = _document.GetElement(new ElementId((long)990191)) as FamilySymbol;
-#endif
+        var fs = GetElement(990191) as FamilySymbol;
         tr.Start();
         var newChain = _document.Create.NewFamilyInstance(
             new XYZ(-8.93862219885585, 6.15996740717654, 0),
@@ -129,5 +122,14 @@ public class BasisRevitTests
             StructuralType.NonStructural);
         tr.Commit().Should().Be(TransactionStatus.Committed);
         _document.GetElement(newChain.Id).Should().NotBeNull();
+    }
+
+    private Element? GetElement(int id)
+    {
+#if !RVT2024 && !RVT2025
+        return _document.GetElement(new ElementId(id));
+#else
+        return _document.GetElement(new ElementId((long)id));
+#endif
     }
 }

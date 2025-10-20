@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor Runner
+participant AcadTestTasks
+participant AutocadScriptRunner
+participant AutoCAD
+participant TestServer
+database OutputDirectory
+
+Runner -> Runner : GetTestRunningOptions
+Runner -> AcadTestTasks ++ : Run(options)
+AcadTestTasks -> TestServer ++ : Start(options)
+AcadTestTasks -> AutocadScriptRunner ++ : Run(IAutocadScriptBuilder)
+    AutocadScriptRunner -> AutocadScriptRunner : CreateScriptFile
+    AutocadScriptRunner -> AutocadScriptRunner : GetParams/GetArguments
+    AutocadScriptRunner -> AutoCAD ++ : Start process (arguments)    
+    AutoCAD <-> TestServer : Execute test\n(see "CadApp" diagram\nCadApp = AutoCAD)
+    AutoCAD --> AutocadScriptRunner -- : Process close
+AutocadScriptRunner --> AcadTestTasks -- : Exit
+TestServer --> AcadTestTasks -- : Test results
+
+
+AcadTestTasks -> OutputDirectory : Write result file (test results)
+AcadTestTasks --> Runner -- : return
+
+@enduml
