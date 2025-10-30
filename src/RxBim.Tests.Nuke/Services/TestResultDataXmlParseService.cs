@@ -7,18 +7,13 @@ using Serilog;
 /// <summary>
 /// Service for obtaining data on test results based on an xml document.
 /// </summary>
-public class TestResultDataXmlParseService
+public static class TestResultDataXmlParseService
 {
-    /// <summary>
-    /// Create a new instance of <see cref="TestResultDataXmlParseService"/>
-    /// </summary>
-    public static TestResultDataXmlParseService Create() => new();
-
     /// <summary>
     /// Returns test result data based on an test xml document.
     /// </summary>
     /// <param name="resultXmlSourcePath">Tests result xml file path.</param>
-    public async Task<TestResultData> GetTestResultData(string resultXmlSourcePath)
+    public static async Task<TestResultData> GetTestResultData(string resultXmlSourcePath)
     {
         var xmlDocument = await LoadSource(resultXmlSourcePath);
         var testResultData = CreateTestResultData(xmlDocument);
@@ -26,14 +21,14 @@ public class TestResultDataXmlParseService
         return testResultData;
     }
 
-    private async Task<XmlDocument> LoadSource(string resultSourcePath)
+    private static async Task<XmlDocument> LoadSource(string resultSourcePath)
     {
         var doc = new XmlDocument();
         doc.LoadXml(await File.ReadAllTextAsync(resultSourcePath));
         return doc;
     }
 
-    private TestResultData CreateTestResultData(XmlDocument document)
+    private static TestResultData CreateTestResultData(XmlDocument document)
     {
         var testResultData = InitTestResultData(document);
         var fixturesData = CreateFixturesData(document);
@@ -41,7 +36,7 @@ public class TestResultDataXmlParseService
         return testResultData;
     }
 
-    private TestResultData InitTestResultData(XmlDocument document)
+    private static TestResultData InitTestResultData(XmlDocument document)
     {
         var mainNodeAttributes = document.SelectSingleNode("/test-suite")?.Attributes;
         if (mainNodeAttributes is null)
@@ -59,7 +54,7 @@ public class TestResultDataXmlParseService
         return new TestResultData(assemblyFileName);
     }
 
-    private IEnumerable<TestFixtureData> CreateFixturesData(XmlNode node)
+    private static IEnumerable<TestFixtureData> CreateFixturesData(XmlNode node)
     {
         var xmlNodeList = node.SelectNodes("//test-suite[@type=\"TestFixture\"]");
         if (xmlNodeList == null)
@@ -70,7 +65,7 @@ public class TestResultDataXmlParseService
         }
     }
 
-    private TestFixtureData CreateTestFixtureData(XmlElement xmlElement)
+    private static TestFixtureData CreateTestFixtureData(XmlElement xmlElement)
     {
         var testFixtureName = xmlElement.Attributes["name"]?.Value;
         var testFixtureData = new TestFixtureData(testFixtureName);
@@ -89,7 +84,7 @@ public class TestResultDataXmlParseService
         return testFixtureData;
     }
 
-    private TestCaseData CreateTestCaseData(XmlNode testCase)
+    private static TestCaseData CreateTestCaseData(XmlNode testCase)
     {
         var testCaseData = new TestCaseData
         {

@@ -62,7 +62,8 @@
         "SignAssemblies",
         "TagProject",
         "Test",
-        "UpdateTestsTool"
+        "UpdateTestsTool",
+        "UpdateToolsLocal"
       ]
     },
     "Project": {
@@ -470,6 +471,10 @@
           "type": "string",
           "description": "Select project"
         },
+        "ProjectNames": {
+          "type": "string",
+          "description": "Test project names"
+        },
         "RxBimEnvironment": {
           "type": "string",
           "description": "Environment variable"
@@ -481,6 +486,10 @@
         "ServerUrl": {
           "type": "string",
           "description": "Timestamp server URL"
+        },
+        "SkipUpdateTool": {
+          "type": "boolean",
+          "description": "Skip update for test tool CLI"
         },
         "Solution": {
           "type": "string",
@@ -508,6 +517,9 @@
         "TimestampRevisionVersion": {
           "type": "boolean",
           "description": "Adds timestamp revision version"
+        },
+        "Version": {
+          "type": "string"
         },
         "VersionNumber": {
           "type": "string",

@@ -1,22 +1,22 @@
 namespace RxBim.Tests.SDK.Abstractions;
 
 /// <summary>
-///     comment
+/// Test run options.
 /// </summary>
 public interface ITestRunningOptions
 {
     /// <summary>
-    ///     The full path to the assembly containing your tests.
+    /// The full path to the assembly containing your tests.
     /// </summary>
     public string AssemblyPath { get; }
 
     /// <summary>
-    ///     Debug mode.
+    /// Debug mode.
     /// </summary>
     public bool Debug { get; }
 
     /// <summary>
-    ///     The name of a test to run.
+    /// The name of a test to run.
     /// </summary>
     public string? TestName { get; set; }
 }

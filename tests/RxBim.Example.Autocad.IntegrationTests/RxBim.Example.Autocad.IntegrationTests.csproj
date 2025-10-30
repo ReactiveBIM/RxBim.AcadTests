@@ -1,16 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <PlatformTarget>x64</PlatformTarget>
         <UseDi>true</UseDi>
-        <PreserveCompilationContext>true</PreserveCompilationContext>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="FluentAssertions" Version="6.10.0" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
-        <PackageReference Include="NUnit" Version="3.13.3" />
-    </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\..\src\RxBim.AutocadTests.TestingUtils\RxBim.AutocadTests.TestingUtils.csproj" />
+        <ProjectReference Include="..\..\src\Autocad\RxBim.AutocadTests.TestingUtils\RxBim.AutocadTests.TestingUtils.csproj" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="drawing1.dwg">

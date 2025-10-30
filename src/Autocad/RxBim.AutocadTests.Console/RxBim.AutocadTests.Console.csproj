@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <UseCommandLineParser>true</UseCommandLineParser>
+        <NotRefenceApi>true</NotRefenceApi>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\RxBim.AutocadTests.ScriptUtils\RxBim.AutocadTests.ScriptUtils.csproj" />
+        <ProjectReference Include="..\..\RxBim.Tests.SDK\RxBim.Tests.SDK.csproj" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <PackAsTool>true</PackAsTool>
+        <Description>Autocad tests framework console.</Description>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+</Project>

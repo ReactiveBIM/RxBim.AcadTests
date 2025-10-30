@@ -2,13 +2,8 @@
 
     <PropertyGroup>
         <UseDi>true</UseDi>
-        <PreserveCompilationContext>true</PreserveCompilationContext>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     </PropertyGroup>
-    <ItemGroup>
-        <PackageReference Include="FluentAssertions" Version="6.10.0" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
-        <PackageReference Include="NUnit" Version="3.13.3" />
-    </ItemGroup>
 
     <ItemGroup Condition="'$(ApplicationVersion)' != '2025'">
         <Reference Include="WindowsBase" />
@@ -24,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\RxBim.RevitTests.TestingUtils\RxBim.RevitTests.TestingUtils.csproj" />
+      <ProjectReference Include="..\..\src\Revit\RxBim.RevitTests.TestingUtils\RxBim.RevitTests.TestingUtils.csproj" />
     </ItemGroup>
 
 </Project>
