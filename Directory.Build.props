@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
         <PlatformTarget>x64</PlatformTarget>
-        <Version>1.2.4</Version>
+        <Version>1.2.5-dev001</Version>
         <NoWarn>NU1901;NU1902;NU1903;NU1904;CS8618</NoWarn>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <PropertyGroup>
-        <RxBimVersion>3.0.4</RxBimVersion>
+        <RxBimVersion>3.0.5-dev001</RxBimVersion>
     </PropertyGroup>
 
     <ItemGroup Condition=" '$(UseDi)' == 'true' ">
@@ -44,7 +44,7 @@
     </ItemGroup>
 
     <ItemGroup Condition=" '$(UseNuke)' == 'true' ">
-        <PackageReference Include="BimLab.Nuke" Version="2024.2.2"/>
+        <PackageReference Include="BimLab.Nuke" Version="2025.1.0"/>
         <PackageReference Include="Nuke.Common" Version="8.1.4"/>
         <PackageReference Include="RazorLight" Version="2.3.0"/>
     </ItemGroup>

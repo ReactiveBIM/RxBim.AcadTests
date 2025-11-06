@@ -30,6 +30,7 @@
         "BuildMsi",
         "CheckCurrentBranch",
         "CheckProductionVersion",
+        "CheckPublishTagsExist",
         "CheckStageVersion",
         "Clean",
         "CleanWorkDir",
