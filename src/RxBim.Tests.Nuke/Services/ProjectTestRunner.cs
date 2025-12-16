@@ -28,14 +28,15 @@ public class ProjectTestRunner
     /// <param name="isDebug">Is debug mode</param>
     /// <param name="appVersion">App version</param>
     /// <exception cref="Exception">Exception occurs if at least one test fails.</exception>
-    public async Task RunTests(Project project, string testTool, bool isDebug, string appVersion)
+    public async Task RunTests(Project project, string testTool, bool isDebug, int appVersion)
     {
-        var outputDirectory = _solution.Directory / "testoutput" / project.Name;
+        var outputDirectory = _solution.Directory / "testoutput" / $"{project.Name}_{appVersion}";
         if (Directory.Exists(outputDirectory))
             Directory.Delete(outputDirectory, true);
         DotNetTasks.DotNetBuild(settings => settings
             .SetProjectFile<DotNetBuildSettings>(project)
             .SetConfiguration("Debug")
+            .AddProperty("ApplicationVersion", appVersion)
             .SetOutputDirectory(outputDirectory));
         var assemblyName = project.Name + ".dll";
         var assemblyPath = outputDirectory / assemblyName;
