@@ -40,10 +40,8 @@ public class Cmd : RxBimCommand
 
             testService.ExecuteTest(acadTestClient, testAssemblyRunner, testFilter, testListener);
 
-            foreach (var revitWorker in Process.GetProcessesByName("RevitWorker"))
-            {
-                revitWorker.Kill();
-            }
+            var revitProcess = Process.GetCurrentProcess();
+            revitProcess.Kill();
 
             return PluginResult.Succeeded;
         }

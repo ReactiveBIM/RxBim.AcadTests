@@ -5,6 +5,7 @@ using global::Nuke.Common;
 using global::Nuke.Common.ProjectModel;
 using global::Nuke.Common.Tools.DotNet;
 using JetBrains.Annotations;
+using RxBim.Tests.Nuke.Helpers;
 using Services;
 
 /// <summary>
@@ -121,9 +122,28 @@ public interface IRunIntegrationTests : IHasSolution
             .Description("Starts execution of integration tests")
             .Executes(async () =>
             {
+                var versions = VersionHelper.GetVersions(Version);
                 foreach (var project in TestProjects)
                 {
-                    await ProjectTestRunner.RunTests(project, TestToolName, IsDebug, Version);
+                    foreach (var version in versions)
+                    {
+                        await ProjectTestRunner.RunTests(
+                            project,
+                            TestToolName,
+                            IsDebug,
+                            version,
+                            settings => ConfigureBuildSettings(settings, version));
+                    }
                 }
             });
+
+    /// <summary>
+    /// Configure build settings.
+    /// </summary>
+    /// <param name="settings">Build settings.</param>
+    /// <param name="version">Version.</param>
+    protected virtual DotNetBuildSettings ConfigureBuildSettings(DotNetBuildSettings settings, int version)
+    {
+        return settings.AddProperty("ApplicationVersion", version);
+    }
 }
