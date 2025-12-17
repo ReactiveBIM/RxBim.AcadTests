@@ -25,19 +25,29 @@ public class ProjectTestRunner
     /// </summary>
     /// <param name="project">Project.</param>
     /// <param name="testTool">Path to console Dll.</param>
-    /// <param name="isDebug">Is debug mode</param>
-    /// <param name="appVersion">App version</param>
+    /// <param name="isDebug">Is debug mode.</param>
+    /// <param name="appVersion">App version.</param>
+    /// <param name="configureBuildSettings">Configure build settings.</param>
     /// <exception cref="Exception">Exception occurs if at least one test fails.</exception>
-    public async Task RunTests(Project project, string testTool, bool isDebug, int appVersion)
+    public async Task RunTests(
+        Project project,
+        string testTool,
+        bool isDebug,
+        int appVersion,
+        Func<DotNetBuildSettings, DotNetBuildSettings>? configureBuildSettings = null)
     {
         var outputDirectory = _solution.Directory / "testoutput" / $"{project.Name}_{appVersion}";
         if (Directory.Exists(outputDirectory))
             Directory.Delete(outputDirectory, true);
-        DotNetTasks.DotNetBuild(settings => settings
-            .SetProjectFile<DotNetBuildSettings>(project)
-            .SetConfiguration("Debug")
-            .AddProperty("ApplicationVersion", appVersion)
-            .SetOutputDirectory(outputDirectory));
+        DotNetTasks.DotNetBuild(settings =>
+        {
+            var configuredSettings = settings
+                .SetProjectFile<DotNetBuildSettings>(project)
+                .SetConfiguration("Debug")
+                .SetOutputDirectory(outputDirectory);
+
+            return configureBuildSettings?.Invoke(configuredSettings) ?? configuredSettings;
+        });
         var assemblyName = project.Name + ".dll";
         var assemblyPath = outputDirectory / assemblyName;
         var xmlResultPath = outputDirectory / "result.xml";
