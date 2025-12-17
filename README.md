@@ -1,6 +1,6 @@
 # RxBim.AcadTests
 
-Пример команд для запуска тестов Revit 2025 локально
+Пример команд для запуска тестов Revit 2025 локально:
 
 1. `nuke SetVersion2025` - обязательно перед выполнением тестов для подключения правильных версий пакетов
 2. `nuke IntegrationTests --testToolName revit --onlySelectedProjects --version 2025`
