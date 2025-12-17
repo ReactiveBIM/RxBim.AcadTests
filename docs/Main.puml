@@ -15,27 +15,32 @@ actor User
 Runner -> IRunIntegrationTests : IntegrationTests(Test tool name,Version)
 IRunIntegrationTests -> IRunIntegrationTests : UpdateTestTool
 IRunIntegrationTests -> IRunIntegrationTests : Test projects collect
+IRunIntegrationTests -> IRunIntegrationTests : Get versions from version input string
 
 loop#Gold Test projects iteration
-    IRunIntegrationTests -> ProjectTestRunner : RunTests(Test project,Test tool name,Version)
-    
-    ProjectTestRunner -> OutputDirectory ++ #Grey : Create output directory
-    ProjectTestRunner -> OutputDirectory : Build test project to the output directory
-    
-    ProjectTestRunner->TestTool ++ #Grey : Start(Test assembly path, xml result path, version)
-    TestTool -> OutputDirectory : XML test result file
-    TestTool --> ProjectTestRunner -- : Exit
-    
-    ProjectTestRunner -> OutputDirectory : Convert XML->HTML test result file
-    
-    ProjectTestRunner -> ProjectTestRunner : Check test result
-    
-    alt#Gold All tests pass
-        ProjectTestRunner --> IRunIntegrationTests : RunTests return     
-     else #Pink Any test failed
-     autonumber stop
-        IRunIntegrationTests x<-- ProjectTestRunner : throw Exception
-    end alt
+
+    loop#Gold Versions iteration
+        IRunIntegrationTests -> ProjectTestRunner : RunTests(Test project,Test tool name,Version,Configure build settings)
+        
+        ProjectTestRunner -> OutputDirectory ++ #Grey : Create output directory
+        ProjectTestRunner -> OutputDirectory : Build test project to the output directory
+        
+        ProjectTestRunner->TestTool ++ #Grey : Start(Test assembly path, xml result path, version)
+        TestTool -> OutputDirectory : XML test result file
+        TestTool --> ProjectTestRunner -- : Exit
+        
+        ProjectTestRunner -> OutputDirectory : Convert XML->HTML test result file
+        
+        ProjectTestRunner -> ProjectTestRunner : Check test result
+        
+        alt#Gold All tests pass
+            ProjectTestRunner --> IRunIntegrationTests : RunTests return     
+        else #Pink Any test failed
+        autonumber stop
+            IRunIntegrationTests x<-- ProjectTestRunner : throw Exception
+        end alt
+
+    end loop
 
 end loop
 
