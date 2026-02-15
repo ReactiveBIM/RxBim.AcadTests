@@ -4,8 +4,8 @@ using Bimlab.Nuke.Components;
 using global::Nuke.Common;
 using global::Nuke.Common.ProjectModel;
 using global::Nuke.Common.Tools.DotNet;
+using Helpers;
 using JetBrains.Annotations;
-using RxBim.Tests.Nuke.Helpers;
 using Services;
 
 /// <summary>
@@ -122,19 +122,12 @@ public interface IRunIntegrationTests : IHasSolution
             .Description("Starts execution of integration tests")
             .Executes(async () =>
             {
-                var versions = VersionHelper.GetVersions(Version);
-                foreach (var project in TestProjects)
-                {
-                    foreach (var version in versions)
-                    {
-                        await ProjectTestRunner.RunTests(
-                            project,
-                            TestToolName,
-                            IsDebug,
-                            version,
-                            settings => ConfigureBuildSettings(settings, version));
-                    }
-                }
+                var appVersions = VersionHelper.GetVersions(Version).ToArray();
+                await ProjectTestRunner.RunTests(
+                    TestProjects,
+                    TestToolName,
+                    IsDebug,
+                    appVersions);
             });
 
     /// <summary>
