@@ -69,7 +69,7 @@ public class ProjectTestRunner
 
             if (versionTestResults.Count > 0)
             {
-                await MergeTestFileAsync(versionTestResults, outputDirectory);
+                await MergeTestFilesAsync(versionTestResults, outputDirectory);
                 CheckAllTestResults(testResultsData);
             }
         }
@@ -111,7 +111,9 @@ public class ProjectTestRunner
     }
 
     // Собирает единый тестовый html файл из тестовых фалов проектов.
-    private static async Task MergeTestFileAsync(Dictionary<int, List<string>> versionTestResults, AbsolutePath outputDirectory)
+    private static async Task MergeTestFilesAsync(
+        Dictionary<int, List<string>> versionTestResults,
+        AbsolutePath outputDirectory)
     {
         var mergedHtml = new StringBuilder();
         foreach (var versionTestResult in versionTestResults)
