@@ -5,6 +5,7 @@ using global::Nuke.Common.IO;
 using global::Nuke.Common.ProjectModel;
 using global::Nuke.Common.Tooling;
 using global::Nuke.Common.Tools.DotNet;
+using Models;
 
 /// <summary>
 /// Project test runner.
@@ -42,6 +43,7 @@ public class ProjectTestRunner
                 Directory.Delete(outputDirectory, true);
 
             var versionTestResults = new Dictionary<int, List<string>>();
+            var testResultsData = new List<TestResultData>();
             foreach (var version in appVersions)
             {
                 foreach (var project in projects)
@@ -53,19 +55,24 @@ public class ProjectTestRunner
                         isDebug,
                         version);
 
+                    testResultsData.Add(testResult.TestResultData);
+
                     if (versionTestResults.TryGetValue(version, out var testResults))
-                        testResults.Add(testResult);
+                        testResults.Add(testResult.HtmlResultPath);
                     else
-                        versionTestResults.Add(version, [testResult]);
+                        versionTestResults.Add(version, new List<string> { testResult.HtmlResultPath });
                 }
             }
 
             if (versionTestResults.Count > 0)
+            {
                 await MergeTestFileAsync(versionTestResults, outputDirectory);
+                CheckAllTestResults(testResultsData);
+            }
         }
     }
 
-    private async Task<string> RunTest(
+    private static async Task<(string HtmlResultPath, TestResultData TestResultData)> RunTest(
         AbsolutePath outputDirectory,
         Project project,
         string testTool,
@@ -93,13 +100,11 @@ public class ProjectTestRunner
         var htmlResultPath = outputDirectory / $"{testResultName}.html";
         await TestResultDataHtmlSaveService.SaveResultTestData(testResultData, htmlResultPath);
 
-        // обсудить с Ефремом!!!!!!!!!
-        TestResultDataValidationService.ThrowIfNotAllTestsPassed(testResultData);
-        return htmlResultPath;
+        return (htmlResultPath, testResultData);
     }
 
-    // Собираем единый тестовый html файл из тестовых фалов проектов.
-    private async Task MergeTestFileAsync(Dictionary<int, List<string>> versionTestResults, AbsolutePath outputDirectory)
+    // Собирает единый тестовый html файл из тестовых фалов проектов.
+    private static async Task MergeTestFileAsync(Dictionary<int, List<string>> versionTestResults, AbsolutePath outputDirectory)
     {
         var mergedHtml = new StringBuilder();
         foreach (var versionTestResult in versionTestResults)
@@ -124,5 +129,12 @@ public class ProjectTestRunner
         {
             File.Delete(testResult);
         }
+    }
+
+    // Проверяет все результаты тестов, если какой-нибудь тест не пройден - вызывает исключение.
+    private static void CheckAllTestResults(List<TestResultData> testResultsData)
+    {
+        foreach (var testResultData in testResultsData)
+            TestResultDataValidationService.ThrowIfNotAllTestsPassed(testResultData);
     }
 }
