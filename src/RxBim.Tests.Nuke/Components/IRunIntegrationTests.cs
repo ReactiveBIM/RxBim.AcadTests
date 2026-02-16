@@ -127,7 +127,8 @@ public interface IRunIntegrationTests : IHasSolution
                     TestProjects,
                     TestToolName,
                     IsDebug,
-                    appVersions);
+                    appVersions,
+                    ConfigureBuildSettings);
             });
 
     /// <summary>

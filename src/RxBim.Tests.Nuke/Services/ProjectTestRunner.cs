@@ -30,12 +30,14 @@ public class ProjectTestRunner
     /// <param name="testTool">Path to console Dll.</param>
     /// <param name="isDebug">Is debug mode.</param>
     /// <param name="appVersions">Collection of app version.</param>
+    /// <param name="configureBuildSettings">Configure build settings.</param>
     /// <exception cref="Exception">Exception occurs if at least one test fails.</exception>
     public async Task RunTests(
         Project[] projects,
         string testTool,
         bool isDebug,
-        int[] appVersions)
+        int[] appVersions,
+        Func<DotNetBuildSettings, int, DotNetBuildSettings>? configureBuildSettings = null)
     {
         {
             var outputDirectory = _solution.Directory / "testoutput";
@@ -53,7 +55,8 @@ public class ProjectTestRunner
                         project,
                         testTool,
                         isDebug,
-                        version);
+                        version,
+                        configureBuildSettings);
 
                     testResultsData.Add(testResult.TestResultData);
 
@@ -77,14 +80,18 @@ public class ProjectTestRunner
         Project project,
         string testTool,
         bool isDebug,
-        int appVersion)
+        int appVersion,
+        Func<DotNetBuildSettings, int, DotNetBuildSettings>? configureBuildSettings = null)
     {
         DotNetTasks.DotNetBuild(settings =>
-            settings
+        {
+            var configuredSettings = settings
                 .SetProjectFile<DotNetBuildSettings>(project)
                 .SetConfiguration("Debug")
-                .SetOutputDirectory(outputDirectory)
-                .AddProperty("ApplicationVersion", appVersion));
+                .SetOutputDirectory(outputDirectory);
+
+            return configureBuildSettings?.Invoke(configuredSettings, appVersion) ?? configuredSettings;
+        });
 
         var assemblyName = project.Name + ".dll";
         var assemblyPath = outputDirectory / assemblyName;
