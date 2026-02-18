@@ -154,6 +154,7 @@ public interface IRunIntegrationTests : IHasSolution
     /// </summary>
     Target MergeTestResults =>
         definition => definition
+            .Description("Starts merging test results")
             .Executes(async () => await TestResultFilesService.MergeTestResultsAsync());
 
     /// <summary>
@@ -161,6 +162,7 @@ public interface IRunIntegrationTests : IHasSolution
     /// </summary>
     Target DeleteTestResults =>
         definition => definition
+            .Description("Starts deleting test results")
             .Executes(() => TestResultFilesService.DeleteTestResults());
 
     /// <summary>
