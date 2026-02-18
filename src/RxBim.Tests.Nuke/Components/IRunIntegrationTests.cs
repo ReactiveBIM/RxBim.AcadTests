@@ -6,6 +6,7 @@ using global::Nuke.Common.ProjectModel;
 using global::Nuke.Common.Tools.DotNet;
 using Helpers;
 using JetBrains.Annotations;
+using Models;
 using Services;
 
 /// <summary>
@@ -18,6 +19,11 @@ public interface IRunIntegrationTests : IHasSolution
     /// TestProjectProvider.
     /// </summary>
     TestProjectProvider TestProjectProvider => new(Solution);
+
+    /// <summary>
+    /// TestResultFilesService.
+    /// </summary>
+    TestResultFilesService TestResultFilesService => new(Solution);
 
     /// <summary>
     /// ProjectTestRunner.
@@ -122,14 +128,40 @@ public interface IRunIntegrationTests : IHasSolution
             .Description("Starts execution of integration tests")
             .Executes(async () =>
             {
-                var appVersions = VersionHelper.GetVersions(Version).ToArray();
-                await ProjectTestRunner.RunTests(
-                    TestProjects,
-                    TestToolName,
-                    IsDebug,
-                    appVersions,
-                    ConfigureBuildSettings);
+                var versions = VersionHelper.GetVersions(Version);
+                var testResultDatas = new List<TestResultData>();
+                foreach (var project in TestProjects)
+                {
+                    foreach (var version in versions)
+                    {
+                        var testResultData = await ProjectTestRunner.RunTests(
+                            project,
+                            TestToolName,
+                            IsDebug,
+                            version,
+                            settings => ConfigureBuildSettings(settings, version));
+
+                        testResultDatas.Add(testResultData);
+                    }
+                }
+
+                foreach (var testResultData in testResultDatas)
+                    TestResultDataValidationService.ThrowIfNotAllTestsPassed(testResultData);
             });
+
+    /// <summary>
+    /// Merges test results.
+    /// </summary>
+    Target MergeTestResults =>
+        definition => definition
+            .Executes(async () => await TestResultFilesService.MergeTestResultsAsync());
+
+    /// <summary>
+    /// Delete test results (test output directory).
+    /// </summary>
+    Target DeleteTestResults =>
+        definition => definition
+            .Executes(() => TestResultFilesService.DeleteTestResults());
 
     /// <summary>
     /// Configure build settings.
