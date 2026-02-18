@@ -10,7 +10,7 @@ using global::Nuke.Common.ProjectModel;
 public class TestResultFilesService(Solution solution)
 {
     /// <summary>
-    /// Delete test results (test output directory).
+    /// Delete test results(test output directory).
     /// </summary>
     public void DeleteTestResults() => Directory.Delete(solution.Directory / "testoutput", recursive: true);
 
