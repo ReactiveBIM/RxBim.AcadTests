@@ -73,7 +73,7 @@ public class TestResultFilesService(Solution solution)
             }
             else
             {
-                versionTestResultsDict.Add(versionNumber, new List<string> { testResult });
+                versionTestResultsDict.Add(versionNumber, [testResult]);
             }
         }
 
