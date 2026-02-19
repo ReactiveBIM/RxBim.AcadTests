@@ -3,6 +3,7 @@ namespace RxBim.Tests.Nuke.Services;
 using global::Nuke.Common.ProjectModel;
 using global::Nuke.Common.Tooling;
 using global::Nuke.Common.Tools.DotNet;
+using Models;
 
 /// <summary>
 /// Project test runner.
@@ -29,7 +30,7 @@ public class ProjectTestRunner
     /// <param name="appVersion">App version.</param>
     /// <param name="configureBuildSettings">Configure build settings.</param>
     /// <exception cref="Exception">Exception occurs if at least one test fails.</exception>
-    public async Task RunTests(
+    public async Task<TestResultData> RunTests(
         Project project,
         string testTool,
         bool isDebug,
@@ -60,6 +61,6 @@ public class ProjectTestRunner
         var htmlResultPath = outputDirectory / "result.html";
         await TestResultDataHtmlSaveService.SaveResultTestData(testResultData, htmlResultPath);
 
-        TestResultDataValidationService.ThrowIfNotAllTestsPassed(testResultData);
+        return testResultData;
     }
 }

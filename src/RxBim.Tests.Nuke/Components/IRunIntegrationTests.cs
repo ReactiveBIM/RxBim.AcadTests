@@ -4,8 +4,9 @@ using Bimlab.Nuke.Components;
 using global::Nuke.Common;
 using global::Nuke.Common.ProjectModel;
 using global::Nuke.Common.Tools.DotNet;
+using Helpers;
 using JetBrains.Annotations;
-using RxBim.Tests.Nuke.Helpers;
+using Models;
 using Services;
 
 /// <summary>
@@ -18,6 +19,11 @@ public interface IRunIntegrationTests : IHasSolution
     /// TestProjectProvider.
     /// </summary>
     TestProjectProvider TestProjectProvider => new(Solution);
+
+    /// <summary>
+    /// TestResultFilesService.
+    /// </summary>
+    TestResultFilesService TestResultFilesService => new(Solution);
 
     /// <summary>
     /// ProjectTestRunner.
@@ -123,19 +129,41 @@ public interface IRunIntegrationTests : IHasSolution
             .Executes(async () =>
             {
                 var versions = VersionHelper.GetVersions(Version);
+                var testResultDatas = new List<TestResultData>();
                 foreach (var project in TestProjects)
                 {
                     foreach (var version in versions)
                     {
-                        await ProjectTestRunner.RunTests(
+                        var testResultData = await ProjectTestRunner.RunTests(
                             project,
                             TestToolName,
                             IsDebug,
                             version,
                             settings => ConfigureBuildSettings(settings, version));
+
+                        testResultDatas.Add(testResultData);
                     }
                 }
+
+                foreach (var testResultData in testResultDatas)
+                    TestResultDataValidationService.ThrowIfNotAllTestsPassed(testResultData);
             });
+
+    /// <summary>
+    /// Merges test results.
+    /// </summary>
+    Target MergeTestResults =>
+        definition => definition
+            .Description("Starts merging test results")
+            .Executes(async () => await TestResultFilesService.MergeTestResultsAsync());
+
+    /// <summary>
+    /// Delete test results (test output directory).
+    /// </summary>
+    Target DeleteTestResults =>
+        definition => definition
+            .Description("Starts deleting test results")
+            .Executes(() => TestResultFilesService.DeleteTestResults());
 
     /// <summary>
     /// Configure build settings.
