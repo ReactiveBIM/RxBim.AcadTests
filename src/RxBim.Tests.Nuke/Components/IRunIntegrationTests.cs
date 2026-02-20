@@ -120,7 +120,7 @@ public interface IRunIntegrationTests : IHasSolution
                 }));
 
     /// <summary>
-    /// Run s integration tests for Revit.
+    /// Runs integration tests for Revit.
     /// </summary>
     Target IntegrationTests =>
         definition => definition
