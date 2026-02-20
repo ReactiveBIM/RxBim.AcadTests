@@ -12,7 +12,12 @@ public class TestResultFilesService(Solution solution)
     /// <summary>
     /// Delete test results (test output directory).
     /// </summary>
-    public void DeleteTestResults() => Directory.Delete(solution.Directory / "testoutput", recursive: true);
+    public void DeleteTestResults()
+    {
+        var testOutputDirectory = solution.Directory / "testoutput";
+        if (Directory.Exists(testOutputDirectory))
+            Directory.Delete(testOutputDirectory, recursive: true);
+    }
 
     /// <summary>
     /// Merges html test result files.
