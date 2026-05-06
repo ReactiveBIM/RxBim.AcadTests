@@ -73,6 +73,12 @@
     "Project": {
       "type": "object",
       "properties": {
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
         "Solution": {
           "oneOf": [
             {
@@ -83,31 +89,29 @@
             }
           ]
         },
-        "ProjectId": {
-          "type": "string",
-          "format": "guid"
-        },
-        "Name": {
-          "type": [
-            "null",
-            "string"
-          ]
-        },
-        "TypeId": {
-          "type": "string",
-          "format": "guid"
-        },
-        "SolutionFolder": {
+        "Parent": {
           "oneOf": [
             {
               "type": "null"
             },
             {
-              "$ref": "#/definitions/SolutionFolder"
+              "$ref": "#/definitions/IProjectContainer"
             }
           ]
         },
+        "RelativePath": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
         "Path": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "FileName": {
           "type": [
             "null",
             "string"
@@ -118,15 +122,6 @@
             "null",
             "string"
           ]
-        },
-        "Configurations": {
-          "type": [
-            "null",
-            "object"
-          ],
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -156,42 +151,6 @@
             "null",
             "string"
           ]
-        },
-        "Header": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "type": "string"
-          }
-        },
-        "Properties": {
-          "type": [
-            "null",
-            "object"
-          ],
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "ExtensibilityGlobals": {
-          "type": [
-            "null",
-            "object"
-          ],
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "Configurations": {
-          "type": [
-            "null",
-            "object"
-          ],
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "AllProjects": {
           "type": [
@@ -234,6 +193,12 @@
     "SolutionFolder": {
       "type": "object",
       "properties": {
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
         "Solution": {
           "oneOf": [
             {
@@ -244,37 +209,23 @@
             }
           ]
         },
-        "ProjectId": {
-          "type": "string",
-          "format": "guid"
-        },
-        "Name": {
-          "type": [
-            "null",
-            "string"
-          ]
-        },
-        "TypeId": {
-          "type": "string",
-          "format": "guid"
-        },
-        "SolutionFolder": {
+        "Parent": {
           "oneOf": [
             {
               "type": "null"
             },
             {
-              "$ref": "#/definitions/SolutionFolder"
+              "$ref": "#/definitions/IProjectContainer"
             }
           ]
         },
-        "Items": {
+        "Projects": {
           "type": [
-            "null",
-            "object"
+            "array",
+            "null"
           ],
-          "additionalProperties": {
-            "type": "string"
+          "items": {
+            "$ref": "#/definitions/Project"
           }
         },
         "SolutionFolders": {
@@ -285,6 +236,22 @@
           "items": {
             "$ref": "#/definitions/SolutionFolder"
           }
+        }
+      }
+    },
+    "IProjectContainer": {
+      "type": "object",
+      "x-abstract": true,
+      "properties": {
+        "Parent": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/IProjectContainer"
+            }
+          ]
         },
         "Projects": {
           "type": [
@@ -293,6 +260,15 @@
           ],
           "items": {
             "$ref": "#/definitions/Project"
+          }
+        },
+        "SolutionFolders": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/SolutionFolder"
           }
         }
       }
