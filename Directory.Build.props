@@ -1,11 +1,11 @@
 ﻿<Project>
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <LangVersion>12</LangVersion>
+        <TargetFramework>net10.0</TargetFramework>
+        <LangVersion>14</LangVersion>
         <Nullable>enable</Nullable>
         <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
         <PlatformTarget>x64</PlatformTarget>
-        <Version>1.2.5-dev007</Version>
+        <Version>1.2.5</Version>
         <NoWarn>NU1901;NU1902;NU1903;NU1904;CS8618</NoWarn>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <PropertyGroup>
-        <RxBimVersion>3.0.5-dev004</RxBimVersion>
+        <RxBimVersion>3.0.5</RxBimVersion>
     </PropertyGroup>
 
     <ItemGroup Condition=" '$(UseDi)' == 'true' ">
@@ -44,8 +44,8 @@
     </ItemGroup>
 
     <ItemGroup Condition=" '$(UseNuke)' == 'true' ">
-        <PackageReference Include="BimLab.Nuke" Version="2025.1.0"/>
-        <PackageReference Include="Nuke.Common" Version="8.1.4"/>
+        <PackageReference Include="BimLab.Nuke" Version="2026.1.0"/>
+        <PackageReference Include="Nuke.Common" Version="10.1.0"/>
         <PackageReference Include="RazorLight" Version="2.3.0"/>
     </ItemGroup>
 
@@ -59,7 +59,7 @@
         <Company>pik-group.com</Company>
         <Authors>Reactive BIM</Authors>
         <Product>AcadTestFramework</Product>
-        <Copyright>Copyright ©2025 Reactive BIM</Copyright>
+        <Copyright>Copyright ©2026 Reactive BIM</Copyright>
         <PackageTags>Acad test framework</PackageTags>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <PackageProjectUrl>https://github.com/ReactiveBIM/RxBim.AcadTests</PackageProjectUrl>
