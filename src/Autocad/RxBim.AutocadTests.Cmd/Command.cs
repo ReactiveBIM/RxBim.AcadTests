@@ -18,11 +18,6 @@ using Exception = Exception;
 [PublicAPI]
 public class Command : RxBimCommand
 {
-#if NETCOREAPP
-    /// <inheritdoc/>
-    protected override bool RunInSeparatedContext => false;
-#endif
-
     /// <summary>Executes command.</summary>
     /// <param name="editor"><see cref="Editor" /> instance.</param>
     /// <param name="acadTestClient"><see cref="AcadTestClient" /></param>

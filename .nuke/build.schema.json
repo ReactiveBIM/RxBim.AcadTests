@@ -30,18 +30,21 @@
         "BuildMsi",
         "CheckCurrentBranch",
         "CheckProductionVersion",
+        "CheckPublishTagsExist",
         "CheckStageVersion",
         "Clean",
         "CleanWorkDir",
         "Compile",
         "CompileToTemp",
         "DeleteLocalPacks",
+        "DeleteTestResults",
         "Develop",
         "GenerateAdditionalFiles",
         "GeneratePackageContentsFile",
         "GenerateProjectProps",
         "InstallWixTools",
         "IntegrationTests",
+        "MergeTestResults",
         "Pack",
         "PackagesList",
         "PackLocal",
@@ -58,6 +61,7 @@
         "SetVersion2023",
         "SetVersion2024",
         "SetVersion2025",
+        "SetVersion2026",
         "SetVersionForApp",
         "SignAssemblies",
         "TagProject",
@@ -69,6 +73,12 @@
     "Project": {
       "type": "object",
       "properties": {
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
         "Solution": {
           "oneOf": [
             {
@@ -79,31 +89,29 @@
             }
           ]
         },
-        "ProjectId": {
-          "type": "string",
-          "format": "guid"
-        },
-        "Name": {
-          "type": [
-            "null",
-            "string"
-          ]
-        },
-        "TypeId": {
-          "type": "string",
-          "format": "guid"
-        },
-        "SolutionFolder": {
+        "Parent": {
           "oneOf": [
             {
               "type": "null"
             },
             {
-              "$ref": "#/definitions/SolutionFolder"
+              "$ref": "#/definitions/IProjectContainer"
             }
           ]
         },
+        "RelativePath": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
         "Path": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "FileName": {
           "type": [
             "null",
             "string"
@@ -114,15 +122,6 @@
             "null",
             "string"
           ]
-        },
-        "Configurations": {
-          "type": [
-            "null",
-            "object"
-          ],
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -152,42 +151,6 @@
             "null",
             "string"
           ]
-        },
-        "Header": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "type": "string"
-          }
-        },
-        "Properties": {
-          "type": [
-            "null",
-            "object"
-          ],
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "ExtensibilityGlobals": {
-          "type": [
-            "null",
-            "object"
-          ],
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "Configurations": {
-          "type": [
-            "null",
-            "object"
-          ],
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "AllProjects": {
           "type": [
@@ -230,6 +193,12 @@
     "SolutionFolder": {
       "type": "object",
       "properties": {
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
         "Solution": {
           "oneOf": [
             {
@@ -240,37 +209,23 @@
             }
           ]
         },
-        "ProjectId": {
-          "type": "string",
-          "format": "guid"
-        },
-        "Name": {
-          "type": [
-            "null",
-            "string"
-          ]
-        },
-        "TypeId": {
-          "type": "string",
-          "format": "guid"
-        },
-        "SolutionFolder": {
+        "Parent": {
           "oneOf": [
             {
               "type": "null"
             },
             {
-              "$ref": "#/definitions/SolutionFolder"
+              "$ref": "#/definitions/IProjectContainer"
             }
           ]
         },
-        "Items": {
+        "Projects": {
           "type": [
-            "null",
-            "object"
+            "array",
+            "null"
           ],
-          "additionalProperties": {
-            "type": "string"
+          "items": {
+            "$ref": "#/definitions/Project"
           }
         },
         "SolutionFolders": {
@@ -281,6 +236,22 @@
           "items": {
             "$ref": "#/definitions/SolutionFolder"
           }
+        }
+      }
+    },
+    "IProjectContainer": {
+      "type": "object",
+      "x-abstract": true,
+      "properties": {
+        "Parent": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/IProjectContainer"
+            }
+          ]
         },
         "Projects": {
           "type": [
@@ -289,6 +260,15 @@
           ],
           "items": {
             "$ref": "#/definitions/Project"
+          }
+        },
+        "SolutionFolders": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/SolutionFolder"
           }
         }
       }
@@ -312,7 +292,8 @@
         "Version2022",
         "Version2023",
         "Version2024",
-        "Version2025"
+        "Version2025",
+        "Version2026"
       ]
     },
     "NukeBuild": {
@@ -395,6 +376,7 @@
             "Autocad2023",
             "Autocad2024",
             "Autocad2025",
+            "Autocad2026",
             "Civil2019",
             "Civil2020",
             "Civil2021",
@@ -402,13 +384,15 @@
             "Civil2023",
             "Civil2024",
             "Civil2025",
+            "Civil2026",
             "Revit2019",
             "Revit2020",
             "Revit2021",
             "Revit2022",
             "Revit2023",
             "Revit2024",
-            "Revit2025"
+            "Revit2025",
+            "Revit206"
           ]
         },
         "Cert": {

@@ -4,7 +4,9 @@ using Bimlab.Nuke.Components;
 using global::Nuke.Common;
 using global::Nuke.Common.ProjectModel;
 using global::Nuke.Common.Tools.DotNet;
+using Helpers;
 using JetBrains.Annotations;
+using Models;
 using Services;
 
 /// <summary>
@@ -17,6 +19,11 @@ public interface IRunIntegrationTests : IHasSolution
     /// TestProjectProvider.
     /// </summary>
     TestProjectProvider TestProjectProvider => new(Solution);
+
+    /// <summary>
+    /// TestResultFilesService.
+    /// </summary>
+    TestResultFilesService TestResultFilesService => new(Solution);
 
     /// <summary>
     /// ProjectTestRunner.
@@ -121,9 +128,50 @@ public interface IRunIntegrationTests : IHasSolution
             .Description("Starts execution of integration tests")
             .Executes(async () =>
             {
+                var versions = VersionHelper.GetVersions(Version);
+                var testResultDatas = new List<TestResultData>();
                 foreach (var project in TestProjects)
                 {
-                    await ProjectTestRunner.RunTests(project, TestToolName, IsDebug, Version);
+                    foreach (var version in versions)
+                    {
+                        var testResultData = await ProjectTestRunner.RunTests(
+                            project,
+                            TestToolName,
+                            IsDebug,
+                            version,
+                            settings => ConfigureBuildSettings(settings, version));
+
+                        testResultDatas.Add(testResultData);
+                    }
                 }
+
+                foreach (var testResultData in testResultDatas)
+                    TestResultDataValidationService.ThrowIfNotAllTestsPassed(testResultData);
             });
+
+    /// <summary>
+    /// Merges test results.
+    /// </summary>
+    Target MergeTestResults =>
+        definition => definition
+            .Description("Starts merging test results")
+            .Executes(async () => await TestResultFilesService.MergeTestResultsAsync());
+
+    /// <summary>
+    /// Delete test results (test output directory).
+    /// </summary>
+    Target DeleteTestResults =>
+        definition => definition
+            .Description("Starts deleting test results")
+            .Executes(() => TestResultFilesService.DeleteTestResults());
+
+    /// <summary>
+    /// Configure build settings.
+    /// </summary>
+    /// <param name="settings">Build settings.</param>
+    /// <param name="version">Version.</param>
+    protected virtual DotNetBuildSettings ConfigureBuildSettings(DotNetBuildSettings settings, int version)
+    {
+        return settings.AddProperty("ApplicationVersion", version);
+    }
 }

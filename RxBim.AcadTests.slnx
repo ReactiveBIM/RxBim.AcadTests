@@ -1,0 +1,43 @@
+<Solution>
+  <Folder Name="/docs/">
+    <File Path="docs/AutocadTestTool.puml" />
+    <File Path="docs/CadApp.puml" />
+    <File Path="docs/Main.puml" />
+    <File Path="docs/RevitTestTool.puml" />
+  </Folder>
+  <Folder Name="/SolutionFolder/">
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="README.md" />
+    <File Path="stylecop.ruleset" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/RxBim.Tests.Nuke/RxBim.Tests.Nuke.csproj" />
+    <Project Path="src/RxBim.Tests.SDK/RxBim.Tests.SDK.csproj" />
+  </Folder>
+  <Folder Name="/src/Autocad/">
+    <Project Path="src/Autocad/RxBim.AutocadTests.Cmd/RxBim.AutocadTests.Cmd.csproj" />
+    <Project Path="src/Autocad/RxBim.AutocadTests.Console/RxBim.AutocadTests.Console.csproj" />
+    <Project Path="src/Autocad/RxBim.AutocadTests.ScriptUtils/RxBim.AutocadTests.ScriptUtils.csproj" />
+    <Project Path="src/Autocad/RxBim.AutocadTests.TestingUtils/RxBim.AutocadTests.TestingUtils.csproj" />
+  </Folder>
+  <Folder Name="/src/Revit/">
+    <Project Path="src/Revit/RxBim.RevitTests.Cmd/RxBim.RevitTests.Cmd.csproj" />
+    <Project Path="src/Revit/RxBim.RevitTests.Console/RxBim.RevitTests.Console.csproj">
+      <BuildDependency Project="src/Autocad/RxBim.AutocadTests.Cmd/RxBim.AutocadTests.Cmd.csproj" />
+    </Project>
+    <Project Path="src/Revit/RxBim.RevitTests.TestingUtils/RxBim.RevitTests.TestingUtils.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <File Path="tests/Directory.Build.props" />
+    <Project Path="tests/AcadTestFramework.SDK.Tests/AcadTestFramework.SDK.Tests.csproj" />
+    <Project Path="tests/RxBim.Example.Autocad.IntegrationTests/RxBim.Example.Autocad.IntegrationTests.csproj" />
+    <Project Path="tests/RxBim.Example.Revit.IntegrationTests/RxBim.Example.Revit.IntegrationTests.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/ParseAndValidateResult/ParseAndValidateResult.csproj" />
+  </Folder>
+  <Project Path="build/_build.csproj">
+    <Build Project="false" />
+  </Project>
+</Solution>
