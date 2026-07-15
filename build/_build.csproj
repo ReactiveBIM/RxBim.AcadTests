@@ -14,9 +14,9 @@
 
   <ItemGroup>
     <PackageReference Include="Nuke.Common" Version="10.1.0" />
-    <PackageReference Include="RxBim.Nuke.AutoCAD" Version="3.0.5-rc001" />
-    <PackageReference Include="RxBim.Nuke.Versions" Version="3.0.5-rc001" />
-    <PackageReference Include="RxBim.Nuke.Generators" Version="3.0.5-rc001" />
+    <PackageReference Include="RxBim.Nuke.AutoCAD" Version="3.0.6" />
+    <PackageReference Include="RxBim.Nuke.Versions" Version="3.0.6" />
+    <PackageReference Include="RxBim.Nuke.Generators" Version="3.0.6" />
   </ItemGroup>
 
   <ItemGroup>
