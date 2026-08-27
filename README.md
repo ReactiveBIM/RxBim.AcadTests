@@ -1,5 +1,89 @@
 # RxBim.AcadTests
 
+# RxBim.AcadTests packages
+
+## Core
+
+| Package name | Release | Latest |
+|--------------|---------|--------|
+| *RxBim.Tests.SDK* | [![Nuget](https://img.shields.io/nuget/v/RxBim.Tests.SDK?style=flat)](https://www.nuget.org/packages/RxBim.Tests.SDK) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.Tests.SDK?style=flat)](https://www.nuget.org/packages/RxBim.Tests.SDK/absoluteLatest) |
+| *RxBim.Tests.Nuke* | [![Nuget](https://img.shields.io/nuget/v/RxBim.Tests.Nuke?style=flat)](https://www.nuget.org/packages/RxBim.Tests.Nuke) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.Tests.Nuke?style=flat)](https://www.nuget.org/packages/RxBim.Tests.Nuke/absoluteLatest) |
+| *RxBim.AutocadTests.Console* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.Console?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Console) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.Console?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Console/absoluteLatest) |
+| *RxBim.AutocadTests.ScriptUtils* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.ScriptUtils?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.ScriptUtils) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.ScriptUtils?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.ScriptUtils/absoluteLatest) |
+| *RxBim.RevitTests.Console* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.Console?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Console) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.Console?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Console/absoluteLatest) |
+
+## 2019
+
+| Package name | Release | Latest |
+|--------------|---------|--------|
+| *RxBim.AutocadTests.Cmd.2019* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.Cmd.2019?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2019) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.Cmd.2019?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2019/absoluteLatest) |
+| *RxBim.AutocadTests.TestingUtils.2019* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.TestingUtils.2019?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2019) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.TestingUtils.2019?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2019/absoluteLatest) |
+| *RxBim.RevitTests.Cmd.2019* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.Cmd.2019?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2019) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.Cmd.2019?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2019/absoluteLatest) |
+| *RxBim.RevitTests.TestingUtils.2019* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.TestingUtils.2019?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2019) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.TestingUtils.2019?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2019/absoluteLatest) |
+
+## 2020
+
+| Package name | Release | Latest |
+|--------------|---------|--------|
+| *RxBim.AutocadTests.Cmd.2020* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.Cmd.2020?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2020) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.Cmd.2020?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2020/absoluteLatest) |
+| *RxBim.AutocadTests.TestingUtils.2020* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.TestingUtils.2020?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2020) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.TestingUtils.2020?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2020/absoluteLatest) |
+| *RxBim.RevitTests.Cmd.2020* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.Cmd.2020?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2020) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.Cmd.2020?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2020/absoluteLatest) |
+| *RxBim.RevitTests.TestingUtils.2020* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.TestingUtils.2020?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2020) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.TestingUtils.2020?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2020/absoluteLatest) |
+
+## 2021
+
+| Package name | Release | Latest |
+|--------------|---------|--------|
+| *RxBim.AutocadTests.Cmd.2021* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.Cmd.2021?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2021) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.Cmd.2021?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2021/absoluteLatest) |
+| *RxBim.AutocadTests.TestingUtils.2021* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.TestingUtils.2021?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2021) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.TestingUtils.2021?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2021/absoluteLatest) |
+| *RxBim.RevitTests.Cmd.2021* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.Cmd.2021?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2021) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.Cmd.2021?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2021/absoluteLatest) |
+| *RxBim.RevitTests.TestingUtils.2021* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.TestingUtils.2021?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2021) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.TestingUtils.2021?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2021/absoluteLatest) |
+
+## 2022
+
+| Package name | Release | Latest |
+|--------------|---------|--------|
+| *RxBim.AutocadTests.Cmd.2022* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.Cmd.2022?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2022) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.Cmd.2022?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2022/absoluteLatest) |
+| *RxBim.AutocadTests.TestingUtils.2022* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.TestingUtils.2022?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2022) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.TestingUtils.2022?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2022/absoluteLatest) |
+| *RxBim.RevitTests.Cmd.2022* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.Cmd.2022?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2022) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.Cmd.2022?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2022/absoluteLatest) |
+| *RxBim.RevitTests.TestingUtils.2022* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.TestingUtils.2022?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2022) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.TestingUtils.2022?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2022/absoluteLatest) |
+
+## 2023
+
+| Package name | Release | Latest |
+|--------------|---------|--------|
+| *RxBim.AutocadTests.Cmd.2023* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.Cmd.2023?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2023) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.Cmd.2023?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2023/absoluteLatest) |
+| *RxBim.AutocadTests.TestingUtils.2023* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.TestingUtils.2023?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2023) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.TestingUtils.2023?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2023/absoluteLatest) |
+| *RxBim.RevitTests.Cmd.2023* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.Cmd.2023?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2023) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.Cmd.2023?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2023/absoluteLatest) |
+| *RxBim.RevitTests.TestingUtils.2023* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.TestingUtils.2023?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2023) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.TestingUtils.2023?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2023/absoluteLatest) |
+
+## 2024
+
+| Package name | Release | Latest |
+|--------------|---------|--------|
+| *RxBim.AutocadTests.Cmd.2024* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.Cmd.2024?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2024) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.Cmd.2024?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2024/absoluteLatest) |
+| *RxBim.AutocadTests.TestingUtils.2024* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.TestingUtils.2024?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2024) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.TestingUtils.2024?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2024/absoluteLatest) |
+| *RxBim.RevitTests.Cmd.2024* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.Cmd.2024?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2024) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.Cmd.2024?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2024/absoluteLatest) |
+| *RxBim.RevitTests.TestingUtils.2024* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.TestingUtils.2024?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2024) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.TestingUtils.2024?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2024/absoluteLatest) |
+
+## 2025
+
+| Package name | Release | Latest |
+|--------------|---------|--------|
+| *RxBim.AutocadTests.Cmd.2025* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.Cmd.2025?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2025) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.Cmd.2025?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2025/absoluteLatest) |
+| *RxBim.AutocadTests.TestingUtils.2025* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.TestingUtils.2025?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2025) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.TestingUtils.2025?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2025/absoluteLatest) |
+| *RxBim.RevitTests.Cmd.2025* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.Cmd.2025?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2025) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.Cmd.2025?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2025/absoluteLatest) |
+| *RxBim.RevitTests.TestingUtils.2025* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.TestingUtils.2025?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2025) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.TestingUtils.2025?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2025/absoluteLatest) |
+
+## 2026
+
+| Package name | Release | Latest |
+|--------------|---------|--------|
+| *RxBim.AutocadTests.Cmd.2026* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.Cmd.2026?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2026) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.Cmd.2026?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.Cmd.2026/absoluteLatest) |
+| *RxBim.AutocadTests.TestingUtils.2026* | [![Nuget](https://img.shields.io/nuget/v/RxBim.AutocadTests.TestingUtils.2026?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2026) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.AutocadTests.TestingUtils.2026?style=flat)](https://www.nuget.org/packages/RxBim.AutocadTests.TestingUtils.2026/absoluteLatest) |
+| *RxBim.RevitTests.Cmd.2026* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.Cmd.2026?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2026) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.Cmd.2026?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.Cmd.2026/absoluteLatest) |
+| *RxBim.RevitTests.TestingUtils.2026* | [![Nuget](https://img.shields.io/nuget/v/RxBim.RevitTests.TestingUtils.2026?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2026) | [![Nuget](https://img.shields.io/nuget/vpre/RxBim.RevitTests.TestingUtils.2026?style=flat)](https://www.nuget.org/packages/RxBim.RevitTests.TestingUtils.2026/absoluteLatest) |
+
 Пример команд для запуска тестов Revit 2025 локально:
 
 1. `nuke SetVersion2025` - обязательно перед выполнением тестов для подключения правильных версий пакетов
